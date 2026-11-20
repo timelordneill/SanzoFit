@@ -1,0 +1,18 @@
+<div class="combination-title" role="heading" [attr.aria-level]="headingLevel()">
+  Combination {{ combinationId() }}
+</div>
+<div class="strip">
+  @for (member of members(); track member.index) {
+    @if (member.color === current()) {
+      <div class="member current">
+        <div class="swatch" [style.background-color]="rgb(member.color)"></div>
+        <span class="name">{{ member.color.name }}</span>
+      </div>
+    } @else {
+      <a class="member" [routerLink]="['/color', member.index]">
+        <div class="swatch" [style.background-color]="rgb(member.color)"></div>
+        <span class="name">{{ member.color.name }}</span>
+      </a>
+    }
+  }
+</div>

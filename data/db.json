@@ -1,0 +1,37 @@
+{
+  "wardrobeItems": [
+    {
+      "name": "Vest T2 Hasselt",
+      "type": "Top",
+      "colors": [
+        "#f5ecc2"
+      ],
+      "id": "CbfRFdx4en4"
+    },
+    {
+      "name": "color combo test",
+      "type": "Outerwear",
+      "colors": [
+        "#a62c37"
+      ],
+      "id": "Xlqz85lYIXY"
+    },
+    {
+      "name": "test 2",
+      "type": "Top",
+      "colors": [
+        "#f3a257"
+      ],
+      "id": "J9CPW-LLFy0"
+    },
+    {
+      "name": "test 3",
+      "type": "Shoes",
+      "colors": [
+        "#b09f36"
+      ],
+      "id": "vQdChJl3qM8"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

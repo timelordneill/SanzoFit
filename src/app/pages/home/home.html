@@ -1,0 +1,16 @@
+<section class="home">
+  <h2>Colors</h2>
+
+  <ul class="color-grid">
+    @for (color of colors(); track color.name) {
+      <li>
+        <a class="color" [routerLink]="['/color', $index]">
+          <div class="swatch" [style.background-color]="rgb(color)"></div>
+          <span class="name">{{ color.name }}</span>
+        </a>
+      </li>
+    } @empty {
+      <li class="loading">Loading colors…</li>
+    }
+  </ul>
+</section>

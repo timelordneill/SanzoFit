@@ -1,0 +1,24 @@
+@let current = color();
+
+<header class="hero">
+  <div class="swatch hero-swatch" [style.background-color]="rgb(current)"></div>
+  <div>
+    <div class="title" role="heading" [attr.aria-level]="headingLevel()">{{ current.name }}</div>
+    <p class="muted">
+      {{ current.hex }} · RGB {{ current.rgb.join(', ') }} · {{ current.combinations.length }}
+      {{ current.combinations.length === 1 ? 'combination' : 'combinations' }}
+    </p>
+  </div>
+</header>
+
+<ol class="combinations">
+  @for (combinationId of current.combinations; track combinationId) {
+    <li class="combination">
+      <app-color-combination
+        [combinationId]="combinationId"
+        [current]="current"
+        [headingLevel]="headingLevel() + 1"
+      />
+    </li>
+  }
+</ol>

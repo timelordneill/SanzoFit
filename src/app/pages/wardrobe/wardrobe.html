@@ -1,0 +1,39 @@
+<div class="heading">
+  <h2>Wardrobe</h2>
+  <a class="add" routerLink="/wardrobe/new">+ Add</a>
+</div>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="muted">Loading…</p>
+  }
+  @case ('error') {
+    <p class="error" role="alert">
+      Could not load your wardrobe. Is the API running? Start the app with <code>npm start</code>.
+    </p>
+  }
+  @default {
+    <ul class="items">
+      @for (item of items(); track item.id) {
+        <li>
+          <a class="item" [routerLink]="['/wardrobe', item.id]">
+            @if (item.image) {
+              <img class="item-image" [src]="item.image" alt="" loading="lazy" />
+            }
+            <div class="item-colors">
+              @for (color of colorsOf(item); track color.hex) {
+                <span class="dot" [style.background-color]="rgb(color)" [title]="color.name"></span>
+              }
+            </div>
+            <div>
+              <div class="item-name">{{ item.name }}</div>
+              <div class="muted">{{ item.type }}</div>
+            </div>
+          </a>
+        </li>
+      } @empty {
+        <li class="muted">No items yet. Use “Add” to create your first one.</li>
+      }
+    </ul>
+  }
+}

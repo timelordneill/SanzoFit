@@ -1,0 +1,11 @@
+<a class="back" routerLink="/">← All colors</a>
+
+@if (!loaded()) {
+  <p class="muted">Loading…</p>
+} @else {
+  @if (color(); as color) {
+    <app-color-detail [color]="color" />
+  } @else {
+    <p class="muted">Color not found.</p>
+  }
+}
