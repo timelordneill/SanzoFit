@@ -81,6 +81,24 @@
   }
 }
 
+.delete {
+  margin-top: 1.25rem;
+  padding: 0.375rem 0.875rem;
+  border: 1px solid #cf222e;
+  border-radius: 6px;
+  background: transparent;
+  color: #cf222e;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: #cf222e;
+    color: #fff;
+  }
+}
+
 .dot {
   width: 1.25rem;
   height: 1.25rem;

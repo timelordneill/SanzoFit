@@ -31,8 +31,23 @@
           </li>
         }
       </ul>
+
+      <button type="button" class="delete" (click)="askToDelete()">Delete item</button>
     </div>
   </header>
+
+  <app-confirm-dialog
+    [title]="'Delete “' + wardrobeItem.name + '”?'"
+    confirmLabel="Delete"
+    [danger]="true"
+    [open]="confirmingDelete()"
+    [busy]="deleting()"
+    [error]="deleteError()"
+    (confirm)="confirmDelete()"
+    (cancel)="cancelDelete()"
+  >
+    This removes it from your wardrobe. This can't be undone.
+  </app-confirm-dialog>
 
   <section class="matches" aria-labelledby="matches-title">
     <h2 class="section-title" id="matches-title">Goes well with</h2>

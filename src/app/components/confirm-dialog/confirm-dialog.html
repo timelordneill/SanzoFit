@@ -1,0 +1,31 @@
+<dialog
+  #dialog
+  class="dialog"
+  [attr.aria-labelledby]="titleId"
+  (cancel)="onNativeCancel($event)"
+  (click)="onDialogClick($event)"
+>
+  <div class="content">
+    <h2 class="title" [id]="titleId">{{ title() }}</h2>
+    <div class="message"><ng-content /></div>
+
+    @if (error(); as error) {
+      <p class="error" role="alert">{{ error }}</p>
+    }
+
+    <div class="actions">
+      <button type="button" class="cancel" autofocus [disabled]="busy()" (click)="cancel.emit()">
+        {{ cancelLabel() }}
+      </button>
+      <button
+        type="button"
+        class="confirm"
+        [class.danger]="danger()"
+        [disabled]="busy()"
+        (click)="confirm.emit()"
+      >
+        {{ confirmLabel() }}
+      </button>
+    </div>
+  </div>
+</dialog>

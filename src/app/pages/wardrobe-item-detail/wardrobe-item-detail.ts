@@ -1,7 +1,8 @@
 import { Component, computed, inject, input, resource, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ColorCombination } from '../../components/color-combination/color-combination';
 import { ColorDetail } from '../../components/color-detail/color-detail';
+import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 import { Color, toRgbString } from '../../models/color';
 import {
   CombinationGroup,
@@ -12,7 +13,7 @@ import { ColorsService } from '../../services/colors.service';
 import { WardrobeItemNotFoundError, WardrobeService } from '../../services/wardrobe.service';
 
 @Component({
-  imports: [RouterLink, ColorDetail, ColorCombination],
+  imports: [RouterLink, ColorDetail, ColorCombination, ConfirmDialog],
   selector: 'app-wardrobe-item-detail',
   styleUrl: './wardrobe-item-detail.scss',
   templateUrl: './wardrobe-item-detail.html',
@@ -20,6 +21,12 @@ import { WardrobeItemNotFoundError, WardrobeService } from '../../services/wardr
 export class WardrobeItemDetail {
   private readonly colorsService = inject(ColorsService);
   private readonly wardrobeService = inject(WardrobeService);
+  private readonly router = inject(Router);
+
+  /** Whether the "are you sure?" popup for deleting is shown. */
+  protected readonly confirmingDelete = signal(false);
+  protected readonly deleting = signal(false);
+  protected readonly deleteError = signal<string | null>(null);
 
   /** Route parameter `:id`: the wardrobe item's id. */
   readonly id = input.required<string>();
@@ -70,6 +77,30 @@ export class WardrobeItemDetail {
       () => this.wardrobeState.set('loaded'),
       () => this.wardrobeState.set('error'),
     );
+  }
+
+  protected askToDelete(): void {
+    this.deleteError.set(null);
+    this.confirmingDelete.set(true);
+  }
+
+  protected cancelDelete(): void {
+    this.confirmingDelete.set(false);
+  }
+
+  /** Deletes the item after confirmation and returns to the wardrobe. */
+  protected async confirmDelete(): Promise<void> {
+    this.deleting.set(true);
+    this.deleteError.set(null);
+    try {
+      await this.wardrobeService.delete(this.id());
+      this.confirmingDelete.set(false);
+      await this.router.navigateByUrl('/wardrobe');
+    } catch {
+      this.deleteError.set('Could not delete the item. Please try again.');
+    } finally {
+      this.deleting.set(false);
+    }
   }
 
   /** This item's color within the group's combination, highlighted in the strip. */

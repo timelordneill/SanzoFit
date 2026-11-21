@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { WardrobeItem } from '../../models/wardrobe-item';
 import { ColorsService } from '../../services/colors.service';
 import { WARDROBE_STORAGE_KEY } from '../../services/wardrobe.service';
@@ -101,6 +101,50 @@ describe('WardrobeItemDetail', () => {
     const chinosCard = groups[0].querySelectorAll('a.match')[1];
     expect(chinosCard.getAttribute('href')).toBe('/wardrobe/b2');
     expect(chinosCard.querySelector('.dot')?.getAttribute('title')).toBe('Brings Seashell Pink');
+  });
+
+  describe('deleting', () => {
+    const dialog = () => element.querySelector('dialog')!;
+    const deleteButton = () => element.querySelector<HTMLButtonElement>('button.delete')!;
+
+    it('asks for confirmation before deleting', async () => {
+      await render([shirt]);
+      expect(dialog().open).toBe(false);
+
+      deleteButton().click();
+      await fixture.whenStable();
+
+      expect(dialog().open).toBe(true);
+      expect(dialog().querySelector('.title')?.textContent).toBe('Delete “Linen shirt”?');
+      // Nothing is deleted yet.
+      expect(JSON.parse(localStorage.getItem(WARDROBE_STORAGE_KEY)!)).toHaveLength(1);
+    });
+
+    it('keeps the item when cancelled', async () => {
+      await render([shirt]);
+      deleteButton().click();
+      await fixture.whenStable();
+
+      dialog().querySelector<HTMLButtonElement>('.cancel')!.click();
+      await fixture.whenStable();
+
+      expect(dialog().open).toBe(false);
+      expect(JSON.parse(localStorage.getItem(WARDROBE_STORAGE_KEY)!)).toHaveLength(1);
+    });
+
+    it('deletes the item and returns to the wardrobe when confirmed', async () => {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigateByUrl').mockResolvedValue(true);
+      const other: WardrobeItem = { id: 'b2', name: 'Chinos', type: 'Bottom', colors: ['#fdd4bd'] };
+      await render([shirt, other]);
+      deleteButton().click();
+      await fixture.whenStable();
+
+      dialog().querySelector<HTMLButtonElement>('.confirm')!.click();
+      await fixture.whenStable();
+
+      expect(JSON.parse(localStorage.getItem(WARDROBE_STORAGE_KEY)!)).toEqual([other]);
+      expect(navigate).toHaveBeenCalledWith('/wardrobe');
+    });
   });
 
   it('says so when nothing matches', async () => {

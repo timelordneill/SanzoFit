@@ -50,6 +50,22 @@ describe('WardrobeService', () => {
     await expect(service.getById('nope')).rejects.toBeInstanceOf(WardrobeItemNotFoundError);
   });
 
+  it('deletes an item from storage and from the list', async () => {
+    const service = TestBed.inject(WardrobeService);
+    const kept = await service.create(shirt);
+    const removed = await service.create({ ...shirt, name: 'Old shirt' });
+
+    await service.delete(removed.id);
+
+    expect(service.items()).toEqual([kept]);
+    expect(await freshService().load()).toEqual([kept]);
+  });
+
+  it('rejects deleting an unknown id', async () => {
+    const service = TestBed.inject(WardrobeService);
+    await expect(service.delete('nope')).rejects.toBeInstanceOf(WardrobeItemNotFoundError);
+  });
+
   it('treats unreadable storage as an empty wardrobe', async () => {
     localStorage.setItem(WARDROBE_STORAGE_KEY, '{not json');
     expect(await TestBed.inject(WardrobeService).load()).toEqual([]);

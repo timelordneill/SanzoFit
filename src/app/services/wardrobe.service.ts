@@ -58,6 +58,17 @@ export class WardrobeService {
     return created;
   }
 
+  /** Removes an item. Rejects with `WardrobeItemNotFoundError` when it doesn't exist. */
+  async delete(id: string): Promise<void> {
+    const items = this.read();
+    const remaining = items.filter((item) => item.id !== id);
+    if (remaining.length === items.length) {
+      throw new WardrobeItemNotFoundError(id);
+    }
+    this.write(remaining);
+    this._items.set(remaining);
+  }
+
   /** The stored items; an empty list when storage is empty, unreadable or blocked. */
   private read(): WardrobeItem[] {
     try {
