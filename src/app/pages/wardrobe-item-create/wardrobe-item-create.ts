@@ -6,7 +6,7 @@ import { Color, toRgbString } from '../../models/color';
 import { WARDROBE_ITEM_TYPES, WardrobeItemType } from '../../models/wardrobe-item';
 import { ColorsService } from '../../services/colors.service';
 import { ImageResizeService } from '../../services/image-resize.service';
-import { WardrobeService } from '../../services/wardrobe.service';
+import { WardrobeService, WardrobeStorageFullError } from '../../services/wardrobe.service';
 
 /** Files larger than this are rejected before resizing. */
 const MAX_UPLOAD_BYTES = 15 * 1024 * 1024;
@@ -130,8 +130,10 @@ export class WardrobeItemCreate {
         ...(image ? { image } : {}),
       });
       await this.router.navigateByUrl('/wardrobe');
-    } catch {
-      this.error.set('Could not save the item. Is the API running (npm start)?');
+    } catch (error) {
+      this.error.set(
+        error instanceof WardrobeStorageFullError ? error.message : 'Could not save the item.',
+      );
     } finally {
       this.saving.set(false);
     }

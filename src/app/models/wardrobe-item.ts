@@ -9,7 +9,7 @@ export const WARDROBE_ITEM_TYPES = [
 
 export type WardrobeItemType = (typeof WARDROBE_ITEM_TYPES)[number];
 
-/** A piece of clothing, stored in `data/db.json` via the local API. */
+/** A piece of clothing, stored in the browser's localStorage by `WardrobeService`. */
 export interface WardrobeItem {
   /** Assigned by the API when the item is created. */
   id: string;

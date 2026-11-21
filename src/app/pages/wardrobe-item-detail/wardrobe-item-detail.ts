@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, computed, inject, input, resource, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ColorCombination } from '../../components/color-combination/color-combination';
@@ -10,7 +9,7 @@ import {
   groupMatchesByCombination,
 } from '../../models/wardrobe-match';
 import { ColorsService } from '../../services/colors.service';
-import { WardrobeService } from '../../services/wardrobe.service';
+import { WardrobeItemNotFoundError, WardrobeService } from '../../services/wardrobe.service';
 
 @Component({
   imports: [RouterLink, ColorDetail, ColorCombination],
@@ -30,11 +29,10 @@ export class WardrobeItemDetail {
     loader: ({ params: id }) => this.wardrobeService.getById(id),
   });
 
-  /** True when the API answered that the item does not exist. */
-  protected readonly notFound = computed(() => {
-    const error = this.item.error();
-    return error instanceof HttpErrorResponse && error.status === 404;
-  });
+  /** True when no item with this id is stored. */
+  protected readonly notFound = computed(
+    () => this.item.error() instanceof WardrobeItemNotFoundError,
+  );
 
   protected readonly colorsLoaded = computed(() => this.colorsService.colors().length > 0);
 

@@ -1,15 +1,13 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { WardrobeItem } from '../../models/wardrobe-item';
 import { ColorsService } from '../../services/colors.service';
+import { WARDROBE_STORAGE_KEY } from '../../services/wardrobe.service';
 import { WardrobeItemDetail } from './wardrobe-item-detail';
 
 describe('WardrobeItemDetail', () => {
   let fixture: ComponentFixture<WardrobeItemDetail>;
   let element: HTMLElement;
-  let http: HttpTestingController;
 
   const shirt: WardrobeItem = {
     id: 'a1',
@@ -20,30 +18,25 @@ describe('WardrobeItemDetail', () => {
   };
 
   beforeEach(async () => {
+    localStorage.clear();
     await TestBed.configureTestingModule({
       imports: [WardrobeItemDetail],
-      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
+      providers: [provideRouter([])],
     }).compileComponents();
-
     await TestBed.inject(ColorsService).loadColors();
-    http = TestBed.inject(HttpTestingController);
-    fixture = TestBed.createComponent(WardrobeItemDetail);
-    fixture.componentRef.setInput('id', 'a1');
-    fixture.detectChanges();
-    element = fixture.nativeElement as HTMLElement;
   });
 
-  afterEach(() => http.verify());
-
-  /** Answers the item request and the full-wardrobe request (used for matching). */
-  async function respond(item: Partial<WardrobeItem>, allItems: WardrobeItem[] = [shirt]) {
-    http.expectOne('/api/wardrobeItems/a1').flush(item);
-    http.expectOne('/api/wardrobeItems').flush(allItems);
+  /** Stores the wardrobe, then renders the detail page for item `a1`. */
+  async function render(items: WardrobeItem[]) {
+    localStorage.setItem(WARDROBE_STORAGE_KEY, JSON.stringify(items));
+    fixture = TestBed.createComponent(WardrobeItemDetail);
+    fixture.componentRef.setInput('id', 'a1');
     await fixture.whenStable();
+    element = fixture.nativeElement as HTMLElement;
   }
 
   it('shows the photo, details and a color detail per color', async () => {
-    await respond(shirt);
+    await render([shirt]);
 
     expect(element.querySelector('h2')?.textContent).toContain('Linen shirt');
     expect(element.querySelector<HTMLImageElement>('img.photo')?.getAttribute('src')).toBe(
@@ -56,22 +49,22 @@ describe('WardrobeItemDetail', () => {
       'Turquoise Green',
     ]);
     expect(details[0].querySelector('.title')?.getAttribute('aria-level')).toBe('3');
+
+    // Each color chip is a list item linking to the color's page.
+    const chipLinks = Array.from(element.querySelectorAll('.color-chips > li > a'));
+    expect(chipLinks.map((a) => a.getAttribute('href'))).toEqual(['/color/0', '/color/87']);
     expect(details[0].querySelectorAll('.combination').length).toBe(3);
   });
 
   it('shows a placeholder when the item has no photo', async () => {
-    await respond({ ...shirt, image: undefined });
+    await render([{ ...shirt, image: undefined }]);
 
     expect(element.querySelector('img.photo')).toBeNull();
     expect(element.querySelector('.placeholder')).not.toBeNull();
   });
 
   it('shows a message when the item does not exist', async () => {
-    http
-      .expectOne('/api/wardrobeItems/a1')
-      .flush('Not found', { status: 404, statusText: 'Not Found' });
-    http.expectOne('/api/wardrobeItems').flush([]);
-    await fixture.whenStable();
+    await render([]);
 
     expect(element.textContent).toContain("doesn't exist");
   });
@@ -89,7 +82,7 @@ describe('WardrobeItemDetail', () => {
       colors: ['#78cdd0', '#0093a5'], // Calamine Blue (176), Cerulian Blue (227)
     };
     const socks: WardrobeItem = { id: 'd4', name: 'Socks', type: 'Accessory', colors: ['#000001'] };
-    await respond(shirt, [shirt, chinos, scarf, socks]);
+    await render([shirt, chinos, scarf, socks]);
 
     const groups = Array.from(element.querySelectorAll('.match-group'));
     const summary = groups.map((group) => ({
@@ -111,7 +104,7 @@ describe('WardrobeItemDetail', () => {
   });
 
   it('says so when nothing matches', async () => {
-    await respond(shirt, [shirt]);
+    await render([shirt]);
     expect(element.textContent).toContain('No other items in your wardrobe match');
   });
 });

@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently -k -n api,web -c blue,magenta \"npm:api\" \"npm:web\"",
-    "web": "ng serve",
-    "api": "json-server data/db.json --port 3000",
+    "start": "ng serve",
     "build": "ng build",
+    "build:pages": "ng build --base-href /SanzoFit/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -26,9 +25,7 @@
     "@angular/build": "^22.3.0",
     "@angular/cli": "^22.3.0",
     "@angular/compiler-cli": "^22.3.0",
-    "concurrently": "^10.0.7",
     "jsdom": "^31.0.0",
-    "json-server": "^1.0.0-beta.15",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
     "vitest": "^5.0.0"

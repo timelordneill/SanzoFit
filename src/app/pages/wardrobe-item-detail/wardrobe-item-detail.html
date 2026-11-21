@@ -6,7 +6,7 @@
   <p class="muted">This wardrobe item doesn't exist (anymore).</p>
 } @else if (item.error()) {
   <p class="error" role="alert">
-    Could not load this item. Is the API running? Start the app with <code>npm start</code>.
+    Could not load this item from your browser's storage.
   </p>
 } @else if (item.hasValue()) {
   @let wardrobeItem = item.value();
@@ -23,12 +23,12 @@
       <p class="type">{{ wardrobeItem.type }}</p>
       <ul class="color-chips">
         @for (color of colors(); track color.hex) {
-          <a [routerLink]="['/color', colorsService.colors().indexOf(color)]">
-            <li>
-                <span class="dot" [style.background-color]="rgb(color)"></span>
-                {{ color.name }}
-            </li>
-          </a>
+          <li>
+            <a [routerLink]="['/color', colorsService.colors().indexOf(color)]">
+              <span class="dot" [style.background-color]="rgb(color)"></span>
+              {{ color.name }}
+            </a>
+          </li>
         }
       </ul>
     </div>

@@ -1,49 +1,67 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { WardrobeItem } from '../models/wardrobe-item';
-import { WardrobeService } from './wardrobe.service';
+import { NewWardrobeItem } from '../models/wardrobe-item';
+import {
+  WARDROBE_STORAGE_KEY,
+  WardrobeItemNotFoundError,
+  WardrobeService,
+  WardrobeStorageFullError,
+} from './wardrobe.service';
 
 describe('WardrobeService', () => {
-  let service: WardrobeService;
-  let http: HttpTestingController;
-
-  const shirt: WardrobeItem = { id: 'a1', name: 'Shirt', type: 'Top', colors: ['#f9c1ce'] };
+  const shirt: NewWardrobeItem = { name: 'Shirt', type: 'Top', colors: ['#f9c1ce'] };
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+    localStorage.clear();
+    TestBed.configureTestingModule({});
+  });
+
+  afterEach(() => vi.restoreAllMocks());
+
+  function freshService(): WardrobeService {
+    TestBed.resetTestingModule();
+    return TestBed.inject(WardrobeService);
+  }
+
+  it('starts empty', async () => {
+    const service = TestBed.inject(WardrobeService);
+    expect(await service.load()).toEqual([]);
+    expect(service.items()).toEqual([]);
+  });
+
+  it('creates an item with an id and keeps it in storage', async () => {
+    const service = TestBed.inject(WardrobeService);
+    const created = await service.create(shirt);
+
+    expect(created).toEqual({ ...shirt, id: expect.any(String) });
+    expect(service.items()).toEqual([created]);
+
+    // Survives a reload (a new service instance reading the same storage).
+    expect(await freshService().load()).toEqual([created]);
+  });
+
+  it('gets an item by id', async () => {
+    const service = TestBed.inject(WardrobeService);
+    const created = await service.create(shirt);
+    expect(await service.getById(created.id)).toEqual(created);
+  });
+
+  it('rejects with WardrobeItemNotFoundError for an unknown id', async () => {
+    const service = TestBed.inject(WardrobeService);
+    await expect(service.getById('nope')).rejects.toBeInstanceOf(WardrobeItemNotFoundError);
+  });
+
+  it('treats unreadable storage as an empty wardrobe', async () => {
+    localStorage.setItem(WARDROBE_STORAGE_KEY, '{not json');
+    expect(await TestBed.inject(WardrobeService).load()).toEqual([]);
+  });
+
+  it('reports a readable error when storage is full', async () => {
+    const service = TestBed.inject(WardrobeService);
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new DOMException('Quota exceeded', 'QuotaExceededError');
     });
-    service = TestBed.inject(WardrobeService);
-    http = TestBed.inject(HttpTestingController);
-  });
 
-  afterEach(() => http.verify());
-
-  it('loads items from the API', async () => {
-    const result = service.load();
-    http.expectOne({ method: 'GET', url: '/api/wardrobeItems' }).flush([shirt]);
-
-    expect(await result).toEqual([shirt]);
-    expect(service.items()).toEqual([shirt]);
-  });
-
-  it('fetches a single item by id', async () => {
-    const result = service.getById('a1');
-    http.expectOne({ method: 'GET', url: '/api/wardrobeItems/a1' }).flush(shirt);
-
-    expect(await result).toEqual(shirt);
-  });
-
-  it('creates an item and adds it to the list', async () => {
-    const { id, ...newItem } = shirt;
-    const result = service.create(newItem);
-
-    const request = http.expectOne({ method: 'POST', url: '/api/wardrobeItems' });
-    expect(request.request.body).toEqual(newItem);
-    request.flush(shirt);
-
-    expect(await result).toEqual(shirt);
-    expect(service.items()).toEqual([shirt]);
+    await expect(service.create(shirt)).rejects.toBeInstanceOf(WardrobeStorageFullError);
+    expect(service.items()).toEqual([]);
   });
 });

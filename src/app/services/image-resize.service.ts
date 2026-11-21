@@ -5,7 +5,7 @@ export const MAX_IMAGE_DIMENSION = 800;
 
 /**
  * Shrinks image files in the browser so they can be stored inline (as data URLs)
- * in `data/db.json` without bloating it.
+ * in localStorage (which only holds about 5 MB) without filling it up.
  */
 @Injectable({ providedIn: 'root' })
 export class ImageResizeService {
