@@ -1,18 +1,42 @@
 <div class="combination-title" role="heading" [attr.aria-level]="headingLevel()">
-  Combination {{ combinationId() }}
+  <span class="visually-hidden">Combination </span>{{ displayNumber() }}
 </div>
-<div class="strip">
-  @for (member of members(); track member.index) {
-    @if (member.color === current()) {
-      <div class="member current">
-        <div class="swatch" [style.background-color]="rgb(member.color)"></div>
-        <span class="name">{{ member.color.name }}</span>
-      </div>
-    } @else {
-      <a class="member" [routerLink]="['/color', member.index]">
-        <div class="swatch" [style.background-color]="rgb(member.color)"></div>
-        <span class="name">{{ member.color.name }}</span>
-      </a>
-    }
-  }
+
+<div class="body" [class]="layout()">
+  <div class="art">
+    <!-- Decorative: the same links are available on the names below. -->
+    <div class="figure" aria-hidden="true">
+      @for (member of members(); track member.index) {
+        @if (member.color === current()) {
+          <div
+            class="swatch"
+            [class]="member.position ? 'pos-' + member.position : ''"
+            [style.background-color]="rgb(member.color)"
+          ></div>
+        } @else {
+          <a
+            class="swatch"
+            [class]="member.position ? 'pos-' + member.position : ''"
+            tabindex="-1"
+            [routerLink]="['/color', member.index]"
+            [style.background-color]="rgb(member.color)"
+          ></a>
+        }
+      }
+    </div>
+
+    <ul class="labels">
+      @for (member of members(); track member.index) {
+        <li class="label" [class]="member.position ? 'pos-' + member.position : ''">
+          @if (member.color === current()) {
+            <span class="member current"><span class="name">{{ member.color.name }}</span></span>
+          } @else {
+            <a class="member" [routerLink]="['/color', member.index]">
+              <span class="name">{{ member.color.name }}</span>
+            </a>
+          }
+        </li>
+      }
+    </ul>
+  </div>
 </div>

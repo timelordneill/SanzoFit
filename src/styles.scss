@@ -1,10 +1,17 @@
 /* Global styles */
 
 :root {
-  --color-primary: #1f6feb;
+  --color-primary: #806E4B;
   --color-text: #1f2328;
   --color-muted: #656d76;
   --color-bg: #ffffff;
+
+  /*
+   * The combination plates use Optima, a flared ("glyphic") humanist face. Optima is
+   * commercial but ships with macOS/iOS; everywhere else Marcellus, the closest free
+   * flared face, is used (self-hosted via @fontsource/marcellus, see angular.json).
+   */
+  --font-family: Optima, 'Optima nova', Marcellus, Candara, sans-serif;
 }
 
 *,
@@ -20,8 +27,16 @@ body {
 }
 
 body {
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-family);
   line-height: 1.5;
   color: var(--color-text);
   background: var(--color-bg);
+}
+
+/* Form controls don't inherit the page font by default. */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }

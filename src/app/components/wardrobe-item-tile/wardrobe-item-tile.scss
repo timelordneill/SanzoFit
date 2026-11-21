@@ -1,0 +1,78 @@
+:host {
+  --image-width: var(--tile-image-width, 112px);
+
+  display: block;
+  height: 100%;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  height: 100%;
+  padding-right: 0.75rem;
+  border-right: 1px solid #b8bdc2;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover .item-name,
+  &:focus-visible .item-name {
+    text-decoration: underline;
+  }
+}
+
+// Photo + color strip; the strip stretches to whatever height the photo has.
+.media {
+  display: flex;
+  flex: none;
+  gap: 0.625rem;
+}
+
+// The whole photo is shown in its own proportions (never cropped): fixed width,
+// natural height, capped so very tall photos don't make the row huge.
+.item-image {
+  display: block;
+  width: var(--image-width);
+  height: auto;
+  max-height: calc(var(--image-width) * 1.5);
+  object-fit: contain;
+  object-position: left top;
+}
+
+.placeholder {
+  aspect-ratio: 6 / 5;
+  height: auto;
+  background: #f1f2f3;
+}
+
+// The colors stacked into a narrow strip as tall as the photo.
+.item-colors {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  width: 16px;
+
+  .swatch {
+    flex: 1;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06);
+  }
+}
+
+.info {
+  display: grid;
+  gap: 0.375rem;
+  min-width: 0;
+  padding-top: 0.125rem;
+  padding-left: 0.25rem;
+}
+
+.item-name {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: #444;
+}
+
+.item-type {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}

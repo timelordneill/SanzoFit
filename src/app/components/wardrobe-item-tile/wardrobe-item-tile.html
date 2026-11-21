@@ -1,0 +1,20 @@
+@let wardrobeItem = item();
+
+<a class="item" [routerLink]="['/wardrobe', wardrobeItem.id]">
+  <div class="media">
+    @if (wardrobeItem.image) {
+      <img class="item-image" [src]="wardrobeItem.image" alt="" loading="lazy" />
+    } @else {
+      <div class="item-image placeholder" aria-hidden="true"></div>
+    }
+    <div class="item-colors">
+      @for (color of colors(); track color.hex) {
+        <span class="swatch" [style.background-color]="rgb(color)" [title]="color.name"></span>
+      }
+    </div>
+  </div>
+  <div class="info">
+    <span class="item-name">{{ wardrobeItem.name }}</span>
+    <span class="item-type">{{ wardrobeItem.type }}</span>
+  </div>
+</a>

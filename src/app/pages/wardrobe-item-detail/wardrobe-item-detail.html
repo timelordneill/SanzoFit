@@ -24,9 +24,13 @@
       <ul class="color-chips">
         @for (color of colors(); track color.hex) {
           <li>
-            <a [routerLink]="['/color', colorsService.colors().indexOf(color)]">
-              <span class="dot" [style.background-color]="rgb(color)"></span>
-              {{ color.name }}
+            <a class="chip" [routerLink]="['/color', colorsService.colors().indexOf(color)]">
+              <span class="chip-swatch" [style.background-color]="rgb(color)"></span>
+              <span class="chip-info">
+                <span class="chip-name">{{ color.name }}</span>
+                <span class="chip-value">{{ cmyk(color) }}</span>
+                <span class="chip-value">{{ rgbValues(color) }}</span>
+              </span>
             </a>
           </li>
         }
@@ -69,24 +73,11 @@
             <ul class="match-list" [attr.aria-label]="'Items for combination ' + group.id">
               @for (entry of group.items; track entry.item.id) {
                 <li>
-                  <a class="match" [routerLink]="['/wardrobe', entry.item.id]">
-                    @if (entry.item.image) {
-                      <img class="match-photo" [src]="entry.item.image" alt="" loading="lazy" />
-                    }
-                    <div class="match-text">
-                      <div class="match-name">{{ entry.item.name }}</div>
-                      <div class="muted">{{ entry.item.type }}</div>
-                    </div>
-                    <span class="match-colors">
-                      @for (color of colorsFor(entry.matchHexes); track color.hex) {
-                        <span
-                          class="dot"
-                          [style.background-color]="rgb(color)"
-                          [title]="'Brings ' + color.name"
-                        ></span>
-                      }
-                    </span>
-                  </a>
+                  <!-- The strip shows the color(s) this item brings to the combination. -->
+                  <app-wardrobe-item-tile
+                    [item]="entry.item"
+                    [colors]="colorsFor(entry.matchHexes)"
+                  />
                 </li>
               }
             </ul>

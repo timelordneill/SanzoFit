@@ -53,6 +53,11 @@ describe('WardrobeItemDetail', () => {
     // Each color chip is a list item linking to the color's page.
     const chipLinks = Array.from(element.querySelectorAll('.color-chips > li > a'));
     expect(chipLinks.map((a) => a.getAttribute('href'))).toEqual(['/color/0', '/color/87']);
+    // Each chip is a miniature Home tile: swatch, name, CMYK and RGB values.
+    expect(
+      Array.from(chipLinks[0].querySelectorAll('.chip-name, .chip-value')).map((el) => el.textContent),
+    ).toEqual(['Hermosa Pink', 'C0 M30 Y6 K0', 'R249 G193 B206']);
+    expect(chipLinks[0].querySelector('.chip-swatch')).not.toBeNull();
     expect(details[0].querySelectorAll('.combination').length).toBe(3);
   });
 
@@ -87,7 +92,7 @@ describe('WardrobeItemDetail', () => {
     const groups = Array.from(element.querySelectorAll('.match-group'));
     const summary = groups.map((group) => ({
       title: group.querySelector('.combination-title')?.textContent?.trim(),
-      items: Array.from(group.querySelectorAll('.match-name')).map((n) => n.textContent),
+      items: Array.from(group.querySelectorAll('.item-name')).map((n) => n.textContent),
     }));
     expect(summary).toEqual([
       { title: 'Combination 176', items: ['Scarf', 'Chinos'] },
@@ -97,10 +102,14 @@ describe('WardrobeItemDetail', () => {
 
     // The shirt's own color is highlighted in the combination strip.
     expect(groups[0].querySelector('.member.current .name')?.textContent).toBe('Hermosa Pink');
-    // Each item card links to the item and shows the color it brings.
-    const chinosCard = groups[0].querySelectorAll('a.match')[1];
-    expect(chinosCard.getAttribute('href')).toBe('/wardrobe/b2');
-    expect(chinosCard.querySelector('.dot')?.getAttribute('title')).toBe('Brings Seashell Pink');
+    // Matching items use the wardrobe tile, hung on a rule instead of inside a box;
+    // the strip shows the color the item brings to this combination.
+    expect(groups[0].querySelectorAll('.match-list app-wardrobe-item-tile').length).toBe(2);
+    const chinosTile = groups[0].querySelectorAll('a.item')[1];
+    expect(chinosTile.getAttribute('href')).toBe('/wardrobe/b2');
+    expect(
+      Array.from(chinosTile.querySelectorAll('.item-colors .swatch')).map((s) => s.getAttribute('title')),
+    ).toEqual(['Seashell Pink']);
   });
 
   describe('deleting', () => {

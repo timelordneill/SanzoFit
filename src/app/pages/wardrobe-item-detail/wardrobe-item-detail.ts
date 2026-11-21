@@ -3,7 +3,8 @@ import { Router, RouterLink } from '@angular/router';
 import { ColorCombination } from '../../components/color-combination/color-combination';
 import { ColorDetail } from '../../components/color-detail/color-detail';
 import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
-import { Color, toRgbString } from '../../models/color';
+import { WardrobeItemTile } from '../../components/wardrobe-item-tile/wardrobe-item-tile';
+import { Color, toCmykString, toRgbLabel, toRgbString } from '../../models/color';
 import {
   CombinationGroup,
   findWardrobeMatches,
@@ -13,7 +14,7 @@ import { ColorsService } from '../../services/colors.service';
 import { WardrobeItemNotFoundError, WardrobeService } from '../../services/wardrobe.service';
 
 @Component({
-  imports: [RouterLink, ColorDetail, ColorCombination, ConfirmDialog],
+  imports: [RouterLink, ColorDetail, ColorCombination, ConfirmDialog, WardrobeItemTile],
   selector: 'app-wardrobe-item-detail',
   styleUrl: './wardrobe-item-detail.scss',
   templateUrl: './wardrobe-item-detail.html',
@@ -70,6 +71,8 @@ export class WardrobeItemDetail {
   });
 
   protected readonly rgb = toRgbString;
+  protected readonly cmyk = toCmykString;
+  protected readonly rgbValues = toRgbLabel;
 
   constructor() {
     this.colorsService.loadColors();

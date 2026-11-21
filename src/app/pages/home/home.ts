@@ -1,6 +1,6 @@
 import { Component, inject, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Color, toRgbString } from '../../models/color';
+import { Color, toCmykString, toRgbLabel, toRgbString } from '../../models/color';
 import { ColorsService } from '../../services/colors.service';
 
 @Component({
@@ -19,5 +19,13 @@ export class Home {
 
   rgb(color: Color): string {
     return toRgbString(color);
+  }
+
+  cmyk(color: Color): string {
+    return toCmykString(color);
+  }
+
+  rgbValues(color: Color): string {
+    return toRgbLabel(color);
   }
 }
