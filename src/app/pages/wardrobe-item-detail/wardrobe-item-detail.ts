@@ -7,6 +7,7 @@ import { WardrobeItemTile } from '../../components/wardrobe-item-tile/wardrobe-i
 import { Color, toCmykString, toRgbLabel, toCssColor } from '../../models/color';
 import {
   CombinationGroup,
+  CombinationGroupItem,
   findWardrobeMatches,
   groupMatchesByCombination,
 } from '../../models/wardrobe-match';
@@ -66,9 +67,15 @@ export class WardrobeItemDetail {
       this.item.value(),
       this.wardrobeService.items(),
       this.colorsService.combinations(),
+      // Also include items whose color can harmoniously stand in for a combination color.
+      { byHex: this.colorsService.byHex() },
     );
     return groupMatchesByCombination(matches);
   });
+
+  protected readonly hasNearMatches = computed(() =>
+    this.matchGroups().some((group) => group.items.some((entry) => entry.nearMatch)),
+  );
 
   protected readonly swatchColor = toCssColor;
   protected readonly cmyk = toCmykString;
@@ -109,6 +116,15 @@ export class WardrobeItemDetail {
   /** This item's color within the group's combination, highlighted in the strip. */
   protected ownColor(group: CombinationGroup): Color | undefined {
     return this.colorsService.byHex().get(group.ownHexes[0]);
+  }
+
+  /** Explains a near match, e.g. "Near match: stands in for Seashell Pink". */
+  protected nearMatchNote(entry: CombinationGroupItem): string | undefined {
+    if (!entry.nearMatch) {
+      return undefined;
+    }
+    const target = this.colorsService.byHex().get(entry.nearMatch.standsInFor);
+    return `Near match: stands in for ${target?.name ?? 'a combination color'}`;
   }
 
   /** Resolves hex values to colors, skipping unknown ones. */

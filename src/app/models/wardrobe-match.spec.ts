@@ -1,3 +1,5 @@
+import { TestBed } from '@angular/core/testing';
+import { ColorsService } from '../services/colors.service';
 import { Color } from './color';
 import { WardrobeItem } from './wardrobe-item';
 import { findWardrobeMatches, groupMatchesByCombination } from './wardrobe-match';
@@ -92,5 +94,84 @@ describe('groupMatchesByCombination', () => {
 
   it('returns no groups when nothing matches', () => {
     expect(groupMatchesByCombination([])).toEqual([]);
+  });
+});
+
+describe('near matches (harmonious stand-ins)', () => {
+  let service: ColorsService;
+  const hex = (name: string) => service.colors().find((c) => c.name === name)!.hex;
+
+  beforeEach(async () => {
+    service = TestBed.inject(ColorsService);
+    await service.loadColors();
+  });
+
+  // Combination 176 is Hermosa Pink + Seashell Pink + Calamine Blue.
+  const shirtOf = () => item('shirt', [hex('Hermosa Pink')], 'Shirt');
+
+  it('lets an item stand in for a combination color it is close to', () => {
+    const chinos = item('chinos', [hex('Light Pinkish Cinnamon')], 'Chinos');
+
+    const [match] = findWardrobeMatches(shirtOf(), [chinos], service.combinations(), {
+      byHex: service.byHex(),
+    });
+
+    const combo176 = match.combinations.find((c) => c.id === 176)!;
+    expect(combo176.matchHexes).toEqual([]);
+    expect(combo176.nearMatch).toEqual({
+      hex: hex('Light Pinkish Cinnamon'),
+      standsInFor: hex('Seashell Pink'),
+      score: expect.any(Number),
+    });
+    expect(combo176.nearMatch!.score).toBeLessThanOrEqual(12);
+  });
+
+  it('only finds near matches when the palette lookup is given', () => {
+    const chinos = item('chinos', [hex('Light Pinkish Cinnamon')], 'Chinos');
+    expect(findWardrobeMatches(shirtOf(), [chinos], service.combinations())).toEqual([]);
+  });
+
+  it('respects the score limit', () => {
+    const chinos = item('chinos', [hex('Light Pinkish Cinnamon')], 'Chinos');
+    const matches = findWardrobeMatches(shirtOf(), [chinos], service.combinations(), {
+      byHex: service.byHex(),
+      maxNearScore: 1,
+    });
+    expect(matches).toEqual([]);
+  });
+
+  it('prefers an exact match over a near match for the same combination', () => {
+    // Has the exact Seashell Pink and a stand-in color.
+    const both = item('both', [hex('Seashell Pink'), hex('Light Pinkish Cinnamon')], 'Both');
+
+    const [match] = findWardrobeMatches(shirtOf(), [both], service.combinations(), {
+      byHex: service.byHex(),
+    });
+    const combo176 = match.combinations.find((c) => c.id === 176)!;
+    expect(combo176.matchHexes).toEqual([hex('Seashell Pink')]);
+    expect(combo176.nearMatch).toBeUndefined();
+  });
+
+  it('never uses the viewed item’s own color as a stand-in', () => {
+    const twin = item('twin', [hex('Hermosa Pink')], 'Twin');
+    expect(
+      findWardrobeMatches(shirtOf(), [twin], service.combinations(), { byHex: service.byHex() }),
+    ).toEqual([]);
+  });
+
+  it('lists exact items before near matches, within and across groups', () => {
+    const exact = item('exact', [hex('Calamine BLue')], 'Exact');
+    const near = item('near', [hex('Light Pinkish Cinnamon')], 'Near');
+
+    const matches = findWardrobeMatches(shirtOf(), [near, exact], service.combinations(), {
+      byHex: service.byHex(),
+    });
+    expect(matches[0].item.id).toBe('exact');
+
+    const group176 = groupMatchesByCombination(matches).find((g) => g.id === 176)!;
+    expect(group176.items.map((i) => [i.item.id, !!i.nearMatch])).toEqual([
+      ['exact', false],
+      ['near', true],
+    ]);
   });
 });

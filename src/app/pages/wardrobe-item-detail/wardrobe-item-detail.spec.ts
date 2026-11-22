@@ -94,11 +94,18 @@ describe('WardrobeItemDetail', () => {
       title: group.querySelector('.combination-title')?.textContent?.trim(),
       items: Array.from(group.querySelectorAll('.item-name')).map((n) => n.textContent),
     }));
-    expect(summary).toEqual([
+    // Groups with exact matches come first…
+    expect(summary.slice(0, 3)).toEqual([
       { title: 'Combination 176', items: ['Scarf', 'Chinos'] },
       { title: 'Combination 227', items: ['Scarf'] },
       { title: 'Combination 300', items: ['Scarf'] },
     ]);
+    // …any further groups only hold near matches (each tile explains its stand-in).
+    for (const group of groups.slice(3)) {
+      const tiles = Array.from(group.querySelectorAll('app-wardrobe-item-tile'));
+      expect(tiles.length).toBeGreaterThan(0);
+      expect(tiles.every((tile) => tile.querySelector('.item-note'))).toBe(true);
+    }
 
     // The shirt's own color is highlighted in the combination strip.
     expect(groups[0].querySelector('.member.current .name')?.textContent).toBe('Hermosa Pink');
@@ -154,6 +161,27 @@ describe('WardrobeItemDetail', () => {
       expect(JSON.parse(localStorage.getItem(WARDROBE_STORAGE_KEY)!)).toEqual([other]);
       expect(navigate).toHaveBeenCalledWith('/wardrobe');
     });
+  });
+
+  it('shows near matches after exact ones, with an explanation', async () => {
+    // Light Pinkish Cinnamon isn't in combination 176, but can stand in for its
+    // Seashell Pink next to the shirt's Hermosa Pink.
+    const chinos: WardrobeItem = { id: 'b2', name: 'Chinos', type: 'Bottom', colors: ['#fcc79b'] };
+    await render([shirt, chinos]);
+
+    const group176 = Array.from(element.querySelectorAll('.match-group')).find((g) =>
+      g.querySelector('.combination-title')?.textContent?.includes('176'),
+    )!;
+    const tile = group176.querySelector('app-wardrobe-item-tile')!;
+    expect(tile.querySelector('.item-name')?.textContent).toBe('Chinos');
+    expect(tile.querySelector('.item-note')?.textContent).toBe(
+      'Near match: stands in for Seashell Pink',
+    );
+    // The strip shows the stand-in color the item actually has.
+    expect(
+      Array.from(tile.querySelectorAll('.item-colors .swatch')).map((s) => s.getAttribute('title')),
+    ).toEqual(['Light Pinkish Cinnamon']);
+    expect(element.textContent).toContain('Near matches don');
   });
 
   it('says so when nothing matches', async () => {

@@ -16,5 +16,8 @@
   <div class="info">
     <span class="item-name">{{ wardrobeItem.name }}</span>
     <span class="item-type">{{ wardrobeItem.type }}</span>
+    @if (note(); as note) {
+      <span class="item-note">{{ note }}</span>
+    }
   </div>
 </a>

@@ -39,7 +39,11 @@ Angular 22, standalone components and **zoneless** (there's no zone.js). State l
   - drops clusters within ΔE₀₀ 12 of the background, which is estimated from the photo's edge frame (the median colour, if it covers ≥ 60% of the frame)
   - merges clusters within ΔE₀₀ 8 of each other, drops ones under 5%, and keeps at most 5
   - matches each remaining colour with `findClosestColorsToLab`; nothing is added without the user clicking
-- Wardrobe matching is pure functions in `models/wardrobe-match.ts`. `findWardrobeMatches` treats another item as a match when it has a *different* color of a combination that this item is in. `groupMatchesByCombination` regroups those matches per combination. Keep this logic out of components so it stays unit-testable.
+- Harmony-aware substitutes, `models/harmony.ts`:
+  - `harmonyScore(target, candidate, combination)` = ΔE₀₀, plus penalties for lightness changes beyond 5, light/dark order flips against the other combination colours, warm ↔ cool flips (warmth = chroma·cos(hue − 60°); neutrals are exempt) and muted ↔ vivid role changes within the combination
+  - all weights are in `HARMONY_WEIGHTS`
+  - `NEAR_MATCH_MAX_SCORE` (12) was calibrated on the palette; recalibrate it if you change the weights
+- Wardrobe matching is pure functions in `models/wardrobe-match.ts`. With `{ byHex }` passed (the detail page does), an item without an exact combination colour can still match as a **near match** (`nearMatch` on the combination). Exact matches always win and sort first. `findWardrobeMatches` treats another item as a match when it has a *different* color of a combination that this item is in. `groupMatchesByCombination` regroups those matches per combination. Keep this logic out of components so it stays unit-testable.
 - Naming: services use the `*.service.ts` suffix. The CLI now generates `foo.ts`, so rename new services to match. The color page class is `ColorPage` so it doesn't clash with the `Color` model.
 
 ### Testing conventions

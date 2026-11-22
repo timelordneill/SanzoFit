@@ -23,5 +23,8 @@ export class WardrobeItemTile {
   /** Colors shown in the strip (e.g. all of the item's colors, or the relevant ones). */
   readonly colors = input<Color[]>([]);
 
+  /** Optional extra line under the type, e.g. why the item is shown. */
+  readonly note = input<string>();
+
   protected readonly swatchColor = toCssColor;
 }

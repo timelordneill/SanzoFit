@@ -73,10 +73,12 @@
             <ul class="match-list" [attr.aria-label]="'Items for combination ' + group.id">
               @for (entry of group.items; track entry.item.id) {
                 <li>
-                  <!-- The strip shows the color(s) this item brings to the combination. -->
+                  <!-- The strip shows the color(s) this item brings to the combination
+                       (for a near match: its stand-in color). -->
                   <app-wardrobe-item-tile
                     [item]="entry.item"
-                    [colors]="colorsFor(entry.matchHexes)"
+                    [colors]="colorsFor(entry.nearMatch ? [entry.nearMatch.hex] : entry.matchHexes)"
+                    [note]="nearMatchNote(entry)"
                   />
                 </li>
               }
@@ -86,6 +88,12 @@
           <li class="muted">No other items in your wardrobe match these colors yet.</li>
         }
       </ol>
+      @if (hasNearMatches()) {
+        <p class="hint muted">
+          Near matches don't have the exact combination color, but one that keeps its
+          lightness, warmth and saturation balance.
+        </p>
+      }
     }
   </section>
 
