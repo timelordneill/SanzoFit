@@ -13,13 +13,13 @@ import { ColorsService } from '../../services/colors.service';
 export class ColorPage {
   private readonly colorsService = inject(ColorsService);
 
-  /** Route parameter `:id`: the color's position in the colors list. */
+  /** Route parameter `:id`: the color's stable `id` from colors.json. */
   readonly id = input.required<string>();
 
   protected readonly loaded = computed(() => this.colorsService.colors().length > 0);
 
-  protected readonly color = computed<Color | undefined>(
-    () => this.colorsService.colors()[Number(this.id())],
+  protected readonly color = computed<Color | undefined>(() =>
+    this.colorsService.byId().get(Number(this.id())),
   );
 
   constructor() {

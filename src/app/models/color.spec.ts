@@ -1,14 +1,24 @@
-import { Color, toCmykString, toCssColor, toRgbLabel, toRgbString } from './color';
+import {
+  Color,
+  colorProperties,
+  toCmykString,
+  toCssColor,
+  toRgbLabel,
+  toRgbString,
+} from './color';
 
 describe('color helpers', () => {
+  const lab: Color['lab'] = [83.42717631799802, 22.136186770428026, 1.6381322957198563];
   const hermosaPink: Color = {
+    id: 0,
     name: 'Hermosa Pink',
     combinations: [176, 227, 273],
     swatch: 0,
     cmyk: [0, 30, 6, 0],
-    lab: [83.42717631799802, 22.136186770428026, 1.6381322957198563],
+    lab,
     rgb: [249, 193, 206],
     hex: '#f9c1ce',
+    properties: colorProperties(lab),
   };
 
   it('paints swatches from the stored (print-based) Lab values', () => {

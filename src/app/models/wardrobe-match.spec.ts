@@ -1,11 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { ColorsService } from '../services/colors.service';
-import { Color } from './color';
+import { Color, colorProperties } from './color';
 import { WardrobeItem } from './wardrobe-item';
 import { findWardrobeMatches, groupMatchesByCombination } from './wardrobe-match';
 
 function color(hex: string, name = hex): Color {
-  return { name, hex, combinations: [], swatch: 0, cmyk: [0, 0, 0, 0], lab: [0, 0, 0], rgb: [0, 0, 0] };
+  return {
+    id: 0,
+    name,
+    hex,
+    combinations: [],
+    swatch: 0,
+    cmyk: [0, 0, 0, 0],
+    lab: [0, 0, 0],
+    rgb: [0, 0, 0],
+    properties: colorProperties([0, 0, 0]),
+  };
 }
 
 function item(id: string, colors: string[], name = id): WardrobeItem {

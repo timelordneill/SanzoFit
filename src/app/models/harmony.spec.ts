@@ -5,7 +5,17 @@ import { Lab } from './color-match';
 import { colorProperties, findHarmoniousSubstitutes, harmonyScore } from './harmony';
 
 function color(name: string, lab: Lab): Color {
-  return { name, hex: `#${name}`, lab: [...lab], combinations: [], swatch: 0, cmyk: [0, 0, 0, 0], rgb: [0, 0, 0] };
+  return {
+    id: 0,
+    name,
+    hex: `#${name}`,
+    lab: [...lab],
+    combinations: [],
+    swatch: 0,
+    cmyk: [0, 0, 0, 0],
+    rgb: [0, 0, 0],
+    properties: colorProperties(lab),
+  };
 }
 
 describe('colorProperties', () => {

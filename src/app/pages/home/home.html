@@ -4,7 +4,7 @@
   <ul class="color-grid">
     @for (color of colors(); track color.name) {
       <li>
-        <a class="color" [routerLink]="['/color', $index]">
+        <a class="color" [routerLink]="['/color', color.id]">
           <div class="swatch" [style.background-color]="swatchColor(color)"></div>
           <div class="info">
             <span class="name">{{ color.name }}</span>

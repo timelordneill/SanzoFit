@@ -6,7 +6,7 @@
   <div class="art">
     <!-- Decorative: the same links are available on the names below. -->
     <div class="figure" aria-hidden="true">
-      @for (member of members(); track member.index) {
+      @for (member of members(); track member.color.id) {
         @if (member.color === current()) {
           <div
             class="swatch"
@@ -18,7 +18,7 @@
             class="swatch"
             [class]="member.position ? 'pos-' + member.position : ''"
             tabindex="-1"
-            [routerLink]="['/color', member.index]"
+            [routerLink]="['/color', member.color.id]"
             [style.background-color]="swatchColor(member.color)"
           ></a>
         }
@@ -26,12 +26,12 @@
     </div>
 
     <ul class="labels">
-      @for (member of members(); track member.index) {
+      @for (member of members(); track member.color.id) {
         <li class="label" [class]="member.position ? 'pos-' + member.position : ''">
           @if (member.color === current()) {
             <span class="member current"><span class="name">{{ member.color.name }}</span></span>
           } @else {
-            <a class="member" [routerLink]="['/color', member.index]">
+            <a class="member" [routerLink]="['/color', member.color.id]">
               <span class="name">{{ member.color.name }}</span>
             </a>
           }

@@ -1,17 +1,8 @@
 import { Color } from './color';
-import { deltaE2000, Lab } from './color-match';
+import { deltaE2000 } from './color-match';
 
-/** A color described by the properties that matter for harmony. */
-export interface ColorProperties {
-  /** Value: 0 = black, 100 = white (Lab L). */
-  lightness: number;
-  /** Saturation: 0 = grey; ≲ 20 muted/earthy, ≳ 50 vivid (Lab chroma). */
-  chroma: number;
-  /** Hue angle in degrees (0–360) around the Lab a/b plane. */
-  hue: number;
-  /** Temperature: > 0 warm (reds/oranges/yellows), < 0 cool (blues), ≈ 0 neutral. */
-  warmth: number;
-}
+// Value/saturation/temperature live on the Color model (`color.properties`).
+export { colorProperties, type ColorProperties } from './color';
 
 /** How a candidate's score breaks down (each part in ΔE-like units). */
 export interface HarmonyBreakdown {
@@ -65,19 +56,6 @@ export const HARMONY_WEIGHTS = {
   minChromaSpread: 15,
 } as const;
 
-const toDeg = (rad: number) => (rad * 180) / Math.PI;
-const toRad = (deg: number) => (deg * Math.PI) / 180;
-
-/** Temperature axis: warm points toward orange (Lab hue ≈ 60°), cool toward blue. */
-const WARM_HUE = 60;
-
-export function colorProperties([l, a, b]: Lab): ColorProperties {
-  const chroma = Math.hypot(a, b);
-  const angle = toDeg(Math.atan2(b, a));
-  const hue = angle < 0 ? angle + 360 : angle;
-  return { lightness: l, chroma, hue, warmth: chroma * Math.cos(toRad(hue - WARM_HUE)) };
-}
-
 type Role = 'muted' | 'vivid' | null;
 
 /** Muted or vivid relative to the other colors of the combination; null if all are alike. */
@@ -103,9 +81,10 @@ export function harmonyScore(
   combination: readonly Color[],
 ): { score: number; breakdown: HarmonyBreakdown } {
   const w = HARMONY_WEIGHTS;
-  const t = colorProperties(target.lab);
-  const c = colorProperties(candidate.lab);
-  const others = combination.filter((color) => color.hex !== target.hex).map((o) => colorProperties(o.lab));
+  // Value, saturation and temperature are precomputed per color at load.
+  const t = target.properties;
+  const c = candidate.properties;
+  const others = combination.filter((color) => color.hex !== target.hex).map((o) => o.properties);
 
   const deltaE = deltaE2000(target.lab, candidate.lab);
 

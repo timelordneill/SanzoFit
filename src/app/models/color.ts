@@ -1,5 +1,19 @@
+/** A color described by the properties that matter for harmony, derived from Lab. */
+export interface ColorProperties {
+  /** Value: 0 = black, 100 = white (Lab L). */
+  lightness: number;
+  /** Saturation: 0 = grey; ≲ 20 muted/earthy, ≳ 50 vivid (Lab chroma). */
+  chroma: number;
+  /** Hue angle in degrees (0–360) around the Lab a/b plane. */
+  hue: number;
+  /** Temperature: > 0 warm (reds/oranges/yellows), < 0 cool (blues), ≈ 0 neutral. */
+  warmth: number;
+}
+
 /** A single color entry from `src/assets/colors.json`. */
 export interface Color {
+  /** Stable id, used in URLs (`/color/:id`). Doesn't change if the file is reordered. */
+  id: number;
   /** Display name, e.g. "Hermosa Pink". */
   name: string;
   /** Ids of the color combinations this color appears in. */
@@ -14,6 +28,20 @@ export interface Color {
   rgb: [r: number, g: number, b: number];
   /** Hex color string, e.g. "#f9c1ce". */
   hex: string;
+  /** Derived once at load from `lab` (not stored in the JSON), see `colorProperties`. */
+  properties: ColorProperties;
+}
+
+/** Temperature axis: warm points toward orange (Lab hue ≈ 60°), cool toward blue. */
+const WARM_HUE = 60;
+
+/** Value, saturation, hue and temperature of a Lab color. */
+export function colorProperties([l, a, b]: readonly [number, number, number]): ColorProperties {
+  const chroma = Math.hypot(a, b);
+  const angle = (Math.atan2(b, a) * 180) / Math.PI;
+  const hue = angle < 0 ? angle + 360 : angle;
+  const warmth = chroma * Math.cos(((hue - WARM_HUE) * Math.PI) / 180);
+  return { lightness: l, chroma, hue, warmth };
 }
 
 /** CMYK values as printed in the book, e.g. "C0 M30 Y6 K0". */

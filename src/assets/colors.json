@@ -1,5 +1,6 @@
 [
   {
+    "id": 0,
     "name": "Hermosa Pink",
     "combinations": [
       176,
@@ -26,6 +27,7 @@
     "hex": "#f9c1ce"
   },
   {
+    "id": 1,
     "name": "Corinthian Pink",
     "combinations": [
       27,
@@ -61,6 +63,7 @@
     "hex": "#f8b6ba"
   },
   {
+    "id": 2,
     "name": "Cameo Pink",
     "combinations": [
       101,
@@ -90,6 +93,7 @@
     "hex": "#e0b3b6"
   },
   {
+    "id": 3,
     "name": "Fawn",
     "combinations": [
       18,
@@ -116,6 +120,7 @@
     "hex": "#d1b0a7"
   },
   {
+    "id": 4,
     "name": "Light Brown Drab",
     "combinations": [
       35,
@@ -149,6 +154,7 @@
     "hex": "#b59392"
   },
   {
+    "id": 5,
     "name": "Coral Red",
     "combinations": [
       92,
@@ -176,6 +182,7 @@
     "hex": "#f58e84"
   },
   {
+    "id": 6,
     "name": "Fresh Color",
     "combinations": [
       240
@@ -200,6 +207,7 @@
     "hex": "#f6917e"
   },
   {
+    "id": 7,
     "name": "Grenadine Pink",
     "combinations": [
       6,
@@ -233,6 +241,7 @@
     "hex": "#f48067"
   },
   {
+    "id": 8,
     "name": "Eosine Pink",
     "combinations": [
       34,
@@ -270,6 +279,7 @@
     "hex": "#f37f94"
   },
   {
+    "id": 9,
     "name": "Spinel Red",
     "combinations": [
       14,
@@ -300,6 +310,7 @@
     "hex": "#f27291"
   },
   {
+    "id": 10,
     "name": "Old Rose",
     "combinations": [
       55,
@@ -327,6 +338,7 @@
     "hex": "#d46d7a"
   },
   {
+    "id": 11,
     "name": "Eugenia Red | A",
     "combinations": [
       284
@@ -351,6 +363,7 @@
     "hex": "#e2625e"
   },
   {
+    "id": 12,
     "name": "Eugenia Red | B",
     "combinations": [
       17,
@@ -382,6 +395,7 @@
     "hex": "#da525d"
   },
   {
+    "id": 13,
     "name": "Raw Sienna",
     "combinations": [
       3,
@@ -424,6 +438,7 @@
     "hex": "#bb7125"
   },
   {
+    "id": 14,
     "name": "Vinaceous Tawny",
     "combinations": [
       40,
@@ -450,6 +465,7 @@
     "hex": "#c56127"
   },
   {
+    "id": 15,
     "name": "Jasper Red",
     "combinations": [
       155,
@@ -477,6 +493,7 @@
     "hex": "#eb5324"
   },
   {
+    "id": 16,
     "name": "Spectrum Red",
     "combinations": [
       257,
@@ -504,6 +521,7 @@
     "hex": "#e31f26"
   },
   {
+    "id": 17,
     "name": "Red Orange",
     "combinations": [
       31,
@@ -532,6 +550,7 @@
     "hex": "#dd4027"
   },
   {
+    "id": 18,
     "name": "Etruscan Red",
     "combinations": [
       25,
@@ -562,6 +581,7 @@
     "hex": "#c55347"
   },
   {
+    "id": 19,
     "name": "Burnt Sienna",
     "combinations": [
       198,
@@ -594,6 +614,7 @@
     "hex": "#ae5224"
   },
   {
+    "id": 20,
     "name": "Ochre Red",
     "combinations": [
       199,
@@ -619,6 +640,7 @@
     "hex": "#ab544d"
   },
   {
+    "id": 21,
     "name": "Scarlet",
     "combinations": [
       136,
@@ -645,6 +667,7 @@
     "hex": "#cb2f43"
   },
   {
+    "id": 22,
     "name": "Carmine",
     "combinations": [
       39,
@@ -676,6 +699,7 @@
     "hex": "#cc1236"
   },
   {
+    "id": 23,
     "name": "Indian Lake",
     "combinations": [
       299,
@@ -701,6 +725,7 @@
     "hex": "#c53c69"
   },
   {
+    "id": 24,
     "name": "Rosolanc Purple",
     "combinations": [
       48,
@@ -730,6 +755,7 @@
     "hex": "#b73f74"
   },
   {
+    "id": 25,
     "name": "Pomegranite Purple",
     "combinations": [
       220,
@@ -755,6 +781,7 @@
     "hex": "#b71f57"
   },
   {
+    "id": 26,
     "name": "Hydrangea Red",
     "combinations": [
       142
@@ -779,6 +806,7 @@
     "hex": "#a94151"
   },
   {
+    "id": 27,
     "name": "Brick Red",
     "combinations": [
       37,
@@ -807,6 +835,7 @@
     "hex": "#a84222"
   },
   {
+    "id": 28,
     "name": "Carmine Red",
     "combinations": [
       35,
@@ -842,6 +871,7 @@
     "hex": "#a62c37"
   },
   {
+    "id": 29,
     "name": "Pompeian Red",
     "combinations": [
       30,
@@ -871,6 +901,7 @@
     "hex": "#ab2439"
   },
   {
+    "id": 30,
     "name": "Red",
     "combinations": [
       251,
@@ -896,6 +927,7 @@
     "hex": "#a72144"
   },
   {
+    "id": 31,
     "name": "Brown",
     "combinations": [
       110,
@@ -923,6 +955,7 @@
     "hex": "#7c4226"
   },
   {
+    "id": 32,
     "name": "Hay's Russet",
     "combinations": [
       58,
@@ -957,6 +990,7 @@
     "hex": "#793327"
   },
   {
+    "id": 33,
     "name": "Vandyke Red",
     "combinations": [
       16,
@@ -985,6 +1019,7 @@
     "hex": "#82241f"
   },
   {
+    "id": 34,
     "name": "Pansy Purple",
     "combinations": [
       157,
@@ -1010,6 +1045,7 @@
     "hex": "#7d133a"
   },
   {
+    "id": 35,
     "name": "Pale Burnt Lake",
     "combinations": [
       124,
@@ -1041,6 +1077,7 @@
     "hex": "#802626"
   },
   {
+    "id": 36,
     "name": "Violet Red",
     "combinations": [
       9
@@ -1065,6 +1102,7 @@
     "hex": "#642d5e"
   },
   {
+    "id": 37,
     "name": "Vistoris Lake",
     "combinations": [
       63,
@@ -1094,6 +1132,7 @@
     "hex": "#6d4145"
   },
   {
+    "id": 38,
     "name": "Sulpher Yellow",
     "combinations": [
       52,
@@ -1135,6 +1174,7 @@
     "hex": "#f5ecc2"
   },
   {
+    "id": 39,
     "name": "Pale Lemon Yellow",
     "combinations": [
       3,
@@ -1177,6 +1217,7 @@
     "hex": "#ffefae"
   },
   {
+    "id": 40,
     "name": "Naples Yellow",
     "combinations": [
       14,
@@ -1206,6 +1247,7 @@
     "hex": "#fbe6a0"
   },
   {
+    "id": 41,
     "name": "Ivory Buff",
     "combinations": [
       11,
@@ -1245,6 +1287,7 @@
     "hex": "#ebd3a2"
   },
   {
+    "id": 42,
     "name": "Seashell Pink",
     "combinations": [
       45,
@@ -1277,6 +1320,7 @@
     "hex": "#fdd4bd"
   },
   {
+    "id": 43,
     "name": "Light Pinkish Cinnamon",
     "combinations": [
       317
@@ -1301,6 +1345,7 @@
     "hex": "#fcc79b"
   },
   {
+    "id": 44,
     "name": "Pinkish Cinnamon",
     "combinations": [
       78,
@@ -1333,6 +1378,7 @@
     "hex": "#eeb480"
   },
   {
+    "id": 45,
     "name": "Cinnamon Buff",
     "combinations": [
       23,
@@ -1365,6 +1411,7 @@
     "hex": "#fdc57e"
   },
   {
+    "id": 46,
     "name": "Cream Yellow",
     "combinations": [
       122,
@@ -1402,6 +1449,7 @@
     "hex": "#fdbf68"
   },
   {
+    "id": 47,
     "name": "Golden Yellow",
     "combinations": [
       26,
@@ -1435,6 +1483,7 @@
     "hex": "#f3a257"
   },
   {
+    "id": 48,
     "name": "Vinaceous Cinnamon",
     "combinations": [
       203,
@@ -1465,6 +1514,7 @@
     "hex": "#eea78c"
   },
   {
+    "id": 49,
     "name": "Ochraceous Salmon",
     "combinations": [
       32,
@@ -1498,6 +1548,7 @@
     "hex": "#d8a37b"
   },
   {
+    "id": 50,
     "name": "Isabella Color",
     "combinations": [
       4,
@@ -1525,6 +1576,7 @@
     "hex": "#c5a56e"
   },
   {
+    "id": 51,
     "name": "Maple",
     "combinations": [
       282
@@ -1549,6 +1601,7 @@
     "hex": "#c59f6b"
   },
   {
+    "id": 52,
     "name": "Olive Buff",
     "combinations": [
       83,
@@ -1577,6 +1630,7 @@
     "hex": "#c1c494"
   },
   {
+    "id": 53,
     "name": "Ecru",
     "combinations": [
       167,
@@ -1608,6 +1662,7 @@
     "hex": "#c2ae93"
   },
   {
+    "id": 54,
     "name": "Yellow",
     "combinations": [
       22,
@@ -1639,6 +1694,7 @@
     "hex": "#fff200"
   },
   {
+    "id": 55,
     "name": "Lemon Yellow",
     "combinations": [
       45,
@@ -1677,6 +1733,7 @@
     "hex": "#f8ed43"
   },
   {
+    "id": 56,
     "name": "Apricot Yellow",
     "combinations": [
       107,
@@ -1710,6 +1767,7 @@
     "hex": "#ffdd00"
   },
   {
+    "id": 57,
     "name": "Pyrite Yellow",
     "combinations": [
       239,
@@ -1737,6 +1795,7 @@
     "hex": "#cab356"
   },
   {
+    "id": 58,
     "name": "Olive Ocher",
     "combinations": [
       66,
@@ -1767,6 +1826,7 @@
     "hex": "#d6b43e"
   },
   {
+    "id": 59,
     "name": "Yellow Ocher",
     "combinations": [
       42,
@@ -1798,6 +1858,7 @@
     "hex": "#e2b540"
   },
   {
+    "id": 60,
     "name": "Orange Yellow",
     "combinations": [
       114,
@@ -1829,6 +1890,7 @@
     "hex": "#fcb315"
   },
   {
+    "id": 61,
     "name": "Yellow Orange",
     "combinations": [
       2,
@@ -1866,6 +1928,7 @@
     "hex": "#f99d1b"
   },
   {
+    "id": 62,
     "name": "Apricot Orange",
     "combinations": [
       211,
@@ -1893,6 +1956,7 @@
     "hex": "#f68c50"
   },
   {
+    "id": 63,
     "name": "Orange",
     "combinations": [
       7,
@@ -1923,6 +1987,7 @@
     "hex": "#f37420"
   },
   {
+    "id": 64,
     "name": "Peach Red",
     "combinations": [
       115,
@@ -1954,6 +2019,7 @@
     "hex": "#f15a30"
   },
   {
+    "id": 65,
     "name": "English Red",
     "combinations": [
       1,
@@ -1982,6 +2048,7 @@
     "hex": "#d96629"
   },
   {
+    "id": 66,
     "name": "Cinnamon Rufous",
     "combinations": [
       8,
@@ -2012,6 +2079,7 @@
     "hex": "#c27544"
   },
   {
+    "id": 67,
     "name": "Orange Rufous",
     "combinations": [
       91,
@@ -2038,6 +2106,7 @@
     "hex": "#c16b27"
   },
   {
+    "id": 68,
     "name": "Sulphine Yellow",
     "combinations": [
       36,
@@ -2066,6 +2135,7 @@
     "hex": "#c19f2c"
   },
   {
+    "id": 69,
     "name": "Khaki",
     "combinations": [
       129,
@@ -2094,6 +2164,7 @@
     "hex": "#bc892b"
   },
   {
+    "id": 70,
     "name": "Citron Yellow",
     "combinations": [
       40,
@@ -2125,6 +2196,7 @@
     "hex": "#b2b73e"
   },
   {
+    "id": 71,
     "name": "Citrine",
     "combinations": [
       59,
@@ -2153,6 +2225,7 @@
     "hex": "#b09f36"
   },
   {
+    "id": 72,
     "name": "Buffy Citrine",
     "combinations": [
       100,
@@ -2179,6 +2252,7 @@
     "hex": "#96874d"
   },
   {
+    "id": 73,
     "name": "Dark Citrine",
     "combinations": [
       10,
@@ -2206,6 +2280,7 @@
     "hex": "#8b835b"
   },
   {
+    "id": 74,
     "name": "Light Grayish Olive",
     "combinations": [
       107,
@@ -2231,6 +2306,7 @@
     "hex": "#848061"
   },
   {
+    "id": 75,
     "name": "Krongbergs Green",
     "combinations": [
       29
@@ -2255,6 +2331,7 @@
     "hex": "#84875e"
   },
   {
+    "id": 76,
     "name": "Olive",
     "combinations": [
       96,
@@ -2285,6 +2362,7 @@
     "hex": "#837e31"
   },
   {
+    "id": 77,
     "name": "Orange Citrine",
     "combinations": [
       212,
@@ -2310,6 +2388,7 @@
     "hex": "#986f2d"
   },
   {
+    "id": 78,
     "name": "Sudan Brown",
     "combinations": [
       207,
@@ -2336,6 +2415,7 @@
     "hex": "#a36752"
   },
   {
+    "id": 79,
     "name": "Olive Green",
     "combinations": [
       66,
@@ -2363,6 +2443,7 @@
     "hex": "#6b7140"
   },
   {
+    "id": 80,
     "name": "Light Brownish Olive",
     "combinations": [
       199,
@@ -2388,6 +2469,7 @@
     "hex": "#806e4b"
   },
   {
+    "id": 81,
     "name": "Deep Grayish Olive",
     "combinations": [
       146,
@@ -2413,6 +2495,7 @@
     "hex": "#635a3a"
   },
   {
+    "id": 82,
     "name": "Pale Raw Umber",
     "combinations": [
       26,
@@ -2441,6 +2524,7 @@
     "hex": "#71502f"
   },
   {
+    "id": 83,
     "name": "Sepia",
     "combinations": [
       24,
@@ -2466,6 +2550,7 @@
     "hex": "#644b1e"
   },
   {
+    "id": 84,
     "name": "Madder Brown",
     "combinations": [
       28,
@@ -2496,6 +2581,7 @@
     "hex": "#762c19"
   },
   {
+    "id": 85,
     "name": "Mars Brown Tobacco",
     "combinations": [
       19
@@ -2520,6 +2606,7 @@
     "hex": "#653514"
   },
   {
+    "id": 86,
     "name": "Vandyke Brown",
     "combinations": [
       110,
@@ -2549,6 +2636,7 @@
     "hex": "#4b3317"
   },
   {
+    "id": 87,
     "name": "Turquoise Green",
     "combinations": [
       36,
@@ -2588,6 +2676,7 @@
     "hex": "#b5decc"
   },
   {
+    "id": 88,
     "name": "Glaucous Green",
     "combinations": [
       7,
@@ -2617,6 +2706,7 @@
     "hex": "#b4cdc2"
   },
   {
+    "id": 89,
     "name": "Dark Greenish Glaucous",
     "combinations": [
       264,
@@ -2642,6 +2732,7 @@
     "hex": "#b7c2a9"
   },
   {
+    "id": 90,
     "name": "Yellow Green",
     "combinations": [
       111,
@@ -2670,6 +2761,7 @@
     "hex": "#afd472"
   },
   {
+    "id": 91,
     "name": "Light Green Yellow",
     "combinations": [
       61,
@@ -2698,6 +2790,7 @@
     "hex": "#c7d14f"
   },
   {
+    "id": 92,
     "name": "Night Green",
     "combinations": [
       19,
@@ -2725,6 +2818,7 @@
     "hex": "#87c540"
   },
   {
+    "id": 93,
     "name": "Olive Yellow",
     "combinations": [
       124,
@@ -2752,6 +2846,7 @@
     "hex": "#a6a159"
   },
   {
+    "id": 94,
     "name": "Artemesia Green",
     "combinations": [
       293,
@@ -2777,6 +2872,7 @@
     "hex": "#709390"
   },
   {
+    "id": 95,
     "name": "Andover Green",
     "combinations": [
       244,
@@ -2802,6 +2898,7 @@
     "hex": "#6d7e77"
   },
   {
+    "id": 96,
     "name": "Rainette Green",
     "combinations": [
       73,
@@ -2830,6 +2927,7 @@
     "hex": "#8fa071"
   },
   {
+    "id": 97,
     "name": "Chromium Green",
     "combinations": [
       105,
@@ -2857,6 +2955,7 @@
     "hex": "#719470"
   },
   {
+    "id": 98,
     "name": "Pistachio Green",
     "combinations": [
       127,
@@ -2882,6 +2981,7 @@
     "hex": "#648f7b"
   },
   {
+    "id": 99,
     "name": "Sea Green",
     "combinations": [
       17,
@@ -2916,6 +3016,7 @@
     "hex": "#00b49b"
   },
   {
+    "id": 100,
     "name": "Benzol Green",
     "combinations": [
       15,
@@ -2950,6 +3051,7 @@
     "hex": "#00978d"
   },
   {
+    "id": 101,
     "name": "Light Porcelain Green",
     "combinations": [
       44,
@@ -2976,6 +3078,7 @@
     "hex": "#00908a"
   },
   {
+    "id": 102,
     "name": "Green",
     "combinations": [
       198,
@@ -3002,6 +3105,7 @@
     "hex": "#489b6e"
   },
   {
+    "id": 103,
     "name": "Dull Viridian Green",
     "combinations": [
       136,
@@ -3029,6 +3133,7 @@
     "hex": "#009465"
   },
   {
+    "id": 104,
     "name": "Oil Green",
     "combinations": [
       245,
@@ -3055,6 +3160,7 @@
     "hex": "#819238"
   },
   {
+    "id": 105,
     "name": "Diamine Green",
     "combinations": [
       38,
@@ -3084,6 +3190,7 @@
     "hex": "#1a7444"
   },
   {
+    "id": 106,
     "name": "Cossack Green",
     "combinations": [
       5,
@@ -3116,6 +3223,7 @@
     "hex": "#437742"
   },
   {
+    "id": 107,
     "name": "Lincoln Green",
     "combinations": [
       70,
@@ -3145,6 +3253,7 @@
     "hex": "#555832"
   },
   {
+    "id": 108,
     "name": "Blackish Olive",
     "combinations": [
       109,
@@ -3171,6 +3280,7 @@
     "hex": "#42533e"
   },
   {
+    "id": 109,
     "name": "Deep Slate Olive",
     "combinations": [
       189,
@@ -3204,6 +3314,7 @@
     "hex": "#253122"
   },
   {
+    "id": 110,
     "name": "Nile Blue",
     "combinations": [
       25,
@@ -3234,6 +3345,7 @@
     "hex": "#bce4e5"
   },
   {
+    "id": 111,
     "name": "Pale King's Blue",
     "combinations": [
       16,
@@ -3266,6 +3378,7 @@
     "hex": "#a7d4e4"
   },
   {
+    "id": 112,
     "name": "Light Glaucous Blue",
     "combinations": [
       54,
@@ -3299,6 +3412,7 @@
     "hex": "#a5c8d1"
   },
   {
+    "id": 113,
     "name": "Salvia Blue",
     "combinations": [
       29,
@@ -3335,6 +3449,7 @@
     "hex": "#97acc8"
   },
   {
+    "id": 114,
     "name": "Cobalt Green",
     "combinations": [
       156,
@@ -3370,6 +3485,7 @@
     "hex": "#96d1aa"
   },
   {
+    "id": 115,
     "name": "Calamine BLue",
     "combinations": [
       20,
@@ -3403,6 +3519,7 @@
     "hex": "#78cdd0"
   },
   {
+    "id": 116,
     "name": "Venice Green",
     "combinations": [
       78,
@@ -3432,6 +3549,7 @@
     "hex": "#62c6bf"
   },
   {
+    "id": 117,
     "name": "Cerulian Blue",
     "combinations": [
       1,
@@ -3463,6 +3581,7 @@
     "hex": "#0093a5"
   },
   {
+    "id": 118,
     "name": "Peacock Blue",
     "combinations": [
       131,
@@ -3488,6 +3607,7 @@
     "hex": "#00939b"
   },
   {
+    "id": 119,
     "name": "Green Blue",
     "combinations": [
       12,
@@ -3520,6 +3640,7 @@
     "hex": "#099197"
   },
   {
+    "id": 120,
     "name": "Olympic Blue",
     "combinations": [
       44,
@@ -3550,6 +3671,7 @@
     "hex": "#5a82b3"
   },
   {
+    "id": 121,
     "name": "Blue",
     "combinations": [
       49,
@@ -3585,6 +3707,7 @@
     "hex": "#006eb8"
   },
   {
+    "id": 122,
     "name": "Antwarp Blue",
     "combinations": [
       85,
@@ -3621,6 +3744,7 @@
     "hex": "#007190"
   },
   {
+    "id": 123,
     "name": "Helvetia Blue",
     "combinations": [
       39,
@@ -3652,6 +3776,7 @@
     "hex": "#005b8d"
   },
   {
+    "id": 124,
     "name": "Dark Medici Blue",
     "combinations": [
       160,
@@ -3679,6 +3804,7 @@
     "hex": "#547076"
   },
   {
+    "id": 125,
     "name": "Dusky Green",
     "combinations": [
       94,
@@ -3710,6 +3836,7 @@
     "hex": "#004f46"
   },
   {
+    "id": 126,
     "name": "Deep Lyons Blue",
     "combinations": [
       22,
@@ -3743,6 +3870,7 @@
     "hex": "#1c4286"
   },
   {
+    "id": 127,
     "name": "Violet Blue",
     "combinations": [
       75,
@@ -3777,6 +3905,7 @@
     "hex": "#40456a"
   },
   {
+    "id": 128,
     "name": "Vandar Poel's Blue",
     "combinations": [
       5,
@@ -3807,6 +3936,7 @@
     "hex": "#064f6e"
   },
   {
+    "id": 129,
     "name": "Dark Tyrian Blue",
     "combinations": [
       2,
@@ -3837,6 +3967,7 @@
     "hex": "#12354e"
   },
   {
+    "id": 130,
     "name": "Dull Violet Black",
     "combinations": [
       95,
@@ -3868,6 +3999,7 @@
     "hex": "#1e0e3f"
   },
   {
+    "id": 131,
     "name": "Deep Indigo",
     "combinations": [
       6,
@@ -3898,6 +4030,7 @@
     "hex": "#051230"
   },
   {
+    "id": 132,
     "name": "Deep Slate Green",
     "combinations": [
       84,
@@ -3927,6 +4060,7 @@
     "hex": "#112f2c"
   },
   {
+    "id": 133,
     "name": "Grayish Lavender - A",
     "combinations": [
       8,
@@ -3957,6 +4091,7 @@
     "hex": "#b5b1d8"
   },
   {
+    "id": 134,
     "name": "Grayish Lavender - B",
     "combinations": [
       47,
@@ -3988,6 +4123,7 @@
     "hex": "#c0a9b3"
   },
   {
+    "id": 135,
     "name": "Laelia Pink",
     "combinations": [
       20,
@@ -4015,6 +4151,7 @@
     "hex": "#ca92a8"
   },
   {
+    "id": 136,
     "name": "Lilac",
     "combinations": [
       143,
@@ -4042,6 +4179,7 @@
     "hex": "#b984af"
   },
   {
+    "id": 137,
     "name": "Eupatorium Purple",
     "combinations": [
       215,
@@ -4068,6 +4206,7 @@
     "hex": "#bf5892"
   },
   {
+    "id": 138,
     "name": "Light Mauve",
     "combinations": [
       23,
@@ -4098,6 +4237,7 @@
     "hex": "#9a72aa"
   },
   {
+    "id": 139,
     "name": "Aconite Violet",
     "combinations": [
       43,
@@ -4132,6 +4272,7 @@
     "hex": "#a36aa5"
   },
   {
+    "id": 140,
     "name": "Dull Blue Violet",
     "combinations": [
       9,
@@ -4157,6 +4298,7 @@
     "hex": "#80719e"
   },
   {
+    "id": 141,
     "name": "Dark Soft Violet",
     "combinations": [
       64,
@@ -4183,6 +4325,7 @@
     "hex": "#66629c"
   },
   {
+    "id": 142,
     "name": "Blue Violet",
     "combinations": [
       116,
@@ -4211,6 +4354,7 @@
     "hex": "#6450a1"
   },
   {
+    "id": 143,
     "name": "Purple Drab",
     "combinations": [
       236
@@ -4235,6 +4379,7 @@
     "hex": "#84565b"
   },
   {
+    "id": 144,
     "name": "Deep Violet / Plumbeous",
     "combinations": [
       183,
@@ -4261,6 +4406,7 @@
     "hex": "#70727c"
   },
   {
+    "id": 145,
     "name": "Veronia Purple",
     "combinations": [
       13,
@@ -4288,6 +4434,7 @@
     "hex": "#8c4c62"
   },
   {
+    "id": 146,
     "name": "Dark Slate Purple",
     "combinations": [
       225,
@@ -4313,6 +4460,7 @@
     "hex": "#704357"
   },
   {
+    "id": 147,
     "name": "Taupe Brown",
     "combinations": [
       57,
@@ -4343,6 +4491,7 @@
     "hex": "#7a4456"
   },
   {
+    "id": 148,
     "name": "Violet Carmine",
     "combinations": [
       337
@@ -4367,6 +4516,7 @@
     "hex": "#713b4c"
   },
   {
+    "id": 149,
     "name": "Violet",
     "combinations": [
       42,
@@ -4402,6 +4552,7 @@
     "hex": "#4f4086"
   },
   {
+    "id": 150,
     "name": "Red Violet",
     "combinations": [
       4,
@@ -4433,6 +4584,7 @@
     "hex": "#59256a"
   },
   {
+    "id": 151,
     "name": "Cotinga Purple",
     "combinations": [
       61,
@@ -4463,6 +4615,7 @@
     "hex": "#501345"
   },
   {
+    "id": 152,
     "name": "Dusky Madder Violet",
     "combinations": [
       18,
@@ -4492,6 +4645,7 @@
     "hex": "#4e1d4c"
   },
   {
+    "id": 153,
     "name": "White",
     "combinations": [
       55
@@ -4516,6 +4670,7 @@
     "hex": "#ffffff"
   },
   {
+    "id": 154,
     "name": "Neutral Gray",
     "combinations": [
       34,
@@ -4551,6 +4706,7 @@
     "hex": "#b6bfc1"
   },
   {
+    "id": 155,
     "name": "Mineral Gray",
     "combinations": [
       11,
@@ -4576,6 +4732,7 @@
     "hex": "#a2b0ad"
   },
   {
+    "id": 156,
     "name": "Warm Gray",
     "combinations": [
       69,
@@ -4607,6 +4764,7 @@
     "hex": "#a1a39a"
   },
   {
+    "id": 157,
     "name": "Slate Color",
     "combinations": [
       27,
@@ -4643,6 +4801,7 @@
     "hex": "#34454c"
   },
   {
+    "id": 158,
     "name": "Black",
     "combinations": [
       46,

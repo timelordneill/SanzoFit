@@ -8,11 +8,12 @@ type CrossPosition = 'top' | 'left' | 'right' | 'bottom';
 
 interface CombinationMember {
   color: Color;
-  /** Position in the colors list, used as the `/color/:id` route id. */
-  index: number;
   /** Placement in the 4-color layout; undefined for 2 and 3 colors (side by side). */
   position?: CrossPosition;
 }
+
+/** combinations.json lists 4-color combinations in this reading order. */
+const CROSS_ORDER: readonly CrossPosition[] = ['top', 'left', 'right', 'bottom'];
 
 /**
  * One color combination in the style of the source book: a zero-padded number with
@@ -53,24 +54,13 @@ export class ColorCombination {
 
   /** The combination's colors in display order, with their layout position. */
   protected readonly members = computed<CombinationMember[]>(() => {
-    const colors = this.colorsService.colors();
-    // The data lists colors in the reverse of the book's left-to-right order.
-    const ordered = [...(this.colorsService.combinations().get(this.combinationId()) ?? [])]
-      .reverse()
-      .map((color) => ({ color, index: colors.indexOf(color) }));
-
-    if (ordered.length !== 4) {
-      return ordered;
-    }
-    // Book order for 4 colors (reversed data): middle band left, middle band right,
-    // top, bottom. Return them in reading order: top, left, right, bottom.
-    const [left, right, top, bottom] = ordered;
-    return [
-      { ...top, position: 'top' },
-      { ...left, position: 'left' },
-      { ...right, position: 'right' },
-      { ...bottom, position: 'bottom' },
-    ];
+    // Already in book order (combinations.json): left to right, or for 4 colors
+    // top, middle left, middle right, bottom.
+    const colors = this.colorsService.combinations().get(this.combinationId()) ?? [];
+    return colors.map((color, i) => ({
+      color,
+      position: colors.length === 4 ? CROSS_ORDER[i] : undefined,
+    }));
   });
 
   protected readonly layout = computed(() => `count-${this.members().length}`);
