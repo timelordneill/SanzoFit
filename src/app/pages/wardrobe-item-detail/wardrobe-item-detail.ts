@@ -1,7 +1,6 @@
 import { Component, computed, inject, input, resource, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ColorCombination } from '../../components/color-combination/color-combination';
-import { ColorDetail } from '../../components/color-detail/color-detail';
 import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 import { WardrobeItemTile } from '../../components/wardrobe-item-tile/wardrobe-item-tile';
 import { Color, toCmykString, toRgbLabel, toCssColor } from '../../models/color';
@@ -15,7 +14,7 @@ import { ColorsService } from '../../services/colors.service';
 import { WardrobeItemNotFoundError, WardrobeService } from '../../services/wardrobe.service';
 
 @Component({
-  imports: [RouterLink, ColorDetail, ColorCombination, ConfirmDialog, WardrobeItemTile],
+  imports: [RouterLink, ColorCombination, ConfirmDialog, WardrobeItemTile],
   selector: 'app-wardrobe-item-detail',
   styleUrl: './wardrobe-item-detail.scss',
   templateUrl: './wardrobe-item-detail.html',
@@ -76,6 +75,24 @@ export class WardrobeItemDetail {
   protected readonly hasNearMatches = computed(() =>
     this.matchGroups().some((group) => group.items.some((entry) => entry.nearMatch)),
   );
+
+  /** Combinations already shown under "Goes well with", not repeated further down. */
+  protected readonly shownCombinationIds = computed(() => this.matchGroups().map((g) => g.id));
+
+  /**
+   * Per item color, its remaining combinations: those not shown under "Goes well with".
+   * A combination with several of the item's colors is listed once, under the first.
+   */
+  protected readonly moreCombinations = computed(() => {
+    const seen = new Set(this.shownCombinationIds());
+    return this.colors()
+      .map((color) => {
+        const ids = color.combinations.filter((id) => !seen.has(id));
+        ids.forEach((id) => seen.add(id));
+        return { color, ids };
+      })
+      .filter((entry) => entry.ids.length > 0);
+  });
 
   protected readonly swatchColor = toCssColor;
   protected readonly cmyk = toCmykString;

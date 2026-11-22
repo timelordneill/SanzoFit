@@ -97,19 +97,31 @@
     }
   </section>
 
-  <h2 class="section-title">
-    {{ colors().length === 1 ? 'Color' : 'Colors' }} and their combinations
-  </h2>
+  <h2 class="section-title">More combinations</h2>
 
   @if (!colorsLoaded()) {
     <p class="muted">Loading colors…</p>
+  } @else if (colors().length === 0) {
+    <p class="muted">This item has no known colors.</p>
   } @else {
-    @for (color of colors(); track color.hex) {
-      <section class="color-section">
-        <app-color-detail [color]="color" [headingLevel]="3" />
+    <!-- Only the combinations not already shown under "Goes well with". -->
+    @for (entry of moreCombinations(); track entry.color.hex) {
+      <section class="more">
+        <h3 class="more-title">With {{ entry.color.name }}</h3>
+        <ol class="more-list">
+          @for (combinationId of entry.ids; track combinationId) {
+            <li>
+              <app-color-combination
+                [combinationId]="combinationId"
+                [current]="entry.color"
+                [headingLevel]="4"
+              />
+            </li>
+          }
+        </ol>
       </section>
     } @empty {
-      <p class="muted">This item has no known colors.</p>
+      <p class="muted">All combinations of this item's colors are shown above.</p>
     }
   }
 }

@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  // The wardrobe is the start screen.
+  { path: '', pathMatch: 'full', redirectTo: 'wardrobe' },
   {
-    path: '',
-    title: 'SanzoFit',
+    path: 'colors',
+    title: 'SanzoFit · Colors',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
   },
   {
@@ -33,5 +35,5 @@ export const routes: Routes = [
         (m) => m.WardrobeItemDetail,
       ),
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'wardrobe' },
 ];

@@ -35,7 +35,7 @@ describe('WardrobeItemDetail', () => {
     element = fixture.nativeElement as HTMLElement;
   }
 
-  it('shows the photo, details and a color detail per color', async () => {
+  it('shows the photo, details and each color’s combination plates', async () => {
     await render([shirt]);
 
     expect(element.querySelector('h2')?.textContent).toContain('Linen shirt');
@@ -43,12 +43,15 @@ describe('WardrobeItemDetail', () => {
       shirt.image,
     );
 
-    const details = Array.from(element.querySelectorAll('app-color-detail'));
-    expect(details.map((d) => d.querySelector('.title')?.textContent?.trim())).toEqual([
-      'Hermosa Pink',
-      'Turquoise Green',
+    // Only the combination plates, under a small heading per color; no full color detail.
+    expect(element.querySelector('app-color-detail')).toBeNull();
+    const sections = Array.from(element.querySelectorAll('.more'));
+    expect(sections.map((s) => s.querySelector('.more-title')?.textContent?.trim())).toEqual([
+      'With Hermosa Pink',
+      'With Turquoise Green',
     ]);
-    expect(details[0].querySelector('.title')?.getAttribute('aria-level')).toBe('3');
+    expect(sections[0].querySelectorAll('app-color-combination')).toHaveLength(3);
+    expect(sections[0].querySelector('.combination-title')?.getAttribute('aria-level')).toBe('4');
 
     // Each color chip is a list item linking to the color's page.
     const chipLinks = Array.from(element.querySelectorAll('.color-chips > li > a'));
@@ -58,7 +61,6 @@ describe('WardrobeItemDetail', () => {
       Array.from(chipLinks[0].querySelectorAll('.chip-name, .chip-value')).map((el) => el.textContent),
     ).toEqual(['Hermosa Pink', 'C0 M30 Y6 K0', 'R249 G193 B206']);
     expect(chipLinks[0].querySelector('.chip-swatch')).not.toBeNull();
-    expect(details[0].querySelectorAll('.combination').length).toBe(3);
   });
 
   it('shows a placeholder when the item has no photo', async () => {
@@ -117,6 +119,63 @@ describe('WardrobeItemDetail', () => {
     expect(
       Array.from(chinosTile.querySelectorAll('.item-colors .swatch')).map((s) => s.getAttribute('title')),
     ).toEqual(['Seashell Pink']);
+  });
+
+  it('does not repeat combinations from "Goes well with" under "More combinations"', async () => {
+    const chinos: WardrobeItem = { id: 'b2', name: 'Chinos', type: 'Bottom', colors: ['#fdd4bd'] };
+    const scarf: WardrobeItem = {
+      id: 'c3',
+      name: 'Scarf',
+      type: 'Accessory',
+      colors: ['#78cdd0', '#0093a5'],
+    };
+    await render([shirt, chinos, scarf]);
+
+    const ids = (selector: string) =>
+      Array.from(element.querySelectorAll(`${selector} .combination-title`)).map((t) =>
+        Number(t.textContent?.replace(/\D/g, '')),
+      );
+    const shownAbove = ids('.match-group');
+    const shownBelow = ids('.more');
+
+    expect(shownAbove).toEqual(expect.arrayContaining([176, 227, 300]));
+    // No combination appears twice on the page…
+    expect(shownBelow.filter((id) => shownAbove.includes(id))).toEqual([]);
+    expect(new Set(shownBelow).size).toBe(shownBelow.length);
+    // …and together the sections still cover every combination of the item's colors.
+    const colors = TestBed.inject(ColorsService).colors();
+    const all = new Set(
+      shirt.colors.flatMap((hex) => colors.find((c) => c.hex === hex)!.combinations),
+    );
+    expect(new Set([...shownAbove, ...shownBelow])).toEqual(all);
+  });
+
+  it('lists a combination with two of the item’s colors only once', async () => {
+    // Hermosa Pink and Seashell Pink share combination 176.
+    await render([{ ...shirt, colors: ['#f9c1ce', '#fdd4bd'] }]);
+
+    const titlesIn = (section: Element) =>
+      Array.from(section.querySelectorAll('.combination-title')).map((t) => t.textContent?.trim());
+    const [hermosa, seashell] = Array.from(element.querySelectorAll('.more'));
+    expect(titlesIn(hermosa)).toContain('Combination 176');
+    expect(titlesIn(seashell)).not.toContain('Combination 176');
+  });
+
+  it('says so when every combination is already shown above', async () => {
+    // A color in a single combination, with an item that completes it.
+    const colors = TestBed.inject(ColorsService).colors();
+    const single = colors.find((c) => c.combinations.length === 1)!;
+    const partner = TestBed.inject(ColorsService)
+      .combinations()
+      .get(single.combinations[0])!
+      .find((c) => c !== single)!;
+    await render([
+      { ...shirt, colors: [single.hex] },
+      { id: 'p1', name: 'Partner', type: 'Bottom', colors: [partner.hex] },
+    ]);
+
+    expect(element.querySelector('.more')).toBeNull();
+    expect(element.textContent).toContain('All combinations of this item');
   });
 
   describe('deleting', () => {
