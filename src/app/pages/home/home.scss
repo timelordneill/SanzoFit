@@ -1,5 +1,4 @@
-// Tiles styled after the book's color index: swatch on the left, name and CMYK
-// values beside it, a thin vertical rule closing the entry on the right.
+// The book's color index: a grid of large color tiles (see ColorTile).
 .color-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -7,60 +6,6 @@
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.color {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.875rem;
-  height: 100%;
-  padding-right: 0.75rem;
-  border-right: 1px solid #b8bdc2;
-  color: inherit;
-  text-decoration: none;
-
-  &:hover .name,
-  &:focus-visible .name {
-    text-decoration: underline;
-  }
-
-  &:hover .swatch {
-    filter: brightness(1.05);
-  }
-}
-
-.swatch {
-  flex: none;
-  width: 80px;
-  aspect-ratio: 6 / 5;
-  // Flat printed block; faint edge keeps very light colors visible on white.
-  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06);
-}
-
-.info {
-  display: grid;
-  gap: 0.375rem;
-  min-width: 0;
-  padding-top: 0.125rem;
-}
-
-.name {
-  font-size: 0.875rem;
-  line-height: 1.25;
-  color: #444;
-}
-
-.values {
-  display: grid;
-  gap: 0.125rem;
-}
-
-.cmyk,
-.rgb {
-  font-size: 0.75rem;
-  letter-spacing: 0.02em;
-  color: var(--color-muted);
-  font-variant-numeric: tabular-nums;
 }
 
 .loading {

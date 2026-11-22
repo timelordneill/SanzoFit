@@ -48,9 +48,7 @@ export class ColorCombination {
   readonly headingLevel = input(3);
 
   /** The number as printed in the book, e.g. 2 → "002". */
-  protected readonly displayNumber = computed(() =>
-    String(this.combinationId()).padStart(3, '0'),
-  );
+  protected readonly displayNumber = computed(() => String(this.combinationId()).padStart(3, '0'));
 
   /** The combination's colors in display order, with their layout position. */
   protected readonly members = computed<CombinationMember[]>(() => {

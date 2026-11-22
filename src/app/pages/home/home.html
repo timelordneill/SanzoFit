@@ -2,18 +2,15 @@
   <h2>Colors</h2>
 
   <ul class="color-grid">
-    @for (color of colors(); track color.name) {
+    @for (color of colors(); track color.id) {
       <li>
-        <a class="color" [routerLink]="['/color', color.id]">
-          <div class="swatch" [style.background-color]="swatchColor(color)"></div>
-          <div class="info">
-            <span class="name">{{ color.name }}</span>
-            <span class="values">
-              <span class="cmyk">{{ cmyk(color) }}</span>
-              <span class="rgb">{{ rgbValues(color) }}</span>
-            </span>
-          </div>
-        </a>
+        <a
+          appColorTile
+          class="color"
+          size="lg"
+          [color]="color"
+          [routerLink]="['/color', color.id]"
+        ></a>
       </li>
     } @empty {
       <li class="loading">Loading colors…</li>

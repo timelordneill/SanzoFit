@@ -19,30 +19,27 @@
 
 @if (sampledCss(); as sampledCss) {
   <div class="result" aria-live="polite">
-    <div class="sample">
-      <span class="sample-swatch" [style.background-color]="sampledCss"></span>
-      <span class="text">
-        <span class="name">Picked from photo</span>
-        <span class="value">{{ sampledLabel() }}</span>
-      </span>
-    </div>
+    <div
+      appColorTile
+      class="sample"
+      name="Picked from photo"
+      [swatch]="sampledCss"
+      [values]="[sampledLabel()]"
+    ></div>
 
     <ul class="matches" aria-label="Closest colors">
       @for (match of matches(); track match.color.hex) {
         <li>
           <button
+            appColorTile
             type="button"
             class="match"
+            [color]="match.color"
+            [values]="match.lines"
             [class.added]="isSelected(match.color)"
             [disabled]="isSelected(match.color)"
             (click)="choose(match.color)"
           >
-            <span class="match-swatch" [style.background-color]="swatchColor(match.color)"></span>
-            <span class="text">
-              <span class="name">{{ match.color.name }}</span>
-              <span class="value">{{ cmyk(match.color) }}</span>
-              <span class="value">{{ describe(match.deltaE) }} · ΔE {{ match.deltaE.toFixed(1) }}</span>
-            </span>
             <span class="action">{{ isSelected(match.color) ? 'Added' : '+ Add' }}</span>
           </button>
         </li>

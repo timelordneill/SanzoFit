@@ -1,0 +1,18 @@
+@for (entry of entries(); track entry.color.hex) {
+  <section class="more">
+    <h3 class="more-title">With {{ entry.color.name }}</h3>
+    <ol class="more-list">
+      @for (combinationId of entry.ids; track combinationId) {
+        <li>
+          <app-color-combination
+            [combinationId]="combinationId"
+            [current]="entry.color"
+            [headingLevel]="4"
+          />
+        </li>
+      }
+    </ol>
+  </section>
+} @empty {
+  <p class="muted">All combinations of this item's colors are shown above.</p>
+}

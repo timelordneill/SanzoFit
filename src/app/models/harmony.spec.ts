@@ -1,21 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { ColorsService } from '../services/colors.service';
-import { Color } from './color';
+import { makeColor } from '../testing/color-fixtures';
+import { Color, colorProperties } from './color';
 import { Lab } from './color-match';
-import { colorProperties, findHarmoniousSubstitutes, harmonyScore } from './harmony';
+import { findHarmoniousSubstitutes, harmonyScore } from './harmony';
 
 function color(name: string, lab: Lab): Color {
-  return {
-    id: 0,
-    name,
-    hex: `#${name}`,
-    lab: [...lab],
-    combinations: [],
-    swatch: 0,
-    cmyk: [0, 0, 0, 0],
-    rgb: [0, 0, 0],
-    properties: colorProperties(lab),
-  };
+  return makeColor({ name, hex: `#${name}`, lab: [...lab] });
 }
 
 describe('colorProperties', () => {

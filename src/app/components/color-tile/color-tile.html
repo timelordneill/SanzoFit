@@ -1,0 +1,9 @@
+<ng-content select="[tileStart]" />
+<span class="swatch" [style.background-color]="swatchCss()"></span>
+<span class="text">
+  <span class="name">{{ displayName() }}</span>
+  @for (value of displayValues(); track $index) {
+    <span class="value">{{ value }}</span>
+  }
+</span>
+<ng-content />

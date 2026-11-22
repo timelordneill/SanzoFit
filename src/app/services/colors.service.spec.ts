@@ -46,15 +46,22 @@ describe('ColorsService', () => {
     expect(service.byId().get(87)?.name).toBe('Turquoise Green');
   });
 
-  it('loads every combination from combinations.json, consistent with colors.json', async () => {
+  it('derives each color’s combinations from combinations.json', async () => {
     const colors = await service.loadColors();
     const combinations = service.combinations();
 
     expect(combinations.size).toBe(348);
-    // Every color's own combination list matches the combinations file (both ways).
+    expect(colors[0].combinations).toEqual([176, 227, 273]); // Hermosa Pink, ascending
+    // Both views describe the same memberships.
     for (const color of colors) {
+      expect(color.combinations.length).toBeGreaterThan(0);
       for (const id of color.combinations) {
         expect(combinations.get(id)).toContain(color);
+      }
+    }
+    for (const [id, members] of combinations) {
+      for (const color of members) {
+        expect(color.combinations).toContain(id);
       }
     }
   });

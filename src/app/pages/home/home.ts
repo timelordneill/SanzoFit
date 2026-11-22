@@ -1,31 +1,20 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Color, toCmykString, toRgbLabel, toCssColor } from '../../models/color';
+import { ColorTile } from '../../components/color-tile/color-tile';
 import { ColorsService } from '../../services/colors.service';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, ColorTile],
   selector: 'app-home',
   styleUrl: './home.scss',
   templateUrl: './home.html',
 })
 export class Home {
-  colorsservice = inject(ColorsService);
-  colors: Signal<Color[]> = this.colorsservice.colors;
+  private readonly colorsService = inject(ColorsService);
+
+  protected readonly colors = this.colorsService.colors;
 
   constructor() {
-    this.colorsservice.loadColors();
-  }
-
-  swatchColor(color: Color): string {
-    return toCssColor(color);
-  }
-
-  cmyk(color: Color): string {
-    return toCmykString(color);
-  }
-
-  rgbValues(color: Color): string {
-    return toRgbLabel(color);
+    this.colorsService.loadColors();
   }
 }

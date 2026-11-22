@@ -1,5 +1,6 @@
 import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
-import { Color, toCmykString, toCssColor } from '../../models/color';
+import { ColorTile } from '../color-tile/color-tile';
+import { Color, rgbCss, toCmykString } from '../../models/color';
 import { describeMatch, findClosestColors, Rgb } from '../../models/color-match';
 import { ColorsService } from '../../services/colors.service';
 import { ImageSamplerService } from '../../services/image-sampler.service';
@@ -19,6 +20,7 @@ interface Marker {
  * Expects `ColorsService.loadColors()` to have been called by the host page.
  */
 @Component({
+  imports: [ColorTile],
   selector: 'app-image-color-picker',
   styleUrl: './image-color-picker.scss',
   templateUrl: './image-color-picker.html',
@@ -40,24 +42,27 @@ export class ImageColorPicker {
   protected readonly sampled = signal<Rgb | null>(null);
   protected readonly error = signal<string | null>(null);
 
+  /** The closest palette colors, each with the value lines its tile shows. */
   protected readonly matches = computed(() => {
     const rgb = this.sampled();
-    return rgb ? findClosestColors(rgb, this.colorsService.colors(), 3) : [];
+    return (rgb ? findClosestColors(rgb, this.colorsService.colors(), 3) : []).map((match) => ({
+      ...match,
+      lines: [
+        toCmykString(match.color),
+        `${describeMatch(match.deltaE)} · ΔE ${match.deltaE.toFixed(1)}`,
+      ],
+    }));
   });
 
   protected readonly sampledCss = computed(() => {
     const rgb = this.sampled();
-    return rgb ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})` : null;
+    return rgb ? rgbCss(rgb) : null;
   });
 
   protected readonly sampledLabel = computed(() => {
     const rgb = this.sampled();
     return rgb ? `R${rgb[0]} G${rgb[1]} B${rgb[2]}` : '';
   });
-
-  protected readonly swatchColor = toCssColor;
-  protected readonly cmyk = toCmykString;
-  protected readonly describe = describeMatch;
 
   constructor() {
     // A new photo invalidates the previous pick.

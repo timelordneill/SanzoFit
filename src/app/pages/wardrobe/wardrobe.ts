@@ -1,12 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, resource } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { WardrobeItemTile } from '../../components/wardrobe-item-tile/wardrobe-item-tile';
-import { Color } from '../../models/color';
+import { Color, resolveColors } from '../../models/color';
 import { WardrobeItem } from '../../models/wardrobe-item';
 import { ColorsService } from '../../services/colors.service';
 import { WardrobeService } from '../../services/wardrobe.service';
-
-type LoadState = 'loading' | 'loaded' | 'error';
 
 @Component({
   imports: [RouterLink, WardrobeItemTile],
@@ -19,19 +17,20 @@ export class Wardrobe {
   private readonly wardrobeService = inject(WardrobeService);
 
   protected readonly items = this.wardrobeService.items;
-  protected readonly state = signal<LoadState>('loading');
+
+  /** Loads the wardrobe; `items` (the service signal) holds the result. */
+  private readonly wardrobe = resource({ loader: () => this.wardrobeService.load() });
+
+  protected readonly state = computed(() =>
+    this.wardrobe.isLoading() ? 'loading' : this.wardrobe.error() ? 'error' : 'loaded',
+  );
 
   constructor() {
     this.colorsService.loadColors();
-    this.wardrobeService.load().then(
-      () => this.state.set('loaded'),
-      () => this.state.set('error'),
-    );
   }
 
-  /** Resolves the item's stored hex values to colors, skipping unknown ones. */
+  /** The item's colors, resolved from their stored hex values. */
   protected colorsOf(item: WardrobeItem): Color[] {
-    const byHex = this.colorsService.byHex();
-    return item.colors.map((hex) => byHex.get(hex)).filter((c): c is Color => !!c);
+    return resolveColors(item.colors, this.colorsService.byHex());
   }
 }

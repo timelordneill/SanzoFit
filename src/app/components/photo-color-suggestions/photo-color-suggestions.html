@@ -18,25 +18,22 @@
         @for (suggestion of suggestions(); track suggestion.color.hex) {
           <li>
             <button
+              appColorTile
               type="button"
               class="suggestion"
+              [color]="suggestion.color"
+              [values]="suggestion.lines"
               [class.added]="isSelected(suggestion.color)"
               [disabled]="isSelected(suggestion.color)"
               (click)="choose(suggestion.color)"
             >
-              <span
-                class="photo-swatch"
-                title="Color in the photo"
-                [style.background-color]="sampleCss(suggestion.sampleRgb)"
-              ></span>
-              <span class="arrow" aria-hidden="true">→</span>
-              <span class="swatch" [style.background-color]="swatchColor(suggestion.color)"></span>
-              <span class="text">
-                <span class="name">{{ suggestion.color.name }}</span>
-                <span class="value">{{ cmyk(suggestion.color) }}</span>
-                <span class="value">
-                  ≈ {{ percent(suggestion.share) }}% of the item · {{ describe(suggestion.deltaE) }}
-                </span>
+              <span tileStart class="from-photo">
+                <span
+                  class="photo-swatch"
+                  title="Color in the photo"
+                  [style.background-color]="rgbCss(suggestion.sampleRgb)"
+                ></span>
+                <span class="arrow" aria-hidden="true">→</span>
               </span>
               <span class="action">{{ isSelected(suggestion.color) ? 'Added' : '+ Add' }}</span>
             </button>

@@ -20,7 +20,7 @@ Angular 22, standalone components and **zoneless** (there's no zone.js). State l
 1. **Colors (static, read-only):** `src/assets/colors.json` (159 colors) and `src/assets/combinations.json` (348 combinations).
    - `src/assets` is *not* an asset folder in `angular.json` (only `public/` is), so these files aren't served over HTTP. `ColorsService.loadColors()` loads both with dynamic `import()`s, which become lazy chunks, and validates them into the `Color` model (`cmyk`/`lab`/`rgb` are fixed-length tuples).
    - The service exposes signals: `colors`, `combinations` (`Map<combinationNumber, Color[]>`), `byHex` and `byId`.
-   - `combinations.json` lists each combination's colours (by hex) **in the book's order**: left to right for 2 and 3 colours; top, middle left, middle right, bottom for 4. `ColorCombination` relies on that order. Each colour's own `combinations` array in `colors.json` must describe the same memberships; loading throws if the two files disagree. All combination and matching logic builds on `ColorsService.combinations`.
+   - `combinations.json` lists each combination's colours (by hex) **in the book's order**: left to right for 2 and 3 colours; top, middle left, middle right, bottom for 4. `ColorCombination` relies on that order. It is the **only** place membership is stored: `color.combinations` (ascending combination ids) is derived from it at load, and `colors.json` has no `combinations` field. To change a combination, edit only `combinations.json`. All combination and matching logic builds on `ColorsService.combinations`.
    - Colour identity: in URLs a colour is its stable **`id`** (`/color/:id`; the ids equal the original array positions, so old links still work). Stored data (wardrobe items) references colours by **hex**, which is unique.
    - `color.properties` (lightness, chroma, hue, warmth) is **derived at load** from `lab` by `colorProperties`, not stored in the JSON. It depends on design choices, such as the 60° warm axis, that may be tuned.
    - Pages and components that render colors call `loadColors()` themselves (it's cached), so deep links work.
@@ -48,13 +48,19 @@ Angular 22, standalone components and **zoneless** (there's no zone.js). State l
   - all weights are in `HARMONY_WEIGHTS`
   - `NEAR_MATCH_MAX_SCORE` (12) was calibrated on the palette; recalibrate it if you change the weights
 - Wardrobe matching is pure functions in `models/wardrobe-match.ts`. With `{ byHex }` passed (the detail page does), an item without an exact combination colour can still match as a **near match** (`nearMatch` on the combination). Exact matches always win and sort first. `findWardrobeMatches` treats another item as a match when it has a *different* color of a combination that this item is in. `groupMatchesByCombination` regroups those matches per combination. Keep this logic out of components so it stays unit-testable.
+- **`ColorTile`** (`[appColorTile]`, an attribute component) is the one book-style colour tile: swatch, name, value lines and a right rule. Put it on whatever element is needed (`<a>`, `<button>`, `<div>`). Use `size` (`sm`/`md`/`lg`), `values` for custom lines, `swatch`/`name` for non-palette colours (photo pixels), a `tileStart` element for content before the swatch, and other content after the text. Don't hand-build swatch-and-name markup.
+- The wardrobe item detail page only loads data and computes the match groups. `MatchGroups` ("Goes well with") and `MoreCombinations` (the remaining plates) render the sections.
+- Async loading uses Angular's `resource()` (status, error and value; outdated loads are ignored), not hand-written state signals or run counters. **Testing note:** a pending `resource()` keeps `fixture.whenStable()` waiting, so to test a never-finishing load, render with `fixture.detectChanges()` instead.
 - Naming: services use the `*.service.ts` suffix. The CLI now generates `foo.ts`, so rename new services to match. The color page class is `ColorPage` so it doesn't clash with the `Color` model.
 
 ### Testing conventions
+- Build synthetic colors with `makeColor({ … })` from `src/app/testing/color-fixtures.ts` (defaults for every field, `properties` derived from `lab`) instead of hand-writing `Color` objects.
 - Specs load the real `colors.json` with `await TestBed.inject(ColorsService).loadColors()` and assert against real data. For example, Hermosa Pink is index 0 and is in combinations 176, 227 and 273. Check the data before choosing fixtures: test items often match more combinations than expected.
 - Wardrobe specs use jsdom's real localStorage: `localStorage.clear()` in `beforeEach`, seed with `localStorage.setItem(WARDROBE_STORAGE_KEY, JSON.stringify(items))` *before* creating the component, and simulate failures with `vi.spyOn(...)`.
 - jsdom has no canvas or `createImageBitmap`: provide fakes for `ImageResizeService` and `ImageSamplerService` in component tests. To simulate a click on a photo, stub `naturalWidth`/`naturalHeight` and `getBoundingClientRect` on the `<img>`.
 - Routed components need `provideRouter([])`. Set route-param inputs with `fixture.componentRef.setInput('id', ...)`.
 
 ### Styling
-Global design tokens (`--color-primary`, `--color-text`, `--color-muted`, `--color-bg`) are defined in `src/styles.scss`. Everything else is component-scoped SCSS.
+`src/styles.scss` holds the global design tokens and the few shared utility classes. Everything else is component-scoped SCSS.
+- **Tokens:** `--color-primary`, `--color-text`, `--color-text-soft`, `--color-muted`, `--color-bg`, `--color-danger`, `--color-border`, `--color-rule` (the thin book-style rules) and `--swatch-edge` (the faint inset edge on swatches). Use these instead of hex values.
+- **Utility classes:** `.muted`, `.error` and `.back` (the "← …" link at the top of a page). Components only add local tweaks such as `margin`/`font-size` on top; don't redefine their colours.

@@ -1,6 +1,8 @@
+import { makeColor } from '../testing/color-fixtures';
 import {
   Color,
-  colorProperties,
+  rgbCss,
+  resolveColors,
   toCmykString,
   toCssColor,
   toRgbLabel,
@@ -8,18 +10,14 @@ import {
 } from './color';
 
 describe('color helpers', () => {
-  const lab: Color['lab'] = [83.42717631799802, 22.136186770428026, 1.6381322957198563];
-  const hermosaPink: Color = {
-    id: 0,
+  const hermosaPink = makeColor({
     name: 'Hermosa Pink',
     combinations: [176, 227, 273],
-    swatch: 0,
     cmyk: [0, 30, 6, 0],
-    lab,
+    lab: [83.42717631799802, 22.136186770428026, 1.6381322957198563],
     rgb: [249, 193, 206],
     hex: '#f9c1ce',
-    properties: colorProperties(lab),
-  };
+  });
 
   it('paints swatches from the stored (print-based) Lab values', () => {
     expect(toCssColor(hermosaPink, true)).toBe('lab(83.43% 22.14 1.64)');
@@ -38,5 +36,18 @@ describe('color helpers', () => {
   it('formats CMYK and RGB labels like the book', () => {
     expect(toCmykString(hermosaPink)).toBe('C0 M30 Y6 K0');
     expect(toRgbLabel(hermosaPink)).toBe('R249 G193 B206');
+  });
+
+  it('builds a CSS color from raw RGB values (e.g. a photo pixel)', () => {
+    expect(rgbCss([12, 34, 56])).toBe('rgb(12, 34, 56)');
+  });
+
+  it('resolves hex values to colors, skipping unknown ones', () => {
+    const byHex = new Map([[hermosaPink.hex, hermosaPink]]);
+    expect(resolveColors(['#f9c1ce', '#unknown', '#f9c1ce'], byHex)).toEqual([
+      hermosaPink,
+      hermosaPink,
+    ]);
+    expect(resolveColors([], byHex)).toEqual([]);
   });
 });

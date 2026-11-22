@@ -1,0 +1,31 @@
+<ol class="match-groups">
+  @for (group of groups(); track group.id) {
+    <li class="match-group">
+      <app-color-combination
+        [combinationId]="group.id"
+        [current]="ownColor(group)"
+        [headingLevel]="3"
+      />
+
+      <ul class="match-list" [attr.aria-label]="'Items for combination ' + group.id">
+        @for (entry of group.items; track entry.item.id) {
+          <li>
+            <app-wardrobe-item-tile
+              [item]="entry.item"
+              [colors]="stripColors(entry)"
+              [note]="nearMatchNote(entry)"
+            />
+          </li>
+        }
+      </ul>
+    </li>
+  } @empty {
+    <li class="muted">No other items in your wardrobe match these colors yet.</li>
+  }
+</ol>
+@if (hasNearMatches()) {
+  <p class="hint muted">
+    Near matches don't have the exact combination color, but one that keeps its lightness, warmth
+    and saturation balance.
+  </p>
+}

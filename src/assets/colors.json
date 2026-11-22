@@ -2,11 +2,6 @@
   {
     "id": 0,
     "name": "Hermosa Pink",
-    "combinations": [
-      176,
-      227,
-      273
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -29,20 +24,6 @@
   {
     "id": 1,
     "name": "Corinthian Pink",
-    "combinations": [
-      27,
-      43,
-      87,
-      97,
-      128,
-      169,
-      174,
-      206,
-      246,
-      254,
-      264,
-      342
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -65,14 +46,6 @@
   {
     "id": 2,
     "name": "Cameo Pink",
-    "combinations": [
-      101,
-      105,
-      116,
-      120,
-      165,
-      231
-    ],
     "swatch": 0,
     "cmyk": [
       10,
@@ -95,11 +68,6 @@
   {
     "id": 3,
     "name": "Fawn",
-    "combinations": [
-      18,
-      125,
-      308
-    ],
     "swatch": 0,
     "cmyk": [
       18,
@@ -122,18 +90,6 @@
   {
     "id": 4,
     "name": "Light Brown Drab",
-    "combinations": [
-      35,
-      68,
-      185,
-      191,
-      223,
-      239,
-      244,
-      268,
-      285,
-      321
-    ],
     "swatch": 0,
     "cmyk": [
       8,
@@ -156,12 +112,6 @@
   {
     "id": 5,
     "name": "Coral Red",
-    "combinations": [
-      92,
-      123,
-      320,
-      332
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -184,9 +134,6 @@
   {
     "id": 6,
     "name": "Fresh Color",
-    "combinations": [
-      240
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -209,18 +156,6 @@
   {
     "id": 7,
     "name": "Grenadine Pink",
-    "combinations": [
-      6,
-      21,
-      112,
-      166,
-      193,
-      201,
-      230,
-      300,
-      315,
-      341
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -243,22 +178,6 @@
   {
     "id": 8,
     "name": "Eosine Pink",
-    "combinations": [
-      34,
-      59,
-      90,
-      108,
-      134,
-      153,
-      197,
-      242,
-      248,
-      276,
-      287,
-      314,
-      327,
-      336
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -281,15 +200,6 @@
   {
     "id": 9,
     "name": "Spinel Red",
-    "combinations": [
-      14,
-      147,
-      165,
-      184,
-      195,
-      224,
-      277
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -312,12 +222,6 @@
   {
     "id": 10,
     "name": "Old Rose",
-    "combinations": [
-      55,
-      162,
-      260,
-      265
-    ],
     "swatch": 0,
     "cmyk": [
       15,
@@ -340,9 +244,6 @@
   {
     "id": 11,
     "name": "Eugenia Red | A",
-    "combinations": [
-      284
-    ],
     "swatch": 0,
     "cmyk": [
       7,
@@ -365,16 +266,6 @@
   {
     "id": 12,
     "name": "Eugenia Red | B",
-    "combinations": [
-      17,
-      77,
-      252,
-      262,
-      270,
-      280,
-      282,
-      325
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -397,27 +288,6 @@
   {
     "id": 13,
     "name": "Raw Sienna",
-    "combinations": [
-      3,
-      13,
-      33,
-      70,
-      86,
-      130,
-      131,
-      182,
-      243,
-      247,
-      252,
-      255,
-      268,
-      269,
-      279,
-      293,
-      298,
-      319,
-      327
-    ],
     "swatch": 0,
     "cmyk": [
       18,
@@ -440,11 +310,6 @@
   {
     "id": 14,
     "name": "Vinaceous Tawny",
-    "combinations": [
-      40,
-      85,
-      244
-    ],
     "swatch": 0,
     "cmyk": [
       17,
@@ -467,12 +332,6 @@
   {
     "id": 15,
     "name": "Jasper Red",
-    "combinations": [
-      155,
-      194,
-      216,
-      219
-    ],
     "swatch": 0,
     "cmyk": [
       2,
@@ -495,12 +354,6 @@
   {
     "id": 16,
     "name": "Spectrum Red",
-    "combinations": [
-      257,
-      266,
-      301,
-      322
-    ],
     "swatch": 0,
     "cmyk": [
       5,
@@ -523,13 +376,6 @@
   {
     "id": 17,
     "name": "Red Orange",
-    "combinations": [
-      31,
-      164,
-      179,
-      241,
-      264
-    ],
     "swatch": 0,
     "cmyk": [
       9,
@@ -552,15 +398,6 @@
   {
     "id": 18,
     "name": "Etruscan Red",
-    "combinations": [
-      25,
-      47,
-      97,
-      137,
-      152,
-      185,
-      275
-    ],
     "swatch": 0,
     "cmyk": [
       16,
@@ -583,17 +420,6 @@
   {
     "id": 19,
     "name": "Burnt Sienna",
-    "combinations": [
-      198,
-      242,
-      263,
-      285,
-      286,
-      297,
-      312,
-      333,
-      343
-    ],
     "swatch": 0,
     "cmyk": [
       22,
@@ -616,10 +442,6 @@
   {
     "id": 20,
     "name": "Ochre Red",
-    "combinations": [
-      199,
-      283
-    ],
     "swatch": 0,
     "cmyk": [
       18,
@@ -642,11 +464,6 @@
   {
     "id": 21,
     "name": "Scarlet",
-    "combinations": [
-      136,
-      308,
-      332
-    ],
     "swatch": 0,
     "cmyk": [
       10,
@@ -669,16 +486,6 @@
   {
     "id": 22,
     "name": "Carmine",
-    "combinations": [
-      39,
-      117,
-      122,
-      154,
-      225,
-      232,
-      307,
-      313
-    ],
     "swatch": 0,
     "cmyk": [
       0,
@@ -701,10 +508,6 @@
   {
     "id": 23,
     "name": "Indian Lake",
-    "combinations": [
-      299,
-      331
-    ],
     "swatch": 0,
     "cmyk": [
       12,
@@ -727,14 +530,6 @@
   {
     "id": 24,
     "name": "Rosolanc Purple",
-    "combinations": [
-      48,
-      144,
-      170,
-      204,
-      277,
-      346
-    ],
     "swatch": 0,
     "cmyk": [
       30,
@@ -757,10 +552,6 @@
   {
     "id": 25,
     "name": "Pomegranite Purple",
-    "combinations": [
-      220,
-      271
-    ],
     "swatch": 0,
     "cmyk": [
       23,
@@ -783,9 +574,6 @@
   {
     "id": 26,
     "name": "Hydrangea Red",
-    "combinations": [
-      142
-    ],
     "swatch": 0,
     "cmyk": [
       38,
@@ -808,13 +596,6 @@
   {
     "id": 27,
     "name": "Brick Red",
-    "combinations": [
-      37,
-      108,
-      246,
-      322,
-      328
-    ],
     "swatch": 0,
     "cmyk": [
       22,
@@ -837,20 +618,6 @@
   {
     "id": 28,
     "name": "Carmine Red",
-    "combinations": [
-      35,
-      51,
-      104,
-      130,
-      181,
-      200,
-      221,
-      228,
-      233,
-      237,
-      245,
-      338
-    ],
     "swatch": 0,
     "cmyk": [
       25,
@@ -873,14 +640,6 @@
   {
     "id": 29,
     "name": "Pompeian Red",
-    "combinations": [
-      30,
-      71,
-      120,
-      212,
-      311,
-      324
-    ],
     "swatch": 0,
     "cmyk": [
       18,
@@ -903,10 +662,6 @@
   {
     "id": 30,
     "name": "Red",
-    "combinations": [
-      251,
-      261
-    ],
     "swatch": 0,
     "cmyk": [
       30,
@@ -929,12 +684,6 @@
   {
     "id": 31,
     "name": "Brown",
-    "combinations": [
-      110,
-      121,
-      145,
-      161
-    ],
     "swatch": 0,
     "cmyk": [
       35,
@@ -957,19 +706,6 @@
   {
     "id": 32,
     "name": "Hay's Russet",
-    "combinations": [
-      58,
-      82,
-      95,
-      152,
-      186,
-      231,
-      249,
-      304,
-      314,
-      336,
-      345
-    ],
     "swatch": 0,
     "cmyk": [
       37,
@@ -992,13 +728,6 @@
   {
     "id": 33,
     "name": "Vandyke Red",
-    "combinations": [
-      16,
-      133,
-      147,
-      316,
-      335
-    ],
     "swatch": 0,
     "cmyk": [
       32,
@@ -1021,10 +750,6 @@
   {
     "id": 34,
     "name": "Pansy Purple",
-    "combinations": [
-      157,
-      273
-    ],
     "swatch": 0,
     "cmyk": [
       34,
@@ -1047,16 +772,6 @@
   {
     "id": 35,
     "name": "Pale Burnt Lake",
-    "combinations": [
-      124,
-      171,
-      177,
-      205,
-      217,
-      258,
-      269,
-      283
-    ],
     "swatch": 0,
     "cmyk": [
       25,
@@ -1079,9 +794,6 @@
   {
     "id": 36,
     "name": "Violet Red",
-    "combinations": [
-      9
-    ],
     "swatch": 0,
     "cmyk": [
       75,
@@ -1104,14 +816,6 @@
   {
     "id": 37,
     "name": "Vistoris Lake",
-    "combinations": [
-      63,
-      91,
-      165,
-      226,
-      290,
-      337
-    ],
     "swatch": 0,
     "cmyk": [
       40,
@@ -1134,26 +838,6 @@
   {
     "id": 38,
     "name": "Sulpher Yellow",
-    "combinations": [
-      52,
-      72,
-      80,
-      104,
-      132,
-      135,
-      151,
-      208,
-      246,
-      254,
-      270,
-      294,
-      296,
-      310,
-      315,
-      320,
-      321,
-      326
-    ],
     "swatch": 1,
     "cmyk": [
       4,
@@ -1176,27 +860,6 @@
   {
     "id": 39,
     "name": "Pale Lemon Yellow",
-    "combinations": [
-      3,
-      31,
-      60,
-      76,
-      99,
-      109,
-      111,
-      169,
-      185,
-      195,
-      203,
-      228,
-      241,
-      261,
-      272,
-      281,
-      290,
-      292,
-      336
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1219,14 +882,6 @@
   {
     "id": 40,
     "name": "Naples Yellow",
-    "combinations": [
-      14,
-      115,
-      166,
-      193,
-      303,
-      325
-    ],
     "swatch": 1,
     "cmyk": [
       2,
@@ -1249,24 +904,6 @@
   {
     "id": 41,
     "name": "Ivory Buff",
-    "combinations": [
-      11,
-      50,
-      94,
-      102,
-      126,
-      178,
-      184,
-      190,
-      209,
-      214,
-      235,
-      243,
-      262,
-      266,
-      301,
-      343
-    ],
     "swatch": 1,
     "cmyk": [
       8,
@@ -1289,17 +926,6 @@
   {
     "id": 42,
     "name": "Seashell Pink",
-    "combinations": [
-      45,
-      84,
-      88,
-      113,
-      150,
-      176,
-      194,
-      276,
-      334
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1322,9 +948,6 @@
   {
     "id": 43,
     "name": "Light Pinkish Cinnamon",
-    "combinations": [
-      317
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1347,17 +970,6 @@
   {
     "id": 44,
     "name": "Pinkish Cinnamon",
-    "combinations": [
-      78,
-      161,
-      175,
-      232,
-      258,
-      263,
-      292,
-      305,
-      310
-    ],
     "swatch": 1,
     "cmyk": [
       5,
@@ -1380,17 +992,6 @@
   {
     "id": 45,
     "name": "Cinnamon Buff",
-    "combinations": [
-      23,
-      127,
-      137,
-      180,
-      210,
-      234,
-      246,
-      323,
-      344
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1413,22 +1014,6 @@
   {
     "id": 46,
     "name": "Cream Yellow",
-    "combinations": [
-      122,
-      192,
-      215,
-      226,
-      267,
-      278,
-      294,
-      295,
-      300,
-      302,
-      304,
-      311,
-      329,
-      342
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1451,18 +1036,6 @@
   {
     "id": 47,
     "name": "Golden Yellow",
-    "combinations": [
-      26,
-      81,
-      132,
-      138,
-      140,
-      179,
-      206,
-      229,
-      309,
-      315
-    ],
     "swatch": 1,
     "cmyk": [
       2,
@@ -1485,15 +1058,6 @@
   {
     "id": 48,
     "name": "Vinaceous Cinnamon",
-    "combinations": [
-      203,
-      205,
-      213,
-      256,
-      260,
-      279,
-      299
-    ],
     "swatch": 1,
     "cmyk": [
       4,
@@ -1516,18 +1080,6 @@
   {
     "id": 49,
     "name": "Ochraceous Salmon",
-    "combinations": [
-      32,
-      71,
-      121,
-      186,
-      217,
-      220,
-      223,
-      238,
-      296,
-      339
-    ],
     "swatch": 1,
     "cmyk": [
       15,
@@ -1550,12 +1102,6 @@
   {
     "id": 50,
     "name": "Isabella Color",
-    "combinations": [
-      4,
-      12,
-      241,
-      292
-    ],
     "swatch": 1,
     "cmyk": [
       15,
@@ -1578,9 +1124,6 @@
   {
     "id": 51,
     "name": "Maple",
-    "combinations": [
-      282
-    ],
     "swatch": 1,
     "cmyk": [
       5,
@@ -1603,13 +1146,6 @@
   {
     "id": 52,
     "name": "Olive Buff",
-    "combinations": [
-      83,
-      175,
-      200,
-      330,
-      348
-    ],
     "swatch": 1,
     "cmyk": [
       16,
@@ -1632,16 +1168,6 @@
   {
     "id": 53,
     "name": "Ecru",
-    "combinations": [
-      167,
-      249,
-      275,
-      279,
-      292,
-      302,
-      317,
-      327
-    ],
     "swatch": 1,
     "cmyk": [
       20,
@@ -1664,16 +1190,6 @@
   {
     "id": 54,
     "name": "Yellow",
-    "combinations": [
-      22,
-      62,
-      68,
-      154,
-      240,
-      251,
-      295,
-      313
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1696,23 +1212,6 @@
   {
     "id": 55,
     "name": "Lemon Yellow",
-    "combinations": [
-      45,
-      123,
-      138,
-      158,
-      168,
-      173,
-      189,
-      210,
-      253,
-      259,
-      289,
-      298,
-      306,
-      317,
-      333
-    ],
     "swatch": 1,
     "cmyk": [
       5,
@@ -1735,18 +1234,6 @@
   {
     "id": 56,
     "name": "Apricot Yellow",
-    "combinations": [
-      107,
-      129,
-      163,
-      198,
-      213,
-      247,
-      265,
-      284,
-      305,
-      319
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1769,12 +1256,6 @@
   {
     "id": 57,
     "name": "Pyrite Yellow",
-    "combinations": [
-      239,
-      250,
-      255,
-      287
-    ],
     "swatch": 1,
     "cmyk": [
       23,
@@ -1797,15 +1278,6 @@
   {
     "id": 58,
     "name": "Olive Ocher",
-    "combinations": [
-      66,
-      148,
-      149,
-      156,
-      157,
-      249,
-      278
-    ],
     "swatch": 1,
     "cmyk": [
       18,
@@ -1828,16 +1300,6 @@
   {
     "id": 59,
     "name": "Yellow Ocher",
-    "combinations": [
-      42,
-      96,
-      118,
-      124,
-      126,
-      191,
-      222,
-      325
-    ],
     "swatch": 1,
     "cmyk": [
       12,
@@ -1860,16 +1322,6 @@
   {
     "id": 60,
     "name": "Orange Yellow",
-    "combinations": [
-      114,
-      148,
-      153,
-      164,
-      170,
-      257,
-      286,
-      338
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1892,22 +1344,6 @@
   {
     "id": 61,
     "name": "Yellow Orange",
-    "combinations": [
-      2,
-      53,
-      89,
-      151,
-      171,
-      209,
-      222,
-      235,
-      267,
-      288,
-      297,
-      312,
-      319,
-      335
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1930,12 +1366,6 @@
   {
     "id": 62,
     "name": "Apricot Orange",
-    "combinations": [
-      211,
-      253,
-      309,
-      328
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1958,15 +1388,6 @@
   {
     "id": 63,
     "name": "Orange",
-    "combinations": [
-      7,
-      46,
-      141,
-      144,
-      149,
-      256,
-      272
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -1989,16 +1410,6 @@
   {
     "id": 64,
     "name": "Peach Red",
-    "combinations": [
-      115,
-      250,
-      274,
-      285,
-      298,
-      303,
-      326,
-      340
-    ],
     "swatch": 1,
     "cmyk": [
       0,
@@ -2021,13 +1432,6 @@
   {
     "id": 65,
     "name": "English Red",
-    "combinations": [
-      1,
-      131,
-      190,
-      308,
-      339
-    ],
     "swatch": 1,
     "cmyk": [
       13,
@@ -2050,15 +1454,6 @@
   {
     "id": 66,
     "name": "Cinnamon Rufous",
-    "combinations": [
-      8,
-      10,
-      103,
-      158,
-      172,
-      204,
-      206
-    ],
     "swatch": 1,
     "cmyk": [
       20,
@@ -2081,11 +1476,6 @@
   {
     "id": 67,
     "name": "Orange Rufous",
-    "combinations": [
-      91,
-      102,
-      222
-    ],
     "swatch": 1,
     "cmyk": [
       18,
@@ -2108,13 +1498,6 @@
   {
     "id": 68,
     "name": "Sulphine Yellow",
-    "combinations": [
-      36,
-      65,
-      142,
-      160,
-      252
-    ],
     "swatch": 1,
     "cmyk": [
       24,
@@ -2137,13 +1520,6 @@
   {
     "id": 69,
     "name": "Khaki",
-    "combinations": [
-      129,
-      146,
-      159,
-      236,
-      248
-    ],
     "swatch": 1,
     "cmyk": [
       24,
@@ -2166,16 +1542,6 @@
   {
     "id": 70,
     "name": "Citron Yellow",
-    "combinations": [
-      40,
-      87,
-      145,
-      150,
-      153,
-      196,
-      305,
-      323
-    ],
     "swatch": 1,
     "cmyk": [
       35,
@@ -2198,13 +1564,6 @@
   {
     "id": 71,
     "name": "Citrine",
-    "combinations": [
-      59,
-      93,
-      132,
-      133,
-      262
-    ],
     "swatch": 1,
     "cmyk": [
       36,
@@ -2227,11 +1586,6 @@
   {
     "id": 72,
     "name": "Buffy Citrine",
-    "combinations": [
-      100,
-      177,
-      233
-    ],
     "swatch": 1,
     "cmyk": [
       42,
@@ -2254,12 +1608,6 @@
   {
     "id": 73,
     "name": "Dark Citrine",
-    "combinations": [
-      10,
-      41,
-      274,
-      304
-    ],
     "swatch": 1,
     "cmyk": [
       38,
@@ -2282,10 +1630,6 @@
   {
     "id": 74,
     "name": "Light Grayish Olive",
-    "combinations": [
-      107,
-      184
-    ],
     "swatch": 1,
     "cmyk": [
       43,
@@ -2308,9 +1652,6 @@
   {
     "id": 75,
     "name": "Krongbergs Green",
-    "combinations": [
-      29
-    ],
     "swatch": 1,
     "cmyk": [
       48,
@@ -2333,15 +1674,6 @@
   {
     "id": 76,
     "name": "Olive",
-    "combinations": [
-      96,
-      201,
-      254,
-      258,
-      277,
-      310,
-      334
-    ],
     "swatch": 1,
     "cmyk": [
       48,
@@ -2364,10 +1696,6 @@
   {
     "id": 77,
     "name": "Orange Citrine",
-    "combinations": [
-      212,
-      342
-    ],
     "swatch": 1,
     "cmyk": [
       28,
@@ -2390,11 +1718,6 @@
   {
     "id": 78,
     "name": "Sudan Brown",
-    "combinations": [
-      207,
-      214,
-      273
-    ],
     "swatch": 1,
     "cmyk": [
       25,
@@ -2417,12 +1740,6 @@
   {
     "id": 79,
     "name": "Olive Green",
-    "combinations": [
-      66,
-      243,
-      270,
-      297
-    ],
     "swatch": 1,
     "cmyk": [
       56,
@@ -2445,10 +1762,6 @@
   {
     "id": 80,
     "name": "Light Brownish Olive",
-    "combinations": [
-      199,
-      318
-    ],
     "swatch": 1,
     "cmyk": [
       42,
@@ -2471,10 +1784,6 @@
   {
     "id": 81,
     "name": "Deep Grayish Olive",
-    "combinations": [
-      146,
-      343
-    ],
     "swatch": 1,
     "cmyk": [
       50,
@@ -2497,13 +1806,6 @@
   {
     "id": 82,
     "name": "Pale Raw Umber",
-    "combinations": [
-      26,
-      73,
-      160,
-      234,
-      296
-    ],
     "swatch": 1,
     "cmyk": [
       46,
@@ -2526,10 +1828,6 @@
   {
     "id": 83,
     "name": "Sepia",
-    "combinations": [
-      24,
-      288
-    ],
     "swatch": 1,
     "cmyk": [
       48,
@@ -2552,15 +1850,6 @@
   {
     "id": 84,
     "name": "Madder Brown",
-    "combinations": [
-      28,
-      79,
-      98,
-      173,
-      237,
-      275,
-      323
-    ],
     "swatch": 1,
     "cmyk": [
       36,
@@ -2583,9 +1872,6 @@
   {
     "id": 85,
     "name": "Mars Brown Tobacco",
-    "combinations": [
-      19
-    ],
     "swatch": 1,
     "cmyk": [
       39,
@@ -2608,14 +1894,6 @@
   {
     "id": 86,
     "name": "Vandyke Brown",
-    "combinations": [
-      110,
-      113,
-      118,
-      182,
-      192,
-      328
-    ],
     "swatch": 1,
     "cmyk": [
       56,
@@ -2638,24 +1916,6 @@
   {
     "id": 87,
     "name": "Turquoise Green",
-    "combinations": [
-      36,
-      74,
-      147,
-      163,
-      173,
-      202,
-      223,
-      230,
-      263,
-      272,
-      285,
-      293,
-      300,
-      305,
-      317,
-      346
-    ],
     "swatch": 2,
     "cmyk": [
       29,
@@ -2678,14 +1938,6 @@
   {
     "id": 88,
     "name": "Glaucous Green",
-    "combinations": [
-      7,
-      150,
-      171,
-      207,
-      239,
-      260
-    ],
     "swatch": 2,
     "cmyk": [
       30,
@@ -2708,10 +1960,6 @@
   {
     "id": 89,
     "name": "Dark Greenish Glaucous",
-    "combinations": [
-      264,
-      311
-    ],
     "swatch": 2,
     "cmyk": [
       30,
@@ -2734,13 +1982,6 @@
   {
     "id": 90,
     "name": "Yellow Green",
-    "combinations": [
-      111,
-      141,
-      276,
-      326,
-      334
-    ],
     "swatch": 2,
     "cmyk": [
       35,
@@ -2763,13 +2004,6 @@
   {
     "id": 91,
     "name": "Light Green Yellow",
-    "combinations": [
-      61,
-      289,
-      291,
-      311,
-      346
-    ],
     "swatch": 2,
     "cmyk": [
       26,
@@ -2792,12 +2026,6 @@
   {
     "id": 92,
     "name": "Night Green",
-    "combinations": [
-      19,
-      32,
-      158,
-      326
-    ],
     "swatch": 2,
     "cmyk": [
       52,
@@ -2820,12 +2048,6 @@
   {
     "id": 93,
     "name": "Olive Yellow",
-    "combinations": [
-      124,
-      211,
-      265,
-      347
-    ],
     "swatch": 2,
     "cmyk": [
       40,
@@ -2848,10 +2070,6 @@
   {
     "id": 94,
     "name": "Artemesia Green",
-    "combinations": [
-      293,
-      312
-    ],
     "swatch": 2,
     "cmyk": [
       57,
@@ -2874,10 +2092,6 @@
   {
     "id": 95,
     "name": "Andover Green",
-    "combinations": [
-      244,
-      346
-    ],
     "swatch": 2,
     "cmyk": [
       60,
@@ -2900,13 +2114,6 @@
   {
     "id": 96,
     "name": "Rainette Green",
-    "combinations": [
-      73,
-      162,
-      188,
-      266,
-      301
-    ],
     "swatch": 2,
     "cmyk": [
       42,
@@ -2929,12 +2136,6 @@
   {
     "id": 97,
     "name": "Chromium Green",
-    "combinations": [
-      105,
-      200,
-      219,
-      283
-    ],
     "swatch": 2,
     "cmyk": [
       50,
@@ -2957,10 +2158,6 @@
   {
     "id": 98,
     "name": "Pistachio Green",
-    "combinations": [
-      127,
-      137
-    ],
     "swatch": 2,
     "cmyk": [
       64,
@@ -2983,19 +2180,6 @@
   {
     "id": 99,
     "name": "Sea Green",
-    "combinations": [
-      17,
-      21,
-      58,
-      86,
-      133,
-      250,
-      260,
-      284,
-      291,
-      340,
-      347
-    ],
     "swatch": 2,
     "cmyk": [
       80,
@@ -3018,19 +2202,6 @@
   {
     "id": 100,
     "name": "Benzol Green",
-    "combinations": [
-      15,
-      54,
-      92,
-      122,
-      155,
-      247,
-      266,
-      267,
-      281,
-      304,
-      306
-    ],
     "swatch": 2,
     "cmyk": [
       100,
@@ -3053,11 +2224,6 @@
   {
     "id": 101,
     "name": "Light Porcelain Green",
-    "combinations": [
-      44,
-      193,
-      328
-    ],
     "swatch": 2,
     "cmyk": [
       86,
@@ -3080,11 +2246,6 @@
   {
     "id": 102,
     "name": "Green",
-    "combinations": [
-      198,
-      216,
-      293
-    ],
     "swatch": 2,
     "cmyk": [
       75,
@@ -3107,12 +2268,6 @@
   {
     "id": 103,
     "name": "Dull Viridian Green",
-    "combinations": [
-      136,
-      256,
-      306,
-      316
-    ],
     "swatch": 2,
     "cmyk": [
       90,
@@ -3135,11 +2290,6 @@
   {
     "id": 104,
     "name": "Oil Green",
-    "combinations": [
-      245,
-      299,
-      320
-    ],
     "swatch": 2,
     "cmyk": [
       53,
@@ -3162,14 +2312,6 @@
   {
     "id": 105,
     "name": "Diamine Green",
-    "combinations": [
-      38,
-      146,
-      217,
-      242,
-      251,
-      313
-    ],
     "swatch": 2,
     "cmyk": [
       87,
@@ -3192,17 +2334,6 @@
   {
     "id": 106,
     "name": "Cossack Green",
-    "combinations": [
-      5,
-      135,
-      262,
-      270,
-      278,
-      294,
-      319,
-      341,
-      348
-    ],
     "swatch": 2,
     "cmyk": [
       76,
@@ -3225,14 +2356,6 @@
   {
     "id": 107,
     "name": "Lincoln Green",
-    "combinations": [
-      70,
-      121,
-      203,
-      210,
-      280,
-      290
-    ],
     "swatch": 2,
     "cmyk": [
       60,
@@ -3255,11 +2378,6 @@
   {
     "id": 108,
     "name": "Blackish Olive",
-    "combinations": [
-      109,
-      318,
-      336
-    ],
     "swatch": 2,
     "cmyk": [
       56,
@@ -3282,18 +2400,6 @@
   {
     "id": 109,
     "name": "Deep Slate Olive",
-    "combinations": [
-      189,
-      229,
-      268,
-      303,
-      310,
-      321,
-      332,
-      341,
-      342,
-      348
-    ],
     "swatch": 2,
     "cmyk": [
       76,
@@ -3316,15 +2422,6 @@
   {
     "id": 110,
     "name": "Nile Blue",
-    "combinations": [
-      25,
-      250,
-      268,
-      302,
-      306,
-      330,
-      345
-    ],
     "swatch": 3,
     "cmyk": [
       25,
@@ -3347,17 +2444,6 @@
   {
     "id": 111,
     "name": "Pale King's Blue",
-    "combinations": [
-      16,
-      49,
-      72,
-      75,
-      167,
-      196,
-      213,
-      234,
-      287
-    ],
     "swatch": 3,
     "cmyk": [
       33,
@@ -3380,18 +2466,6 @@
   {
     "id": 112,
     "name": "Light Glaucous Blue",
-    "combinations": [
-      54,
-      93,
-      119,
-      152,
-      178,
-      204,
-      227,
-      320,
-      339,
-      341
-    ],
     "swatch": 3,
     "cmyk": [
       35,
@@ -3414,21 +2488,6 @@
   {
     "id": 113,
     "name": "Salvia Blue",
-    "combinations": [
-      29,
-      129,
-      135,
-      139,
-      142,
-      188,
-      209,
-      212,
-      237,
-      272,
-      294,
-      321,
-      330
-    ],
     "swatch": 3,
     "cmyk": [
       41,
@@ -3451,20 +2510,6 @@
   {
     "id": 114,
     "name": "Cobalt Green",
-    "combinations": [
-      156,
-      188,
-      201,
-      202,
-      230,
-      271,
-      281,
-      282,
-      290,
-      291,
-      308,
-      333
-    ],
     "swatch": 3,
     "cmyk": [
       42,
@@ -3487,18 +2532,6 @@
   {
     "id": 115,
     "name": "Calamine BLue",
-    "combinations": [
-      20,
-      41,
-      65,
-      159,
-      176,
-      255,
-      261,
-      287,
-      291,
-      300
-    ],
     "swatch": 3,
     "cmyk": [
       50,
@@ -3521,14 +2554,6 @@
   {
     "id": 116,
     "name": "Venice Green",
-    "combinations": [
-      78,
-      128,
-      138,
-      189,
-      283,
-      345
-    ],
     "swatch": 3,
     "cmyk": [
       58,
@@ -3551,16 +2576,6 @@
   {
     "id": 117,
     "name": "Cerulian Blue",
-    "combinations": [
-      1,
-      63,
-      99,
-      125,
-      148,
-      227,
-      240,
-      264
-    ],
     "swatch": 3,
     "cmyk": [
       84,
@@ -3583,10 +2598,6 @@
   {
     "id": 118,
     "name": "Peacock Blue",
-    "combinations": [
-      131,
-      286
-    ],
     "swatch": 3,
     "cmyk": [
       100,
@@ -3609,17 +2620,6 @@
   {
     "id": 119,
     "name": "Green Blue",
-    "combinations": [
-      12,
-      74,
-      79,
-      178,
-      208,
-      252,
-      259,
-      271,
-      330
-    ],
     "swatch": 3,
     "cmyk": [
       82,
@@ -3642,15 +2642,6 @@
   {
     "id": 120,
     "name": "Olympic Blue",
-    "combinations": [
-      44,
-      67,
-      157,
-      194,
-      231,
-      274,
-      324
-    ],
     "swatch": 3,
     "cmyk": [
       69,
@@ -3673,20 +2664,6 @@
   {
     "id": 121,
     "name": "Blue",
-    "combinations": [
-      49,
-      51,
-      88,
-      143,
-      154,
-      186,
-      191,
-      215,
-      257,
-      267,
-      295,
-      333
-    ],
     "swatch": 3,
     "cmyk": [
       95,
@@ -3709,21 +2686,6 @@
   {
     "id": 122,
     "name": "Antwarp Blue",
-    "combinations": [
-      85,
-      106,
-      114,
-      140,
-      163,
-      172,
-      208,
-      244,
-      258,
-      281,
-      299,
-      302,
-      334
-    ],
     "swatch": 3,
     "cmyk": [
       100,
@@ -3746,16 +2708,6 @@
   {
     "id": 123,
     "name": "Helvetia Blue",
-    "combinations": [
-      39,
-      48,
-      161,
-      187,
-      218,
-      259,
-      312,
-      347
-    ],
     "swatch": 3,
     "cmyk": [
       100,
@@ -3778,12 +2730,6 @@
   {
     "id": 124,
     "name": "Dark Medici Blue",
-    "combinations": [
-      160,
-      224,
-      241,
-      249
-    ],
     "swatch": 3,
     "cmyk": [
       70,
@@ -3806,16 +2752,6 @@
   {
     "id": 125,
     "name": "Dusky Green",
-    "combinations": [
-      94,
-      219,
-      225,
-      278,
-      284,
-      318,
-      332,
-      338
-    ],
     "swatch": 3,
     "cmyk": [
       100,
@@ -3838,18 +2774,6 @@
   {
     "id": 126,
     "name": "Deep Lyons Blue",
-    "combinations": [
-      22,
-      38,
-      101,
-      126,
-      179,
-      199,
-      236,
-      247,
-      314,
-      344
-    ],
     "swatch": 3,
     "cmyk": [
       100,
@@ -3872,19 +2796,6 @@
   {
     "id": 127,
     "name": "Violet Blue",
-    "combinations": [
-      75,
-      83,
-      89,
-      98,
-      125,
-      233,
-      286,
-      289,
-      297,
-      309,
-      339
-    ],
     "swatch": 3,
     "cmyk": [
       85,
@@ -3907,15 +2818,6 @@
   {
     "id": 128,
     "name": "Vandar Poel's Blue",
-    "combinations": [
-      5,
-      77,
-      151,
-      167,
-      168,
-      309,
-      343
-    ],
     "swatch": 3,
     "cmyk": [
       100,
@@ -3938,15 +2840,6 @@
   {
     "id": 129,
     "name": "Dark Tyrian Blue",
-    "combinations": [
-      2,
-      60,
-      67,
-      119,
-      141,
-      245,
-      279
-    ],
     "swatch": 3,
     "cmyk": [
       90,
@@ -3969,16 +2862,6 @@
   {
     "id": 130,
     "name": "Dull Violet Black",
-    "combinations": [
-      95,
-      106,
-      145,
-      265,
-      277,
-      289,
-      295,
-      331
-    ],
     "swatch": 3,
     "cmyk": [
       95,
@@ -4001,15 +2884,6 @@
   {
     "id": 131,
     "name": "Deep Indigo",
-    "combinations": [
-      6,
-      28,
-      139,
-      155,
-      182,
-      211,
-      232
-    ],
     "swatch": 3,
     "cmyk": [
       100,
@@ -4032,14 +2906,6 @@
   {
     "id": 132,
     "name": "Deep Slate Green",
-    "combinations": [
-      84,
-      149,
-      166,
-      271,
-      318,
-      325
-    ],
     "swatch": 3,
     "cmyk": [
       80,
@@ -4062,15 +2928,6 @@
   {
     "id": 133,
     "name": "Grayish Lavender - A",
-    "combinations": [
-      8,
-      15,
-      159,
-      177,
-      218,
-      248,
-      307
-    ],
     "swatch": 4,
     "cmyk": [
       28,
@@ -4093,16 +2950,6 @@
   {
     "id": 134,
     "name": "Grayish Lavender - B",
-    "combinations": [
-      47,
-      56,
-      174,
-      187,
-      235,
-      327,
-      329,
-      338
-    ],
     "swatch": 4,
     "cmyk": [
       25,
@@ -4125,12 +2972,6 @@
   {
     "id": 135,
     "name": "Laelia Pink",
-    "combinations": [
-      20,
-      254,
-      280,
-      337
-    ],
     "swatch": 4,
     "cmyk": [
       20,
@@ -4153,12 +2994,6 @@
   {
     "id": 136,
     "name": "Lilac",
-    "combinations": [
-      143,
-      162,
-      282,
-      347
-    ],
     "swatch": 4,
     "cmyk": [
       28,
@@ -4181,11 +3016,6 @@
   {
     "id": 137,
     "name": "Eupatorium Purple",
-    "combinations": [
-      215,
-      315,
-      322
-    ],
     "swatch": 4,
     "cmyk": [
       25,
@@ -4208,15 +3038,6 @@
   {
     "id": 138,
     "name": "Light Mauve",
-    "combinations": [
-      23,
-      80,
-      128,
-      134,
-      180,
-      274,
-      331
-    ],
     "swatch": 4,
     "cmyk": [
       43,
@@ -4239,19 +3060,6 @@
   {
     "id": 139,
     "name": "Aconite Violet",
-    "combinations": [
-      43,
-      64,
-      90,
-      187,
-      220,
-      257,
-      269,
-      301,
-      307,
-      324,
-      344
-    ],
     "swatch": 4,
     "cmyk": [
       39,
@@ -4274,10 +3082,6 @@
   {
     "id": 140,
     "name": "Dull Blue Violet",
-    "combinations": [
-      9,
-      100
-    ],
     "swatch": 4,
     "cmyk": [
       57,
@@ -4300,11 +3104,6 @@
   {
     "id": 141,
     "name": "Dark Soft Violet",
-    "combinations": [
-      64,
-      127,
-      197
-    ],
     "swatch": 4,
     "cmyk": [
       70,
@@ -4327,13 +3126,6 @@
   {
     "id": 142,
     "name": "Blue Violet",
-    "combinations": [
-      116,
-      175,
-      196,
-      322,
-      345
-    ],
     "swatch": 4,
     "cmyk": [
       72,
@@ -4356,9 +3148,6 @@
   {
     "id": 143,
     "name": "Purple Drab",
-    "combinations": [
-      236
-    ],
     "swatch": 4,
     "cmyk": [
       38,
@@ -4381,11 +3170,6 @@
   {
     "id": 144,
     "name": "Deep Violet / Plumbeous",
-    "combinations": [
-      183,
-      192,
-      218
-    ],
     "swatch": 4,
     "cmyk": [
       61,
@@ -4408,12 +3192,6 @@
   {
     "id": 145,
     "name": "Veronia Purple",
-    "combinations": [
-      13,
-      24,
-      168,
-      183
-    ],
     "swatch": 4,
     "cmyk": [
       42,
@@ -4436,10 +3214,6 @@
   {
     "id": 146,
     "name": "Dark Slate Purple",
-    "combinations": [
-      225,
-      248
-    ],
     "swatch": 4,
     "cmyk": [
       64,
@@ -4462,15 +3236,6 @@
   {
     "id": 147,
     "name": "Taupe Brown",
-    "combinations": [
-      57,
-      123,
-      174,
-      224,
-      275,
-      280,
-      288
-    ],
     "swatch": 4,
     "cmyk": [
       30,
@@ -4493,9 +3258,6 @@
   {
     "id": 148,
     "name": "Violet Carmine",
-    "combinations": [
-      337
-    ],
     "swatch": 4,
     "cmyk": [
       64,
@@ -4518,20 +3280,6 @@
   {
     "id": 149,
     "name": "Violet",
-    "combinations": [
-      42,
-      56,
-      130,
-      156,
-      164,
-      181,
-      205,
-      214,
-      226,
-      316,
-      331,
-      335
-    ],
     "swatch": 4,
     "cmyk": [
       85,
@@ -4554,16 +3302,6 @@
   {
     "id": 150,
     "name": "Red Violet",
-    "combinations": [
-      4,
-      37,
-      134,
-      136,
-      170,
-      172,
-      183,
-      316
-    ],
     "swatch": 4,
     "cmyk": [
       76,
@@ -4586,15 +3324,6 @@
   {
     "id": 151,
     "name": "Cotinga Purple",
-    "combinations": [
-      61,
-      181,
-      238,
-      253,
-      307,
-      329,
-      348
-    ],
     "swatch": 4,
     "cmyk": [
       66,
@@ -4617,14 +3346,6 @@
   {
     "id": 152,
     "name": "Dusky Madder Violet",
-    "combinations": [
-      18,
-      50,
-      53,
-      82,
-      103,
-      314
-    ],
     "swatch": 4,
     "cmyk": [
       75,
@@ -4647,9 +3368,6 @@
   {
     "id": 153,
     "name": "White",
-    "combinations": [
-      55
-    ],
     "swatch": 5,
     "cmyk": [
       0,
@@ -4672,20 +3390,6 @@
   {
     "id": 154,
     "name": "Neutral Gray",
-    "combinations": [
-      34,
-      139,
-      180,
-      195,
-      197,
-      221,
-      228,
-      229,
-      273,
-      303,
-      324,
-      340
-    ],
     "swatch": 5,
     "cmyk": [
       29,
@@ -4708,10 +3412,6 @@
   {
     "id": 155,
     "name": "Mineral Gray",
-    "combinations": [
-      11,
-      30
-    ],
     "swatch": 5,
     "cmyk": [
       33,
@@ -4734,16 +3434,6 @@
   {
     "id": 156,
     "name": "Warm Gray",
-    "combinations": [
-      69,
-      76,
-      81,
-      143,
-      169,
-      238,
-      259,
-      261
-    ],
     "swatch": 5,
     "cmyk": [
       37,
@@ -4766,21 +3456,6 @@
   {
     "id": 157,
     "name": "Slate Color",
-    "combinations": [
-      27,
-      33,
-      57,
-      140,
-      202,
-      243,
-      245,
-      251,
-      253,
-      263,
-      296,
-      329,
-      335
-    ],
     "swatch": 5,
     "cmyk": [
       85,
@@ -4803,31 +3478,6 @@
   {
     "id": 158,
     "name": "Black",
-    "combinations": [
-      46,
-      52,
-      62,
-      69,
-      112,
-      117,
-      144,
-      190,
-      207,
-      216,
-      221,
-      242,
-      255,
-      256,
-      269,
-      276,
-      288,
-      298,
-      313,
-      323,
-      337,
-      340,
-      344
-    ],
     "swatch": 5,
     "cmyk": [
       20,

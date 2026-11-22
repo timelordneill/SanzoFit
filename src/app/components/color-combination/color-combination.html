@@ -29,7 +29,9 @@
       @for (member of members(); track member.color.id) {
         <li class="label" [class]="member.position ? 'pos-' + member.position : ''">
           @if (member.color === current()) {
-            <span class="member current"><span class="name">{{ member.color.name }}</span></span>
+            <span class="member current"
+              ><span class="name">{{ member.color.name }}</span></span
+            >
           } @else {
             <a class="member" [routerLink]="['/color', member.color.id]">
               <span class="name">{{ member.color.name }}</span>

@@ -5,9 +5,7 @@
 } @else if (notFound()) {
   <p class="muted">This wardrobe item doesn't exist (anymore).</p>
 } @else if (item.error()) {
-  <p class="error" role="alert">
-    Could not load this item from your browser's storage.
-  </p>
+  <p class="error" role="alert">Could not load this item from your browser's storage.</p>
 } @else if (item.hasValue()) {
   @let wardrobeItem = item.value();
 
@@ -24,14 +22,13 @@
       <ul class="color-chips">
         @for (color of colors(); track color.hex) {
           <li>
-            <a class="chip" [routerLink]="['/color', color.id]">
-              <span class="chip-swatch" [style.background-color]="swatchColor(color)"></span>
-              <span class="chip-info">
-                <span class="chip-name">{{ color.name }}</span>
-                <span class="chip-value">{{ cmyk(color) }}</span>
-                <span class="chip-value">{{ rgbValues(color) }}</span>
-              </span>
-            </a>
+            <a
+              appColorTile
+              class="chip"
+              size="sm"
+              [color]="color"
+              [routerLink]="['/color', color.id]"
+            ></a>
           </li>
         }
       </ul>
@@ -64,39 +61,7 @@
     } @else if (wardrobeState() === 'error') {
       <p class="muted">Could not load the rest of your wardrobe to find matches.</p>
     } @else {
-      <ol class="match-groups">
-        @for (group of matchGroups(); track group.id) {
-          <li class="match-group">
-            <app-color-combination
-              [combinationId]="group.id"
-              [current]="ownColor(group)"
-              [headingLevel]="3"
-            />
-
-            <ul class="match-list" [attr.aria-label]="'Items for combination ' + group.id">
-              @for (entry of group.items; track entry.item.id) {
-                <li>
-                  <!-- The strip shows the color(s) this item brings to the combination
-                       (for a near match: its stand-in color). -->
-                  <app-wardrobe-item-tile
-                    [item]="entry.item"
-                    [colors]="colorsFor(entry.nearMatch ? [entry.nearMatch.hex] : entry.matchHexes)"
-                    [note]="nearMatchNote(entry)"
-                  />
-                </li>
-              }
-            </ul>
-          </li>
-        } @empty {
-          <li class="muted">No other items in your wardrobe match these colors yet.</li>
-        }
-      </ol>
-      @if (hasNearMatches()) {
-        <p class="hint muted">
-          Near matches don't have the exact combination color, but one that keeps its
-          lightness, warmth and saturation balance.
-        </p>
-      }
+      <app-match-groups [groups]="matchGroups()" />
     }
   </section>
 
@@ -108,23 +73,6 @@
     <p class="muted">This item has no known colors.</p>
   } @else {
     <!-- Only the combinations not already shown under "Goes well with". -->
-    @for (entry of moreCombinations(); track entry.color.hex) {
-      <section class="more">
-        <h3 class="more-title">With {{ entry.color.name }}</h3>
-        <ol class="more-list">
-          @for (combinationId of entry.ids; track combinationId) {
-            <li>
-              <app-color-combination
-                [combinationId]="combinationId"
-                [current]="entry.color"
-                [headingLevel]="4"
-              />
-            </li>
-          }
-        </ol>
-      </section>
-    } @empty {
-      <p class="muted">All combinations of this item's colors are shown above.</p>
-    }
+    <app-more-combinations [colors]="colors()" [excludedCombinations]="shownCombinationIds()" />
   }
 }

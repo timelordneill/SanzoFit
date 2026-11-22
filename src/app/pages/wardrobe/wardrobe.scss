@@ -23,14 +23,6 @@
   }
 }
 
-.muted {
-  color: var(--color-muted);
-}
-
-.error {
-  color: #cf222e;
-}
-
 // Each entry is an <app-wardrobe-item-tile> (styled like the Home color tiles).
 .items {
   display: grid;

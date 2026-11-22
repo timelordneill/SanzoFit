@@ -18,8 +18,6 @@ export interface Color {
   name: string;
   /** Ids of the color combinations this color appears in. */
   combinations: number[];
-  /** Index of the swatch group the color belongs to (0–5 in the current data). */
-  swatch: number;
   /** CMYK values: [cyan, magenta, yellow, key], each 0–100. */
   cmyk: [c: number, m: number, y: number, k: number];
   /** CIELAB values: [lightness, a, b]. */
@@ -78,6 +76,18 @@ export function toCssColor(color: Color, labSupported = SUPPORTS_LAB): string {
 
 /** CSS color string built from the color's RGB values, e.g. "rgb(249, 193, 206)". */
 export function toRgbString(color: Color): string {
-  const [r, g, b] = color.rgb;
+  return rgbCss(color.rgb);
+}
+
+/** CSS color string for raw RGB values, e.g. a pixel sampled from a photo. */
+export function rgbCss([r, g, b]: readonly [number, number, number]): string {
   return `rgb(${r}, ${g}, ${b})`;
+}
+
+/** Resolves stored hex values (e.g. on wardrobe items) to colors, skipping unknown ones. */
+export function resolveColors(
+  hexes: readonly string[],
+  byHex: ReadonlyMap<string, Color>,
+): Color[] {
+  return hexes.map((hex) => byHex.get(hex)).filter((color): color is Color => !!color);
 }

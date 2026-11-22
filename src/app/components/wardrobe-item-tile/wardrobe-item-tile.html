@@ -9,7 +9,11 @@
     }
     <div class="item-colors">
       @for (color of colors(); track color.hex) {
-        <span class="swatch" [style.background-color]="swatchColor(color)" [title]="color.name"></span>
+        <span
+          class="swatch"
+          [style.background-color]="swatchColor(color)"
+          [title]="color.name"
+        ></span>
       }
     </div>
   </div>

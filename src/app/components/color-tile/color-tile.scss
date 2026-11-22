@@ -1,0 +1,95 @@
+// Book-style color tile: swatch, name and values, closed by a thin rule.
+:host {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-right: 0.625rem;
+  border-right: 1px solid var(--color-rule);
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+}
+
+// As a button: drop the default button look, keep the rule.
+:host(button) {
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+:host(button:disabled) {
+  cursor: default;
+}
+
+// Links and enabled buttons underline the name on hover/focus.
+:host(a:hover) .name,
+:host(a:focus-visible) .name,
+:host(button:enabled:hover) .name,
+:host(button:focus-visible) .name {
+  text-decoration: underline;
+}
+
+:host(a:hover) .swatch {
+  filter: brightness(1.05);
+}
+
+.swatch {
+  flex: none;
+  width: 48px;
+  aspect-ratio: 6 / 5;
+  box-shadow: inset 0 0 0 1px var(--swatch-edge);
+}
+
+.text {
+  display: grid;
+  gap: 0.0625rem;
+  min-width: 0;
+}
+
+.name {
+  margin-bottom: 0.125rem;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: var(--color-text-soft);
+}
+
+.value {
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+:host(.tile-sm) .swatch {
+  width: 44px;
+}
+
+// Large: the Colors page index.
+:host(.tile-lg) {
+  gap: 0.875rem;
+  height: 100%;
+  padding-right: 0.75rem;
+
+  .swatch {
+    width: 80px;
+  }
+
+  .text {
+    gap: 0.125rem;
+    padding-top: 0.125rem;
+  }
+
+  .name {
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+
+  .value {
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+}

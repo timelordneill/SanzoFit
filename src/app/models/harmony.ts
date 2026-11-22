@@ -1,9 +1,6 @@
 import { Color } from './color';
 import { deltaE2000 } from './color-match';
 
-// Value/saturation/temperature live on the Color model (`color.properties`).
-export { colorProperties, type ColorProperties } from './color';
-
 /** How a candidate's score breaks down (each part in ΔE-like units). */
 export interface HarmonyBreakdown {
   /** Plain visual difference (ΔE₀₀). */

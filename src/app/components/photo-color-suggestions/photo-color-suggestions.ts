@@ -1,5 +1,6 @@
-import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
-import { Color, toCmykString, toCssColor } from '../../models/color';
+import { Component, computed, inject, input, output, resource } from '@angular/core';
+import { ColorTile } from '../color-tile/color-tile';
+import { Color, rgbCss, toCmykString } from '../../models/color';
 import { describeMatch, findClosestColorsToLab, Rgb } from '../../models/color-match';
 import { DominantColor, findDominantColors } from '../../models/dominant-colors';
 import { ColorsService } from '../../services/colors.service';
@@ -13,6 +14,8 @@ interface Suggestion {
   deltaE: number;
   /** Fraction (0–1) of the garment covered by this color. */
   share: number;
+  /** Value lines shown on the tile: CMYK, then share and match quality. */
+  lines: string[];
 }
 
 /**
@@ -23,6 +26,7 @@ interface Suggestion {
  * Expects `ColorsService.loadColors()` to have been called by the host page.
  */
 @Component({
+  imports: [ColorTile],
   selector: 'app-photo-color-suggestions',
   styleUrl: './photo-color-suggestions.scss',
   templateUrl: './photo-color-suggestions.html',
@@ -40,8 +44,22 @@ export class PhotoColorSuggestions {
   /** Emitted for each suggestion the user adds. */
   readonly colorChosen = output<Color>();
 
-  protected readonly state = signal<'analysing' | 'done' | 'error'>('analysing');
-  private readonly dominant = signal<DominantColor[]>([]);
+  /** The photo's dominant colors, re-analysed whenever `src` changes. */
+  private readonly analysis = resource({
+    params: () => this.src(),
+    loader: async ({ params: src }): Promise<DominantColor[]> => {
+      const { pixels, border } = await this.sampler.pixels(src);
+      return findDominantColors(pixels, border);
+    },
+  });
+
+  protected readonly state = computed(() =>
+    this.analysis.isLoading() ? 'analysing' : this.analysis.error() ? 'error' : 'done',
+  );
+
+  private readonly dominant = computed(() =>
+    this.analysis.hasValue() ? this.analysis.value() : [],
+  );
 
   /** One suggestion per palette color; dominant colors that match the same one are combined. */
   protected readonly suggestions = computed<Suggestion[]>(() => {
@@ -62,10 +80,19 @@ export class PhotoColorSuggestions {
           sampleRgb: dominant.rgb,
           deltaE: match.deltaE,
           share: dominant.share,
+          lines: [],
         });
       }
     }
-    return [...byHex.values()].sort((a, b) => b.share - a.share);
+    return [...byHex.values()]
+      .sort((a, b) => b.share - a.share)
+      .map((s) => ({
+        ...s,
+        lines: [
+          toCmykString(s.color),
+          `≈ ${percent(s.share)}% of the item · ${describeMatch(s.deltaE)}`,
+        ],
+      }));
   });
 
   /** Suggestions that aren't selected yet. */
@@ -73,41 +100,7 @@ export class PhotoColorSuggestions {
     this.suggestions().filter((s) => !this.isSelected(s.color)),
   );
 
-  protected readonly swatchColor = toCssColor;
-  protected readonly cmyk = toCmykString;
-  protected readonly describe = describeMatch;
-
-  /** Guards against an older, slower analysis overwriting a newer one. */
-  private run = 0;
-
-  constructor() {
-    effect(() => {
-      this.analyse(this.src());
-    });
-  }
-
-  private async analyse(src: string): Promise<void> {
-    const run = ++this.run;
-    this.state.set('analysing');
-    this.dominant.set([]);
-    try {
-      const { pixels, border } = await this.sampler.pixels(src);
-      if (run !== this.run) return;
-      this.dominant.set(findDominantColors(pixels, border));
-      this.state.set('done');
-    } catch {
-      if (run !== this.run) return;
-      this.state.set('error');
-    }
-  }
-
-  protected sampleCss([r, g, b]: Rgb): string {
-    return `rgb(${r}, ${g}, ${b})`;
-  }
-
-  protected percent(share: number): number {
-    return Math.max(1, Math.round(share * 100));
-  }
+  protected readonly rgbCss = rgbCss;
 
   protected isSelected(color: Color): boolean {
     return this.selectedHexes().includes(color.hex);
@@ -124,4 +117,9 @@ export class PhotoColorSuggestions {
       this.colorChosen.emit(suggestion.color);
     }
   }
+}
+
+/** A share as a whole percentage, at least 1%. */
+function percent(share: number): number {
+  return Math.max(1, Math.round(share * 100));
 }

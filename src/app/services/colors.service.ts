@@ -58,8 +58,7 @@ function parseColor(raw: unknown): Color {
   return {
     id: toId(o['id']),
     name: String(o['name']),
-    combinations: toNumbers(o['combinations']),
-    swatch: Number(o['swatch']),
+    combinations: [], // filled from combinations.json, see parseCombinations
     cmyk: toTuple(o['cmyk'], 4) as Color['cmyk'],
     lab,
     rgb: toTuple(o['rgb'], 3) as Color['rgb'],
@@ -69,9 +68,10 @@ function parseColor(raw: unknown): Color {
 }
 
 /**
- * Builds the combination map from combinations.json, resolving hex values to colors.
- * Throws if a combination names an unknown color, or disagrees with the colors'
- * own `combinations` lists (the two files must describe the same memberships).
+ * Builds the combination map from combinations.json (the single source of
+ * membership), resolving hex values to colors, and fills each color's
+ * `combinations` (ascending ids). Throws if a combination names an unknown color
+ * or lists a color twice.
  */
 function parseCombinations(raw: unknown[], colors: Color[]): Map<number, Color[]> {
   const byHex = new Map(colors.map((color) => [color.hex, color]));
@@ -85,20 +85,17 @@ function parseCombinations(raw: unknown[], colors: Color[]): Map<number, Color[]
       if (!color) {
         throw new Error(`Combination ${id} names unknown color ${String(hex)}`);
       }
-      if (!color.combinations.includes(id)) {
-        throw new Error(`Combination ${id} lists ${color.name}, but its color entry doesn't`);
+      if (color.combinations.includes(id)) {
+        throw new Error(`Combination ${id} lists ${color.name} twice`);
       }
+      color.combinations.push(id);
       return color;
     });
     map.set(id, members);
   }
 
   for (const color of colors) {
-    for (const id of color.combinations) {
-      if (!map.get(id)?.includes(color)) {
-        throw new Error(`${color.name} lists combination ${id}, but combinations.json doesn't`);
-      }
-    }
+    color.combinations.sort((a, b) => a - b);
   }
   return map;
 }

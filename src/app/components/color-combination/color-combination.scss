@@ -1,7 +1,7 @@
 // Layout inspired by the printed combination plates: number + vertical rule on the
 // left, color blocks that touch, names centered underneath.
 :host {
-  --rule: #b8bdc2;
+  --rule: var(--color-rule);
 
   display: grid;
   grid-template-columns: 2.75rem 1fr;
@@ -43,7 +43,7 @@
 .swatch {
   display: block;
   // Faint edge so very light colors stay visible on a white page.
-  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06);
+  box-shadow: inset 0 0 0 1px var(--swatch-edge);
 }
 
 a.swatch:hover {

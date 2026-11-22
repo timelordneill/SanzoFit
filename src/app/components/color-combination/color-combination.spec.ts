@@ -81,7 +81,9 @@ describe('ColorCombination', () => {
 
     const links = Array.from(element.querySelectorAll('a.member'));
     expect(links.length).toBe(2);
-    expect(links[0].getAttribute('href')).toBe(`/color/${colors.indexOf(byName('Dark Tyrian Blue'))}`);
+    expect(links[0].getAttribute('href')).toBe(
+      `/color/${colors.indexOf(byName('Dark Tyrian Blue'))}`,
+    );
     // The swatches link too, but are hidden from keyboard and screen readers (names suffice).
     const swatchLink = element.querySelector('a.swatch')!;
     expect(swatchLink.getAttribute('tabindex')).toBe('-1');

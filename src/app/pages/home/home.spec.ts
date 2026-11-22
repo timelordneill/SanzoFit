@@ -28,15 +28,13 @@ describe('Home', () => {
     expect(tiles[0].querySelector('.name')?.textContent).toBe('Hermosa Pink');
   });
 
-  it('shows the CMYK values like the book', () => {
-    const first = element.querySelector('.color')!;
-    expect(first.querySelector('.cmyk')?.textContent).toBe('C0 M30 Y6 K0');
+  it('shows the CMYK values, with the RGB values beneath, like the book', () => {
+    const values = Array.from(element.querySelectorAll('.color')[0].querySelectorAll('.value'));
+    expect(values.map((v) => v.textContent)).toEqual(['C0 M30 Y6 K0', 'R249 G193 B206']);
   });
 
-  it('shows the RGB values beneath the CMYK values', () => {
-    const values = element.querySelector('.color .values')!;
-    expect(Array.from(values.children).map((el) => el.className)).toEqual(['cmyk', 'rgb']);
-    expect(values.querySelector('.rgb')?.textContent).toBe('R249 G193 B206');
+  it('uses the large tile size', () => {
+    expect(element.querySelector('.color')?.classList).toContain('tile-lg');
   });
 
   it('links each tile to its color page', () => {

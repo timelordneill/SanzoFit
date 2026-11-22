@@ -58,9 +58,9 @@ describe('WardrobeItemDetail', () => {
     expect(chipLinks.map((a) => a.getAttribute('href'))).toEqual(['/color/0', '/color/87']);
     // Each chip is a miniature Home tile: swatch, name, CMYK and RGB values.
     expect(
-      Array.from(chipLinks[0].querySelectorAll('.chip-name, .chip-value')).map((el) => el.textContent),
+      Array.from(chipLinks[0].querySelectorAll('.name, .value')).map((el) => el.textContent),
     ).toEqual(['Hermosa Pink', 'C0 M30 Y6 K0', 'R249 G193 B206']);
-    expect(chipLinks[0].querySelector('.chip-swatch')).not.toBeNull();
+    expect(chipLinks[0].querySelector('.swatch')).not.toBeNull();
   });
 
   it('links to the edit screen', async () => {
@@ -122,7 +122,9 @@ describe('WardrobeItemDetail', () => {
     const chinosTile = groups[0].querySelectorAll('a.item')[1];
     expect(chinosTile.getAttribute('href')).toBe('/wardrobe/b2');
     expect(
-      Array.from(chinosTile.querySelectorAll('.item-colors .swatch')).map((s) => s.getAttribute('title')),
+      Array.from(chinosTile.querySelectorAll('.item-colors .swatch')).map((s) =>
+        s.getAttribute('title'),
+      ),
     ).toEqual(['Seashell Pink']);
   });
 

@@ -34,8 +34,7 @@ describe('ImageColorPicker', () => {
     const photo = element.querySelector<HTMLImageElement>('img.photo')!;
     Object.defineProperty(photo, 'naturalWidth', { value: 800, configurable: true });
     Object.defineProperty(photo, 'naturalHeight', { value: 400, configurable: true });
-    photo.getBoundingClientRect = () =>
-      ({ left: 10, top: 20, width: 200, height: 100 }) as DOMRect;
+    photo.getBoundingClientRect = () => ({ left: 10, top: 20, width: 200, height: 100 }) as DOMRect;
     photo.dispatchEvent(new MouseEvent('click', { clientX: 10 + x, clientY: 20 + y }));
     await new Promise((resolve) => setTimeout(resolve));
     await fixture.whenStable();

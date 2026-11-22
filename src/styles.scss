@@ -5,6 +5,15 @@
   --color-text: #1f2328;
   --color-muted: #656d76;
   --color-bg: #ffffff;
+  /* Slightly softer than --color-text, for names next to swatches. */
+  --color-text-soft: #444;
+  --color-danger: #cf222e;
+  /* Borders of cards, inputs and section separators. */
+  --color-border: #d0d7de;
+  /* The thin vertical rules of the book-style tiles and plates. */
+  --color-rule: #b8bdc2;
+  /* Faint inset edge on flat swatches, so very light colors stay visible on white. */
+  --swatch-edge: rgb(0 0 0 / 0.06);
 
   /*
    * The combination plates use Optima, a flared ("glyphic") humanist face. Optima is
@@ -39,4 +48,29 @@ input,
 select,
 textarea {
   font-family: inherit;
+}
+
+/*
+ * Shared utility classes, used in many component templates. Components only add
+ * local tweaks (e.g. margin or font-size) on top of these.
+ */
+.muted {
+  color: var(--color-muted);
+}
+
+.error {
+  color: var(--color-danger);
+}
+
+/* "← Back" link at the top of a page. */
+.back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
 }

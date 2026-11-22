@@ -41,10 +41,9 @@ describe('WardrobeItemTile', () => {
     expect(link.querySelector('img.item-image')?.getAttribute('src')).toBe(
       'data:image/jpeg;base64,AAAA',
     );
-    expect(Array.from(link.querySelectorAll('.swatch')).map((s) => s.getAttribute('title'))).toEqual([
-      'Hermosa Pink',
-      'Corinthian Pink',
-    ]);
+    expect(
+      Array.from(link.querySelectorAll('.swatch')).map((s) => s.getAttribute('title')),
+    ).toEqual(['Hermosa Pink', 'Corinthian Pink']);
     expect(link.querySelector('.item-name')?.textContent).toBe('Shirt');
     expect(link.querySelector('.item-type')?.textContent).toBe('Top');
   });

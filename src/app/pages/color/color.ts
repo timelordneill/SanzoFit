@@ -7,7 +7,6 @@ import { ColorsService } from '../../services/colors.service';
 @Component({
   imports: [RouterLink, ColorDetail],
   selector: 'app-color',
-  styleUrl: './color.scss',
   templateUrl: './color.html',
 })
 export class ColorPage {

@@ -20,7 +20,8 @@ describe('PhotoColorSuggestions', () => {
   let chosen: Color[];
 
   const byName = (name: string) => colors.find((c) => c.name === name)!;
-  const names = () => Array.from(element.querySelectorAll('.suggestion .name')).map((n) => n.textContent);
+  const names = () =>
+    Array.from(element.querySelectorAll('.suggestion .name')).map((n) => n.textContent);
 
   /** A photo of a mostly Hermosa Pink item with some Blue, on a white background. */
   function pinkAndBluePhoto() {
@@ -92,7 +93,12 @@ describe('PhotoColorSuggestions', () => {
 
   it('shows a progress message while analysing', async () => {
     pixels.mockReturnValue(new Promise(() => {})); // never resolves
-    await render();
+    // The pending analysis keeps the fixture "unstable" on purpose, so render with
+    // detectChanges() instead of awaiting whenStable().
+    fixture.componentRef.setInput('src', PHOTO);
+    fixture.detectChanges();
+    await new Promise((resolve) => setTimeout(resolve));
+    fixture.detectChanges();
     expect(element.textContent).toContain('Analysing photo…');
   });
 

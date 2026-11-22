@@ -1,10 +1,10 @@
-import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, resource, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ImageColorPicker } from '../../components/image-color-picker/image-color-picker';
 import { PhotoColorSuggestions } from '../../components/photo-color-suggestions/photo-color-suggestions';
-import { Color, toCssColor } from '../../models/color';
+import { Color, resolveColors, toCssColor } from '../../models/color';
 import { WARDROBE_ITEM_TYPES, WardrobeItemType } from '../../models/wardrobe-item';
 import { ColorsService } from '../../services/colors.service';
 import { ImageResizeService } from '../../services/image-resize.service';
@@ -44,8 +44,19 @@ export class WardrobeItemForm {
     return id === undefined ? '/wardrobe' : `/wardrobe/${id}`;
   });
 
+  /** Edit mode: the stored item. Idle (no load) in create mode, where `id` is undefined. */
+  private readonly storedItem = resource({
+    params: () => this.id(),
+    loader: ({ params: id }) => this.wardrobeService.getById(id),
+  });
+
   /** Edit mode loads the item first; create mode is ready immediately. */
-  protected readonly loadState = signal<'ready' | 'loading' | 'not-found' | 'error'>('ready');
+  protected readonly loadState = computed(() => {
+    if (this.storedItem.isLoading()) return 'loading';
+    const error = this.storedItem.error();
+    if (error) return error instanceof WardrobeItemNotFoundError ? 'not-found' : 'error';
+    return 'ready';
+  });
 
   protected readonly types = WARDROBE_ITEM_TYPES;
   protected readonly swatchColor = toCssColor;
@@ -61,12 +72,9 @@ export class WardrobeItemForm {
     initialValue: this.form.controls.colors.value,
   });
 
-  protected readonly selectedColors = computed(() => {
-    const byHex = this.colorsService.byHex();
-    return this.selectedHexes()
-      .map((hex) => byHex.get(hex))
-      .filter((color): color is Color => !!color);
-  });
+  protected readonly selectedColors = computed(() =>
+    resolveColors(this.selectedHexes(), this.colorsService.byHex()),
+  );
 
   protected readonly search = signal('');
 
@@ -84,35 +92,18 @@ export class WardrobeItemForm {
   protected readonly processingImage = signal(false);
   protected readonly imageError = signal<string | null>(null);
 
-  /** Guards against an older, slower load overwriting a newer one. */
-  private loadRun = 0;
-
   constructor() {
     this.colorsService.loadColors();
+    // Edit mode: fill the form (and photo) once the stored item has loaded.
     effect(() => {
-      const id = this.id();
-      if (id !== undefined) {
-        this.loadItem(id);
+      if (this.storedItem.hasValue()) {
+        const item = this.storedItem.value();
+        this.form.setValue({ name: item.name, type: item.type, colors: [...item.colors] });
+        this.form.markAsPristine();
+        this.form.markAsUntouched();
+        this.image.set(item.image ?? null);
       }
     });
-  }
-
-  /** Edit mode: fills the form (and photo) with the stored item. */
-  private async loadItem(id: string): Promise<void> {
-    const run = ++this.loadRun;
-    this.loadState.set('loading');
-    try {
-      const item = await this.wardrobeService.getById(id);
-      if (run !== this.loadRun) return;
-      this.form.setValue({ name: item.name, type: item.type, colors: [...item.colors] });
-      this.form.markAsPristine();
-      this.form.markAsUntouched();
-      this.image.set(item.image ?? null);
-      this.loadState.set('ready');
-    } catch (error) {
-      if (run !== this.loadRun) return;
-      this.loadState.set(error instanceof WardrobeItemNotFoundError ? 'not-found' : 'error');
-    }
   }
 
   protected async onImageSelected(event: Event): Promise<void> {
