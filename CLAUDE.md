@@ -21,6 +21,7 @@ Angular 22, standalone components and **zoneless** (there's no zone.js). State l
    - Two colors are "in a combination" when they share a number in their `combinations` arrays. All combination and matching logic builds on `ColorsService.combinations`.
    - Color identity: in URLs a color is its **array index** (`/color/:id`, because names contain `/` and `|`). Stored data (wardrobe items) references colors by **hex**, which is unique.
    - Pages and components that render colors call `loadColors()` themselves (it's cached), so deep links work.
+   - **Paint palette swatches with `toCssColor(color)`** (`models/color.ts`), not RGB. It emits CSS `lab()` from the stored, print/CMYK-based Lab values, and falls back to RGB in browsers without `lab()`. RGB is only for text labels (`toRgbLabel`) and real screen pixels (the photo sample in `ImageColorPicker`).
 2. **Wardrobe items (read/write):** browser **localStorage**, key `sanzofit.wardrobeItems` (`WARDROBE_STORAGE_KEY`), holding a JSON array of `WardrobeItem`. Ids come from `crypto.randomUUID()`. Data is per browser and per origin: localhost and the Pages site don't share it.
    - `WardrobeService` keeps a promise-based API (`load`, `getById`, `create`) and exposes `items` as a signal. Unreadable storage counts as empty.
    - It throws typed errors: `WardrobeItemNotFoundError` (the detail page checks for it) and `WardrobeStorageFullError` (the create page shows its message).
@@ -32,13 +33,19 @@ Angular 22, standalone components and **zoneless** (there's no zone.js). State l
 ### Routing and components
 - `app.routes.ts` lazy-loads every page. `withComponentInputBinding()` is enabled, so route params arrive as signal inputs (`id = input.required<string>()`). `wardrobe/new` must stay before `wardrobe/:id`.
 - `pages/` holds routed screens; `components/` holds reusable pieces. Composition: `ColorDetail` (hero + list) renders one `ColorCombination` per combination, and the wardrobe item detail page reuses both. These components take a `headingLevel` input (rendered as `role="heading"` + `aria-level`) so they can be nested under a page heading.
+- Picking a color from a photo: `ImageColorPicker` (create form) samples an averaged pixel area through `ImageSamplerService` (canvas) and matches it with `models/color-match.ts`. That file converts the *sample* from sRGB to Lab (D65) and compares it with CIEDE2000 against each palette color's **stored `lab` value**, which is print/CMYK-based (a deliberate choice; a few intense colors like Peacock Blue lie outside what sRGB can show). `deltaE2000` is verified against the Sharma et al. reference pairs.
+- Automatic suggestions: `PhotoColorSuggestions` (create form) gets a ≤100px copy of the photo from `ImageSamplerService.pixels()` and runs `findDominantColors` (`models/dominant-colors.ts`):
+  - k-means (k = 6, seeded k-means++, so it's deterministic) on Lab values
+  - drops clusters within ΔE₀₀ 12 of the background, which is estimated from the photo's edge frame (the median colour, if it covers ≥ 60% of the frame)
+  - merges clusters within ΔE₀₀ 8 of each other, drops ones under 5%, and keeps at most 5
+  - matches each remaining colour with `findClosestColorsToLab`; nothing is added without the user clicking
 - Wardrobe matching is pure functions in `models/wardrobe-match.ts`. `findWardrobeMatches` treats another item as a match when it has a *different* color of a combination that this item is in. `groupMatchesByCombination` regroups those matches per combination. Keep this logic out of components so it stays unit-testable.
 - Naming: services use the `*.service.ts` suffix. The CLI now generates `foo.ts`, so rename new services to match. The color page class is `ColorPage` so it doesn't clash with the `Color` model.
 
 ### Testing conventions
 - Specs load the real `colors.json` with `await TestBed.inject(ColorsService).loadColors()` and assert against real data. For example, Hermosa Pink is index 0 and is in combinations 176, 227 and 273. Check the data before choosing fixtures: test items often match more combinations than expected.
 - Wardrobe specs use jsdom's real localStorage: `localStorage.clear()` in `beforeEach`, seed with `localStorage.setItem(WARDROBE_STORAGE_KEY, JSON.stringify(items))` *before* creating the component, and simulate failures with `vi.spyOn(...)`.
-- jsdom has no canvas or `createImageBitmap`: provide a fake `ImageResizeService` in component tests.
+- jsdom has no canvas or `createImageBitmap`: provide fakes for `ImageResizeService` and `ImageSamplerService` in component tests. To simulate a click on a photo, stub `naturalWidth`/`naturalHeight` and `getBoundingClientRect` on the `<img>`.
 - Routed components need `provideRouter([])`. Set route-param inputs with `fixture.componentRef.setInput('id', ...)`.
 
 ### Styling

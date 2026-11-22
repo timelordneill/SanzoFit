@@ -2,7 +2,9 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Color, toRgbString } from '../../models/color';
+import { ImageColorPicker } from '../../components/image-color-picker/image-color-picker';
+import { PhotoColorSuggestions } from '../../components/photo-color-suggestions/photo-color-suggestions';
+import { Color, toCssColor } from '../../models/color';
 import { WARDROBE_ITEM_TYPES, WardrobeItemType } from '../../models/wardrobe-item';
 import { ColorsService } from '../../services/colors.service';
 import { ImageResizeService } from '../../services/image-resize.service';
@@ -12,7 +14,7 @@ import { WardrobeService, WardrobeStorageFullError } from '../../services/wardro
 const MAX_UPLOAD_BYTES = 15 * 1024 * 1024;
 
 @Component({
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, ImageColorPicker, PhotoColorSuggestions],
   selector: 'app-wardrobe-item-create',
   styleUrl: './wardrobe-item-create.scss',
   templateUrl: './wardrobe-item-create.html',
@@ -24,7 +26,7 @@ export class WardrobeItemCreate {
   private readonly router = inject(Router);
 
   protected readonly types = WARDROBE_ITEM_TYPES;
-  protected readonly rgb = toRgbString;
+  protected readonly swatchColor = toCssColor;
 
   protected readonly form = inject(NonNullableFormBuilder).group({
     name: ['', [Validators.required, Validators.pattern(/\S/)]],
@@ -33,7 +35,7 @@ export class WardrobeItemCreate {
   });
 
   /** Hex values of the selected colors, in the order they were picked. */
-  private readonly selectedHexes = toSignal(this.form.controls.colors.valueChanges, {
+  protected readonly selectedHexes = toSignal(this.form.controls.colors.valueChanges, {
     initialValue: this.form.controls.colors.value,
   });
 
@@ -110,6 +112,13 @@ export class WardrobeItemCreate {
         : [...current, color.hex],
     );
     control.markAsTouched();
+  }
+
+  /** Adds a color (e.g. one picked from the photo) if it isn't selected yet. */
+  protected addColor(color: Color): void {
+    if (!this.form.controls.colors.value.includes(color.hex)) {
+      this.toggleColor(color);
+    }
   }
 
   protected async save(): Promise<void> {

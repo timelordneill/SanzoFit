@@ -11,7 +11,7 @@
           <div
             class="swatch"
             [class]="member.position ? 'pos-' + member.position : ''"
-            [style.background-color]="rgb(member.color)"
+            [style.background-color]="swatchColor(member.color)"
           ></div>
         } @else {
           <a
@@ -19,7 +19,7 @@
             [class]="member.position ? 'pos-' + member.position : ''"
             tabindex="-1"
             [routerLink]="['/color', member.index]"
-            [style.background-color]="rgb(member.color)"
+            [style.background-color]="swatchColor(member.color)"
           ></a>
         }
       }

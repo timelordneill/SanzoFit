@@ -4,7 +4,7 @@ import { ColorCombination } from '../../components/color-combination/color-combi
 import { ColorDetail } from '../../components/color-detail/color-detail';
 import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 import { WardrobeItemTile } from '../../components/wardrobe-item-tile/wardrobe-item-tile';
-import { Color, toCmykString, toRgbLabel, toRgbString } from '../../models/color';
+import { Color, toCmykString, toRgbLabel, toCssColor } from '../../models/color';
 import {
   CombinationGroup,
   findWardrobeMatches,
@@ -70,7 +70,7 @@ export class WardrobeItemDetail {
     return groupMatchesByCombination(matches);
   });
 
-  protected readonly rgb = toRgbString;
+  protected readonly swatchColor = toCssColor;
   protected readonly cmyk = toCmykString;
   protected readonly rgbValues = toRgbLabel;
 

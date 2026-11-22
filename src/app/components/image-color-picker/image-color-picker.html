@@ -1,0 +1,52 @@
+<p class="hint">Click the photo where the color is to find the closest matching colors.</p>
+
+<div class="stage">
+  <img class="photo" [src]="src()" alt="Item photo: click to pick a color" (click)="pick($event)" />
+  @if (marker(); as marker) {
+    <span
+      class="marker"
+      aria-hidden="true"
+      [style.left.%]="marker.x"
+      [style.top.%]="marker.y"
+      [style.background-color]="sampledCss()"
+    ></span>
+  }
+</div>
+
+@if (error(); as error) {
+  <p class="error" role="alert">{{ error }}</p>
+}
+
+@if (sampledCss(); as sampledCss) {
+  <div class="result" aria-live="polite">
+    <div class="sample">
+      <span class="sample-swatch" [style.background-color]="sampledCss"></span>
+      <span class="text">
+        <span class="name">Picked from photo</span>
+        <span class="value">{{ sampledLabel() }}</span>
+      </span>
+    </div>
+
+    <ul class="matches" aria-label="Closest colors">
+      @for (match of matches(); track match.color.hex) {
+        <li>
+          <button
+            type="button"
+            class="match"
+            [class.added]="isSelected(match.color)"
+            [disabled]="isSelected(match.color)"
+            (click)="choose(match.color)"
+          >
+            <span class="match-swatch" [style.background-color]="swatchColor(match.color)"></span>
+            <span class="text">
+              <span class="name">{{ match.color.name }}</span>
+              <span class="value">{{ cmyk(match.color) }}</span>
+              <span class="value">{{ describe(match.deltaE) }} · ΔE {{ match.deltaE.toFixed(1) }}</span>
+            </span>
+            <span class="action">{{ isSelected(match.color) ? 'Added' : '+ Add' }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+}

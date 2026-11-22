@@ -1,0 +1,50 @@
+<div class="header">
+  <span class="title">Suggested colors</span>
+  @if (state() === 'done' && addable().length > 1) {
+    <button type="button" class="add-all" (click)="addAll()">Add all</button>
+  }
+</div>
+
+@switch (state()) {
+  @case ('analysing') {
+    <p class="muted">Analysing photo…</p>
+  }
+  @case ('error') {
+    <p class="error" role="alert">Could not analyse this photo. Pick colors on the photo below.</p>
+  }
+  @default {
+    @if (suggestions().length > 0) {
+      <ul class="suggestions" aria-live="polite">
+        @for (suggestion of suggestions(); track suggestion.color.hex) {
+          <li>
+            <button
+              type="button"
+              class="suggestion"
+              [class.added]="isSelected(suggestion.color)"
+              [disabled]="isSelected(suggestion.color)"
+              (click)="choose(suggestion.color)"
+            >
+              <span
+                class="photo-swatch"
+                title="Color in the photo"
+                [style.background-color]="sampleCss(suggestion.sampleRgb)"
+              ></span>
+              <span class="arrow" aria-hidden="true">→</span>
+              <span class="swatch" [style.background-color]="swatchColor(suggestion.color)"></span>
+              <span class="text">
+                <span class="name">{{ suggestion.color.name }}</span>
+                <span class="value">{{ cmyk(suggestion.color) }}</span>
+                <span class="value">
+                  ≈ {{ percent(suggestion.share) }}% of the item · {{ describe(suggestion.deltaE) }}
+                </span>
+              </span>
+              <span class="action">{{ isSelected(suggestion.color) ? 'Added' : '+ Add' }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="muted">No clear colors found. Pick them on the photo below.</p>
+    }
+  }
+}

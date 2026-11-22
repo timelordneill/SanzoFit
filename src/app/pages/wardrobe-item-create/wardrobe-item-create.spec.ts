@@ -3,6 +3,7 @@ import { provideRouter, Router } from '@angular/router';
 import { WardrobeItem } from '../../models/wardrobe-item';
 import { ColorsService } from '../../services/colors.service';
 import { ImageResizeService } from '../../services/image-resize.service';
+import { ImageSamplerService } from '../../services/image-sampler.service';
 import { WardrobeService } from '../../services/wardrobe.service';
 import { WardrobeItemCreate } from './wardrobe-item-create';
 
@@ -24,6 +25,21 @@ describe('WardrobeItemCreate', () => {
         provideRouter([]),
         { provide: WardrobeService, useValue: { create } },
         { provide: ImageResizeService, useValue: { toDataUrl } },
+        // Hermosa Pink's RGB, as if sampled from the photo (jsdom has no canvas).
+        {
+          provide: ImageSamplerService,
+          useValue: {
+            sample: async () => [249, 193, 206],
+            // A Hermosa Pink item on a white background.
+            pixels: async () => ({
+              pixels: [
+                ...Array.from({ length: 60 }, () => [246, 246, 244]),
+                ...Array.from({ length: 40 }, () => [249, 193, 206]),
+              ],
+              border: Array.from({ length: 30 }, () => [246, 246, 244]),
+            }),
+          },
+        },
       ],
     }).compileComponents();
 
@@ -97,6 +113,48 @@ describe('WardrobeItemCreate', () => {
     await submit();
 
     expect(create).toHaveBeenCalledWith(expect.objectContaining({ image: FAKE_DATA_URL }));
+  });
+
+  it('adds a color picked from the photo to the selection', async () => {
+    expect(element.querySelector('app-image-color-picker')).toBeNull();
+    await chooseFile(new File(['x'], 'shirt.png', { type: 'image/png' }));
+
+    const photo = element.querySelector<HTMLImageElement>('app-image-color-picker img.photo')!;
+    Object.defineProperty(photo, 'naturalWidth', { value: 100, configurable: true });
+    Object.defineProperty(photo, 'naturalHeight', { value: 100, configurable: true });
+    photo.getBoundingClientRect = () => ({ left: 0, top: 0, width: 100, height: 100 }) as DOMRect;
+    photo.dispatchEvent(new MouseEvent('click', { clientX: 50, clientY: 50 }));
+    await new Promise((resolve) => setTimeout(resolve));
+    await fixture.whenStable();
+
+    element.querySelector<HTMLButtonElement>('app-image-color-picker .match')!.click();
+    await fixture.whenStable();
+
+    expect(Array.from(element.querySelectorAll('.selected .chip')).map((c) => c.textContent)).toEqual([
+      expect.stringContaining('Hermosa Pink'),
+    ]);
+    // Picking the same color again doesn't remove it.
+    expect(element.querySelector<HTMLButtonElement>('app-image-color-picker .match')!.disabled).toBe(
+      true,
+    );
+  });
+
+  it('suggests colors from the photo, which can be added', async () => {
+    await chooseFile(new File(['x'], 'shirt.png', { type: 'image/png' }));
+    await new Promise((resolve) => setTimeout(resolve));
+    await fixture.whenStable();
+
+    const suggestion = element.querySelector<HTMLButtonElement>(
+      'app-photo-color-suggestions .suggestion',
+    )!;
+    expect(suggestion.querySelector('.name')?.textContent).toBe('Hermosa Pink');
+
+    suggestion.click();
+    await fixture.whenStable();
+
+    expect(Array.from(element.querySelectorAll('.selected .chip')).map((c) => c.textContent)).toEqual([
+      expect.stringContaining('Hermosa Pink'),
+    ]);
   });
 
   it('can remove the photo again', async () => {

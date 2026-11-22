@@ -26,6 +26,7 @@
 
   <div class="field">
     <span class="label" id="image-label">Photo <span class="muted">(optional)</span></span>
+    <span class="muted">To get an accurate match, take a picture on a blank background with no active filters and indirect sunlight.</span>
     <div class="image-upload">
       @if (image(); as image) {
         <img class="preview" [src]="image" alt="Preview of the item photo" />
@@ -66,7 +67,7 @@
           (click)="toggleColor(color)"
           [attr.aria-label]="'Remove ' + color.name"
         >
-          <span class="chip-swatch" [style.background-color]="rgb(color)"></span>
+          <span class="chip-swatch" [style.background-color]="swatchColor(color)"></span>
           {{ color.name }}
           <span aria-hidden="true">×</span>
         </button>
@@ -76,6 +77,19 @@
     </div>
     @if (form.controls.colors.touched && form.controls.colors.invalid) {
       <span class="error">Pick at least one color.</span>
+    }
+
+    @if (image(); as photo) {
+      <app-photo-color-suggestions
+        [src]="photo"
+        [selectedHexes]="selectedHexes()"
+        (colorChosen)="addColor($event)"
+      />
+      <app-image-color-picker
+        [src]="photo"
+        [selectedHexes]="selectedHexes()"
+        (colorChosen)="addColor($event)"
+      />
     }
 
     <input
@@ -96,7 +110,7 @@
           [attr.aria-pressed]="isSelected(color)"
           [title]="color.name"
           [attr.aria-label]="color.name"
-          [style.background-color]="rgb(color)"
+          [style.background-color]="swatchColor(color)"
           (click)="toggleColor(color)"
         >
           @if (isSelected(color)) {

@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Color, toRgbString } from '../../models/color';
+import { Color, toCssColor } from '../../models/color';
 import { ColorCombination } from '../color-combination/color-combination';
 
 /**
@@ -23,5 +23,5 @@ export class ColorDetail {
    */
   readonly headingLevel = input(2);
 
-  protected readonly rgb = toRgbString;
+  protected readonly swatchColor = toCssColor;
 }

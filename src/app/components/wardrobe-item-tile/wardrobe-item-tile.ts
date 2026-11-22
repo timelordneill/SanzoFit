@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Color, toRgbString } from '../../models/color';
+import { Color, toCssColor } from '../../models/color';
 import { WardrobeItem } from '../../models/wardrobe-item';
 
 /**
@@ -23,5 +23,5 @@ export class WardrobeItemTile {
   /** Colors shown in the strip (e.g. all of the item's colors, or the relevant ones). */
   readonly colors = input<Color[]>([]);
 
-  protected readonly rgb = toRgbString;
+  protected readonly swatchColor = toCssColor;
 }

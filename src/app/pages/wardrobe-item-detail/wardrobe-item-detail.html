@@ -25,7 +25,7 @@
         @for (color of colors(); track color.hex) {
           <li>
             <a class="chip" [routerLink]="['/color', colorsService.colors().indexOf(color)]">
-              <span class="chip-swatch" [style.background-color]="rgb(color)"></span>
+              <span class="chip-swatch" [style.background-color]="swatchColor(color)"></span>
               <span class="chip-info">
                 <span class="chip-name">{{ color.name }}</span>
                 <span class="chip-value">{{ cmyk(color) }}</span>

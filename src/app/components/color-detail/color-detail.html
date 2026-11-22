@@ -1,7 +1,7 @@
 @let current = color();
 
 <header class="hero">
-  <div class="swatch hero-swatch" [style.background-color]="rgb(current)"></div>
+  <div class="swatch hero-swatch" [style.background-color]="swatchColor(current)"></div>
   <div>
     <div class="title" role="heading" [attr.aria-level]="headingLevel()">{{ current.name }}</div>
     <p class="muted">

@@ -1,6 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Color, toRgbString } from '../../models/color';
+import { Color, toCssColor } from '../../models/color';
 import { ColorsService } from '../../services/colors.service';
 
 /** Where a color sits in the 4-color cross layout. */
@@ -75,5 +75,5 @@ export class ColorCombination {
 
   protected readonly layout = computed(() => `count-${this.members().length}`);
 
-  protected readonly rgb = toRgbString;
+  protected readonly swatchColor = toCssColor;
 }
