@@ -4,26 +4,42 @@ import { WardrobeItem } from '../../models/wardrobe-item';
 import { ColorsService } from '../../services/colors.service';
 import { ImageResizeService } from '../../services/image-resize.service';
 import { ImageSamplerService } from '../../services/image-sampler.service';
-import { WardrobeService } from '../../services/wardrobe.service';
-import { WardrobeItemCreate } from './wardrobe-item-create';
+import { WardrobeItemNotFoundError, WardrobeService } from '../../services/wardrobe.service';
+import { WardrobeItemForm } from './wardrobe-item-form';
 
 const FAKE_DATA_URL = 'data:image/jpeg;base64,AAAA';
 
-describe('WardrobeItemCreate', () => {
-  let fixture: ComponentFixture<WardrobeItemCreate>;
+describe('WardrobeItemForm', () => {
+  let fixture: ComponentFixture<WardrobeItemForm>;
   let element: HTMLElement;
   let create: ReturnType<typeof vi.fn>;
+  let update: ReturnType<typeof vi.fn>;
+  let getById: ReturnType<typeof vi.fn>;
   let toDataUrl: ReturnType<typeof vi.fn>;
+
+  /** An existing item, used in edit mode. */
+  const stored: WardrobeItem = {
+    id: 'a1',
+    name: 'Linen shirt',
+    type: 'Top',
+    colors: ['#f9c1ce', '#b5decc'], // Hermosa Pink, Turquoise Green
+    image: 'data:image/jpeg;base64,STORED',
+  };
 
   beforeEach(async () => {
     create = vi.fn(async (item: Omit<WardrobeItem, 'id'>) => ({ id: 'new', ...item }));
+    update = vi.fn(async (id: string, item: Omit<WardrobeItem, 'id'>) => ({ id, ...item }));
+    getById = vi.fn(async (id: string) => {
+      if (id !== stored.id) throw new WardrobeItemNotFoundError(id);
+      return stored;
+    });
     toDataUrl = vi.fn(async () => FAKE_DATA_URL);
 
     await TestBed.configureTestingModule({
-      imports: [WardrobeItemCreate],
+      imports: [WardrobeItemForm],
       providers: [
         provideRouter([]),
-        { provide: WardrobeService, useValue: { create } },
+        { provide: WardrobeService, useValue: { create, update, getById } },
         { provide: ImageResizeService, useValue: { toDataUrl } },
         // Hermosa Pink's RGB, as if sampled from the photo (jsdom has no canvas).
         {
@@ -44,7 +60,7 @@ describe('WardrobeItemCreate', () => {
     }).compileComponents();
 
     await TestBed.inject(ColorsService).loadColors();
-    fixture = TestBed.createComponent(WardrobeItemCreate);
+    fixture = TestBed.createComponent(WardrobeItemForm);
     await fixture.whenStable();
     element = fixture.nativeElement as HTMLElement;
   });
@@ -179,5 +195,87 @@ describe('WardrobeItemCreate', () => {
     const names = Array.from(element.querySelectorAll('.pick')).map((p) => p.getAttribute('title'));
     expect(names.length).toBeGreaterThan(0);
     expect(names.every((n) => n!.toLowerCase().includes('olive'))).toBe(true);
+  });
+
+  it('is in create mode without an id', () => {
+    expect(element.querySelector('h2')?.textContent).toBe('New wardrobe item');
+    expect(element.querySelector('a.back')?.getAttribute('href')).toBe('/wardrobe');
+    expect(getById).not.toHaveBeenCalled();
+  });
+
+  describe('edit mode', () => {
+    /** Renders the form for an existing item, as the `/wardrobe/:id/edit` route does. */
+    async function renderEdit(id = stored.id) {
+      fixture = TestBed.createComponent(WardrobeItemForm);
+      fixture.componentRef.setInput('id', id);
+      await fixture.whenStable();
+      await new Promise((resolve) => setTimeout(resolve)); // let the item load
+      await fixture.whenStable();
+      element = fixture.nativeElement as HTMLElement;
+    }
+
+    const chipNames = () =>
+      Array.from(element.querySelectorAll('.selected .chip')).map((c) => c.textContent?.replace('×', '').trim());
+
+    it('fills the form with the stored item', async () => {
+      await renderEdit();
+
+      expect(getById).toHaveBeenCalledWith('a1');
+      expect(element.querySelector('h2')?.textContent).toBe('Edit wardrobe item');
+      expect(element.querySelector<HTMLInputElement>('#name')!.value).toBe('Linen shirt');
+      expect(element.querySelector<HTMLSelectElement>('#type')!.value).toBe('Top');
+      expect(chipNames()).toEqual(['Hermosa Pink', 'Turquoise Green']);
+      expect(element.querySelector<HTMLImageElement>('img.preview')?.getAttribute('src')).toBe(
+        stored.image,
+      );
+    });
+
+    it('saves the changes and returns to the item', async () => {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigateByUrl').mockResolvedValue(true);
+      await renderEdit();
+
+      setInput('#name', 'Linen shirt (blue)');
+      setInput('#type', 'Outerwear');
+      // Remove Turquoise Green via its chip.
+      element.querySelectorAll<HTMLButtonElement>('.selected .chip')[1].click();
+      await submit();
+
+      expect(create).not.toHaveBeenCalled();
+      expect(update).toHaveBeenCalledWith('a1', {
+        name: 'Linen shirt (blue)',
+        type: 'Outerwear',
+        colors: ['#f9c1ce'],
+        image: stored.image,
+      });
+      expect(navigate).toHaveBeenCalledWith('/wardrobe/a1');
+    });
+
+    it('saves without a photo when it was removed', async () => {
+      vi.spyOn(TestBed.inject(Router), 'navigateByUrl').mockResolvedValue(true);
+      await renderEdit();
+
+      element.querySelector<HTMLButtonElement>('.link-button')!.click(); // Remove photo
+      await fixture.whenStable();
+      await submit();
+
+      expect(update.mock.calls[0][1]).not.toHaveProperty('image');
+    });
+
+    it('links back and cancels to the item', async () => {
+      await renderEdit();
+
+      expect(element.querySelector('a.back')?.getAttribute('href')).toBe('/wardrobe/a1');
+      const cancel = Array.from(element.querySelectorAll('.actions a')).find(
+        (a) => a.textContent?.trim() === 'Cancel',
+      )!;
+      expect(cancel.getAttribute('href')).toBe('/wardrobe/a1');
+    });
+
+    it('says so when the item does not exist', async () => {
+      await renderEdit('nope');
+
+      expect(element.querySelector('form')).toBeNull();
+      expect(element.textContent).toContain("doesn't exist");
+    });
   });
 });

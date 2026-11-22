@@ -109,16 +109,36 @@
   font-variant-numeric: tabular-nums;
 }
 
-.delete {
+.item-actions {
+  display: flex;
+  gap: 0.75rem;
   margin-top: 1.25rem;
+}
+
+.edit,
+.delete {
   padding: 0.375rem 0.875rem;
-  border: 1px solid #cf222e;
+  border: 1px solid currentColor;
   border-radius: 6px;
   background: transparent;
-  color: #cf222e;
   font: inherit;
   font-size: 0.875rem;
+  text-decoration: none;
   cursor: pointer;
+}
+
+.edit {
+  color: var(--color-text);
+
+  &:hover,
+  &:focus-visible {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+}
+
+.delete {
+  color: #cf222e;
 
   &:hover,
   &:focus-visible {

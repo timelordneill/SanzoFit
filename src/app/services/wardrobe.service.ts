@@ -58,6 +58,23 @@ export class WardrobeService {
     return created;
   }
 
+  /**
+   * Replaces an item's fields, keeping its id and position. Rejects with
+   * `WardrobeItemNotFoundError` when it doesn't exist.
+   */
+  async update(id: string, changes: NewWardrobeItem): Promise<WardrobeItem> {
+    const items = this.read();
+    const index = items.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw new WardrobeItemNotFoundError(id);
+    }
+    const updated: WardrobeItem = { ...changes, id };
+    const next = items.map((item, i) => (i === index ? updated : item));
+    this.write(next);
+    this._items.set(next);
+    return updated;
+  }
+
   /** Removes an item. Rejects with `WardrobeItemNotFoundError` when it doesn't exist. */
   async delete(id: string): Promise<void> {
     const items = this.read();

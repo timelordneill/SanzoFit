@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter, Router, withComponentInputBinding } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { App } from './app';
 import { routes } from './app.routes';
@@ -8,7 +8,8 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter(routes)],
+      // Same router setup as app.config.ts: route params are bound to component inputs.
+      providers: [provideRouter(routes, withComponentInputBinding())],
     }).compileComponents();
   });
 
@@ -48,6 +49,15 @@ describe('App', () => {
       await harness.navigateByUrl('/colors');
       expect(TestBed.inject(Router).url).toBe('/colors');
       expect(harness.routeNativeElement?.querySelector('h2')?.textContent).toBe('Colors');
+    });
+
+    it('opens the edit form at /wardrobe/:id/edit', async () => {
+      const harness = await RouterTestingHarness.create();
+      await harness.navigateByUrl('/wardrobe/abc/edit');
+      expect(TestBed.inject(Router).url).toBe('/wardrobe/abc/edit');
+      expect(harness.routeNativeElement?.querySelector('h2')?.textContent).toBe(
+        'Edit wardrobe item',
+      );
     });
 
     it('sends unknown addresses to the wardrobe', async () => {

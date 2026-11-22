@@ -36,7 +36,10 @@
         }
       </ul>
 
-      <button type="button" class="delete" (click)="askToDelete()">Delete item</button>
+      <div class="item-actions">
+        <a class="edit" [routerLink]="['/wardrobe', wardrobeItem.id, 'edit']">Edit item</a>
+        <button type="button" class="delete" (click)="askToDelete()">Delete item</button>
+      </div>
     </div>
   </header>
 

@@ -63,6 +63,11 @@ describe('WardrobeItemDetail', () => {
     expect(chipLinks[0].querySelector('.chip-swatch')).not.toBeNull();
   });
 
+  it('links to the edit screen', async () => {
+    await render([shirt]);
+    expect(element.querySelector('a.edit')?.getAttribute('href')).toBe('/wardrobe/a1/edit');
+  });
+
   it('shows a placeholder when the item has no photo', async () => {
     await render([{ ...shirt, image: undefined }]);
 

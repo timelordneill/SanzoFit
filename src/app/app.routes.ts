@@ -22,8 +22,8 @@ export const routes: Routes = [
     path: 'wardrobe/new',
     title: 'SanzoFit · New wardrobe item',
     loadComponent: () =>
-      import('./pages/wardrobe-item-create/wardrobe-item-create').then(
-        (m) => m.WardrobeItemCreate,
+      import('./pages/wardrobe-item-form/wardrobe-item-form').then(
+        (m) => m.WardrobeItemForm,
       ),
   },
   {
@@ -34,6 +34,13 @@ export const routes: Routes = [
       import('./pages/wardrobe-item-detail/wardrobe-item-detail').then(
         (m) => m.WardrobeItemDetail,
       ),
+  },
+  {
+    // Same form as 'wardrobe/new'; the `:id` puts it in edit mode.
+    path: 'wardrobe/:id/edit',
+    title: 'SanzoFit · Edit wardrobe item',
+    loadComponent: () =>
+      import('./pages/wardrobe-item-form/wardrobe-item-form').then((m) => m.WardrobeItemForm),
   },
   { path: '**', redirectTo: 'wardrobe' },
 ];
